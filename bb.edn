@@ -1,0 +1,48 @@
+{:tasks
+ {dev {:doc "Start nREPL server"
+       :task (shell "clj -M:dev -m nrepl.cmdline --interactive")}
+
+  test {:doc "Run all tests (CLJ + CLJS)"
+        :depends [test:clj test:cljs]}
+
+  test:clj {:doc "Run Clojure tests (both implementations)"
+            :depends [test:clj:scoped-value test:clj:thread-local]}
+
+  test:clj:scoped-value {:doc "Run Clojure tests with ScopedValue (JDK 25+)"
+                         :task (shell "clj -M:test -m kaocha.runner")}
+
+  test:clj:thread-local {:doc "Run Clojure tests with ThreadLocal fallback"
+                         :task (shell "clj -J-Dco.multiply.scoped.force-fallback=true -M:test -m kaocha.runner")}
+
+  test:cljs {:doc "Run ClojureScript tests"
+             :task (do
+                     (shell "bunx shadow-cljs compile ci")
+                     (shell "bunx karma start --single-run"))}
+
+  build {:doc "Build library JAR"
+         :task (shell "clj -T:build jar")}
+
+  install {:doc "Install JAR to local Maven repo"
+           :task (shell "clj -T:build install")}
+
+  tag {:doc "Create and push version tag"
+       :task (shell "clj -T:build tag")}
+
+  deploy {:doc "Tag, push, and deploy to Clojars"
+          :task (do
+                  (shell "clj -T:build tag")
+                  (shell "clj -T:build deploy"))}
+
+  format:check {:doc "Check code formatting"
+                :task (shell "cljstyle check src")}
+
+  format:fix {:doc "Fix code formatting"
+              :task (shell "cljstyle fix src")}
+
+  cljdoc {:doc "Test cljdoc analysis locally"
+          :depends [build]
+          :task (let [v (clojure.string/trim (:out (shell {:out :string} "clj -T:build version-str")))]
+                  (shell "clj -M:cljdoc"
+                    (format "{:project \"co.multiply/scoped\" :version \"%s\" :jarpath \"target/scoped-%s.jar\" :pompath \"target/classes/META-INF/maven/co.multiply/scoped/pom.xml\"}"
+                      v v)))}}}
+

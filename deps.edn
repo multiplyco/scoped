@@ -1,0 +1,18 @@
+{:paths ["src"]
+
+ :aliases
+ {:dev   {:extra-paths ["dev"]
+          :extra-deps  {nrepl/nrepl {:mvn/version "1.5.1"}}}
+
+  :test  {:extra-paths ["test"]
+          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+
+  :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "3.3.4"}}}
+
+  :build {:ns-default build
+          :deps       {io.github.clojure/tools.build {:mvn/version "0.10.11"}
+                       slipset/deps-deploy           {:mvn/version "0.2.2"}}}
+
+  :cljdoc {:extra-deps {io.github.cljdoc/cljdoc-analyzer {:git/tag "0.10.3" :git/sha "3f37a390"}}
+           :main-opts  ["-m" "cljdoc-analyzer.cljdoc-main"]}}}
+

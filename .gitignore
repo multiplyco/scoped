@@ -1,0 +1,17 @@
+.idea/
+*.class
+*.jar
+.cpcache/
+.lein-deps-sum
+.lein-failures
+.lein-plugins/
+.lein-repl-history
+.nrepl-port
+.shadow-cljs
+/checkouts/
+/classes/
+/lib/
+/target/
+node_modules
+pom.xml
+pom.xml.asc
