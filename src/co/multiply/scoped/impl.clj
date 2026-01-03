@@ -1,6 +1,6 @@
 (ns co.multiply.scoped.impl
   (:import
-    [clojure.lang Associative IDeref IEditableCollection ITransientAssociative ITransientCollection Var$Unbound]
+    [clojure.lang Associative Counted IDeref IEditableCollection ITransientAssociative ITransientCollection Indexed Var$Unbound]
     [java.lang Runtime$Version]
     [java.util Map]))
 
@@ -53,11 +53,29 @@
       value)))
 
 
+(defn ^:no-doc merge-resolved-bindings
+  "Takes a scope and a vector of bindings. Adds those bindings to the scope.
+
+   `bindings` must be a vector, and the symbols must be resolved."
+  [scope bindings]
+  (let [bindings-count (Counted/.count bindings)]
+    (loop [var-idx (unchecked-int 0)
+           scope   (IEditableCollection/.asTransient scope)]
+      (if (< var-idx bindings-count)
+        (let [value-idx (unchecked-inc-int var-idx)]
+          (recur (unchecked-inc-int value-idx)
+            (ITransientAssociative/.assoc scope
+              (Indexed/.nth bindings var-idx)
+              (Indexed/.nth bindings value-idx))))
+        (ITransientCollection/.persistent scope)))))
+
+
 (defmacro extend-scope
   [scope bindings]
   (assert (even? (count bindings)) "`bindings` must contain an even number of forms.")
-  (let [pairs (partition 2 bindings)]
-    (case (count pairs)
+  (let [pairs      (partition 2 bindings)
+        pair-count (count pairs)]
+    (case pair-count
       0 scope
 
       1 (let [[sym val] (first pairs)]
@@ -66,12 +84,20 @@
             (throw (IllegalArgumentException. (str "Cannot resolve: " sym)))))
 
       ;; Else
-      `(-> (IEditableCollection/.asTransient ~scope)
-         ~@(for [[sym val] pairs]
-             (if-let [resolved (and (symbol? sym) (resolve sym))]
-               `(ITransientAssociative/.assoc ~resolved ~val)
-               (throw (IllegalArgumentException. (str "Cannot resolve: " sym)))))
-         (ITransientCollection/.persistent)))))
+      (if (< pair-count 10)
+        `(-> (IEditableCollection/.asTransient ~scope)
+           ~@(for [[sym val] pairs]
+               (if-let [resolved (and (symbol? sym) (resolve sym))]
+                 `(ITransientAssociative/.assoc ~resolved ~val)
+                 (throw (IllegalArgumentException. (str "Cannot resolve: " sym)))))
+           (ITransientCollection/.persistent))
+        `(merge-resolved-bindings ~scope
+           ~(reduce (fn [v [sym value]]
+                      (if-let [resolved (and (symbol? sym) (resolve sym))]
+                        (conj v resolved value)
+                        (throw (IllegalArgumentException. (str "Cannot resolve: " sym)))))
+              []
+              pairs))))))
 
 
 (defmacro with-scope

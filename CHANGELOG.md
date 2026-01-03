@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.13 - 2026-01-02
+
+- When binding 11+ forms, fall over to loop construction to avoid inlining huge forms at the callsite.
 
 ## 0.1.12 - 2026-01-02
 

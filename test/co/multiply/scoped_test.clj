@@ -235,6 +235,82 @@
       (is (= {0 :thread-0, 1 :thread-1, 2 :thread-2} @results)))))
 
 
+;; # Many bindings (exercises merge-bindings path)
+;; ################################################################################
+(def ^:dynamic *var-01*)
+(def ^:dynamic *var-02*)
+(def ^:dynamic *var-03*)
+(def ^:dynamic *var-04*)
+(def ^:dynamic *var-05*)
+(def ^:dynamic *var-06*)
+(def ^:dynamic *var-07*)
+(def ^:dynamic *var-08*)
+(def ^:dynamic *var-09*)
+(def ^:dynamic *var-10*)
+(def ^:dynamic *var-11*)
+(def ^:dynamic *var-12*)
+
+(deftest many-bindings-test
+  (testing "10+ bindings triggers merge-bindings path"
+    (scoping [*var-01* 1
+              *var-02* 2
+              *var-03* 3
+              *var-04* 4
+              *var-05* 5
+              *var-06* 6
+              *var-07* 7
+              *var-08* 8
+              *var-09* 9
+              *var-10* 10
+              *var-11* 11
+              *var-12* 12]
+      (is (= 1 (ask *var-01*)))
+      (is (= 6 (ask *var-06*)))
+      (is (= 12 (ask *var-12*)))
+      (is (= {#'*var-01* 1 #'*var-02* 2 #'*var-03* 3
+              #'*var-04* 4 #'*var-05* 5 #'*var-06* 6
+              #'*var-07* 7 #'*var-08* 8 #'*var-09* 9
+              #'*var-10* 10 #'*var-11* 11 #'*var-12* 12}
+            (current-scope)))))
+
+  (testing "many bindings via assoc-scope"
+    (let [scope (assoc-scope {}
+                  *var-01* :a *var-02* :b *var-03* :c
+                  *var-04* :d *var-05* :e *var-06* :f
+                  *var-07* :g *var-08* :h *var-09* :i
+                  *var-10* :j *var-11* :k *var-12* :l)]
+      (with-scope scope
+        (is (= :a (ask *var-01*)))
+        (is (= :f (ask *var-06*)))
+        (is (= :l (ask *var-12*))))))
+
+  (testing "nested scoping with many bindings restores correctly"
+    (scoping [*var-01* :outer-1
+              *var-02* :outer-2
+              *var-03* :outer-3
+              *var-04* :outer-4
+              *var-05* :outer-5
+              *var-06* :outer-6
+              *var-07* :outer-7
+              *var-08* :outer-8
+              *var-09* :outer-9
+              *var-10* :outer-10]
+      (scoping [*var-01* :inner-1
+                *var-02* :inner-2
+                *var-03* :inner-3
+                *var-04* :inner-4
+                *var-05* :inner-5
+                *var-06* :inner-6
+                *var-07* :inner-7
+                *var-08* :inner-8
+                *var-09* :inner-9
+                *var-10* :inner-10]
+        (is (= :inner-1 (ask *var-01*)))
+        (is (= :inner-10 (ask *var-10*))))
+      (is (= :outer-1 (ask *var-01*)))
+      (is (= :outer-10 (ask *var-10*))))))
+
+
 ;; # Edge cases
 ;; ################################################################################
 (deftest edge-cases-test
