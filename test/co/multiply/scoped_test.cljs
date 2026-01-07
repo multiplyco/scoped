@@ -72,6 +72,32 @@
       (is (= false (ask *with-default*))))))
 
 
+;; Unbound var (no initial value)
+(def ^:dynamic *unbound*)
+
+
+;; # ask with default value
+;; ################################################################################
+(deftest ask-with-default-test
+  (testing "ask with default returns scoped value when in scope"
+    (scoping [*with-default* :scoped]
+      (is (= :scoped (ask *with-default* :fallback)))))
+
+  (testing "ask with default returns var value when not in scope"
+    (is (= :default-value (ask *with-default* :fallback))))
+
+  (testing "ask with default returns default for unbound var"
+    (is (= :fallback (ask *unbound* :fallback))))
+
+  (testing "ask with default returns default when scoped to nil (CLJS limitation)"
+    (scoping [*with-default* nil]
+      (is (= :fallback (ask *with-default* :fallback)))))
+
+  (testing "ask with default does not use default when scoped to false"
+    (scoping [*with-default* false]
+      (is (= false (ask *with-default* :fallback))))))
+
+
 ;; # Edge cases
 ;; ################################################################################
 (deftest edge-cases-test

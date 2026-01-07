@@ -93,6 +93,28 @@
       (is (= false (ask *with-default*))))))
 
 
+;; # ask with default value
+;; ################################################################################
+(deftest ask-with-default-test
+  (testing "ask with default returns scoped value when in scope"
+    (scoping [*with-default* :scoped]
+      (is (= :scoped (ask *with-default* :fallback)))))
+
+  (testing "ask with default returns root binding when not in scope"
+    (is (= :default-value (ask *with-default* :fallback))))
+
+  (testing "ask with default returns default for unbound var"
+    (is (= :fallback (ask *unbound* :fallback))))
+
+  (testing "ask with default does not use default when scoped to nil"
+    (scoping [*with-default* nil]
+      (is (nil? (ask *with-default* :fallback)))))
+
+  (testing "ask with default does not use default when scoped to false"
+    (scoping [*with-default* false]
+      (is (= false (ask *with-default* :fallback))))))
+
+
 ;; # current-scope and with-scope
 ;; ################################################################################
 (deftest current-scope-test

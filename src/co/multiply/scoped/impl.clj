@@ -40,17 +40,26 @@
    If the var is unbound and not in scope, throws IllegalStateException.
 
    This is the runtime implementation for the `ask` macro."
-  [v]
-  (let [scope (current-scope)
-        value (Map/.getOrDefault scope v ::not-found)]
-    (if (identical? ::not-found value)
-      ;; No value in the given scope; attempt to use default value.
-      (let [value (IDeref/.deref v)]
-        (if (instance? Var$Unbound value)
-          (throw (IllegalStateException. (str "Unbound: " v)))
-          value))
-      ;; A value is available in the scope.
-      value)))
+  ([v]
+   (let [scope (current-scope)
+         value (Map/.getOrDefault scope v ::not-found)]
+     (if (identical? ::not-found value)
+       ;; No value in the given scope; attempt to use default value.
+       (let [value (IDeref/.deref v)]
+         (if (instance? Var$Unbound value)
+           (throw (IllegalStateException. (str "Unbound: " v)))
+           value))
+       ;; A value is available in the scope.
+       value)))
+  ([v default]
+   (let [scope (current-scope)
+         value (Map/.getOrDefault scope v ::not-found)]
+     (if (identical? ::not-found value)
+       ;; No value in the given scope; attempt to use default value.
+       (let [value (IDeref/.deref v)]
+         (if (instance? Var$Unbound value) default value))
+       ;; A value is available in the scope.
+       value))))
 
 
 (defn ^:no-doc merge-resolved-bindings

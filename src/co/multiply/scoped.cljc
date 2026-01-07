@@ -64,7 +64,9 @@
           "Access a scoped value by symbol.
 
            Returns the value bound via `scoping` if present, otherwise falls back
-           to the var's root binding. Throws if the var is unbound and not in scope.
+           to the var's root binding. If no default is given, throws when the var
+           is unbound and not in scope.
+
            In CLJS, returns the var's current binding value.
 
            ```clojure
@@ -74,8 +76,23 @@
              (ask *user-id*))  ;=> 123
 
            (ask *user-id*)     ;=> :default (falls back to var value)
-           ```"
-          [sym]
-          (if (:ns &env)
-            sym
-            `(impl/get-scoped-var ~(resolve sym)))))
+           ```
+
+           The two-arity form returns `default` if the var is unbound:
+
+           ```clojure
+           (def ^:dynamic *user*)
+
+           (ask *user* :anonymous)  ;=> :anonymous (var is unbound)
+           ```
+
+           Note: In CLJS, `nil` is treated as unbound since CLJS does not
+           distinguish between uninitialized vars and vars bound to `nil`."
+          ([sym]
+           (if (:ns &env)
+             sym
+             `(impl/get-scoped-var ~(resolve sym))))
+          ([sym default]
+           (if (:ns &env)
+             `(if (some? ~sym) ~sym ~default)
+             `(impl/get-scoped-var ~(resolve sym) ~default)))))

@@ -25,7 +25,7 @@ automatically falls back to a `ThreadLocal`-based implementation with identical 
 
 ```clojure
 ;; deps.edn
-co.multiply/scoped {:mvn/version "0.1.13"}
+co.multiply/scoped {:mvn/version "0.1.14"}
 ```
 
 ## Why scoped values?
@@ -86,6 +86,22 @@ Access a scoped value. Falls back to the var's root binding if not in scope:
 ```
 
 Throws `IllegalStateException` if the var is unbound and not in scope.
+
+The two-arity form returns a default value instead of throwing:
+
+```clojure
+(def ^:dynamic *user*)
+
+(ask *user* :anonymous)  ; => :anonymous (var is unbound)
+
+(scoping [*user* 123]
+  (ask *user* :anonymous))  ; => 123 (default not used)
+```
+
+This is useful for optional context that should be a no-op when not established.
+
+> **Note:** In CLJS, `nil` is treated as unbound since CLJS does not distinguish between
+> uninitialized vars and vars bound to `nil`.
 
 **Gotcha:** It can be easy to forget `ask` and reference the var directly. With a default value, this fails silently:
 
