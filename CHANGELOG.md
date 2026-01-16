@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.15 - 2026-01-30
+
+**Breaking**
+
+- Add full ClojureScript support for `current-scope`, `with-scope`, and `assoc-scope`.
+- All API functions now work on both CLJ and CLJS.
+
+Note: In CLJS, a var with value `nil` is indistinguishable from an unbound var when not in scope.
+However, explicitly scoping to `nil` works correctly and returns `nil` (not the default).
+
 ## 0.1.14 - 2026-01-07
 
 - Add `default` arity to `ask`: optionally return a default value rather than throwing when var is unbound.
@@ -9,7 +19,7 @@ Note: since `nil` and "unbound" is indistinguishable in ClojureScript, returns d
 
 ## 0.1.13 - 2026-01-02
 
-- When binding 11+ forms, fall over to loop construction to avoid inlining huge forms at the callsite.
+- When binding 10+ forms, fall back to loop construction to avoid inlining huge forms at the callsite.
 
 ## 0.1.12 - 2026-01-02
 

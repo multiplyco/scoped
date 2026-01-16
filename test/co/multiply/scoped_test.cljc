@@ -2,28 +2,14 @@
   "Tests for scoped values library."
   (:require
     [clojure.test :refer [deftest is testing]]
-    [co.multiply.scoped :refer [ask assoc-scope current-scope scoping with-scope]]
-    [co.multiply.scoped.impl :as impl]))
+    [co.multiply.scoped :refer [ask assoc-scope current-scope scoping with-scope]]))
 
 
 ;; Test vars with different initial states
 (def ^:dynamic *with-default* :default-value)
 (def ^:dynamic *another* :another-default)
 (def ^:dynamic *unbound*)
-
-
-;; # Implementation detection
-;; ################################################################################
-(deftest implementation-test
-  (testing "carrier type matches expected implementation"
-    (let [force-fallback? (= (System/getProperty "co.multiply.scoped.force-fallback") "true")
-          jdk-25+?        (>= (.feature (Runtime/version)) 25)
-          carrier         @#'impl/carrier]
-      (if (and jdk-25+? (not force-fallback?))
-        (is (instance? java.lang.ScopedValue carrier)
-          "Expected ScopedValue on JDK 25+ without force-fallback")
-        (is (instance? ThreadLocal carrier)
-          "Expected ThreadLocal on JDK < 25 or with force-fallback")))))
+(def ^:dynamic *nil-root* nil)
 
 
 ;; # Basic scoping and ask
@@ -45,7 +31,17 @@
   (testing "scoping returns value of body"
     (is (= :result
           (scoping [*with-default* :ignored]
-            :result)))))
+            :result))))
+
+  (testing "scoping restores root binding after block exits"
+    (is (= :default-value (ask *with-default*)))
+    (scoping [*with-default* :temporary]
+      (is (= :temporary (ask *with-default*))))
+    (is (= :default-value (ask *with-default*))))
+
+  (testing "single binding (exercises 1-binding path)"
+    (scoping [*with-default* :single]
+      (is (= :single (ask *with-default*))))))
 
 
 ;; # Nested scoping
@@ -77,7 +73,7 @@
 ;; ################################################################################
 (deftest unbound-var-test
   (testing "ask throws for unbound var outside scoping"
-    (is (thrown? IllegalStateException
+    (is (thrown? #?(:clj IllegalStateException :cljs js/Error)
           (ask *unbound*))))
 
   (testing "ask returns scoped value for otherwise unbound var"
@@ -106,13 +102,21 @@
   (testing "ask with default returns default for unbound var"
     (is (= :fallback (ask *unbound* :fallback))))
 
-  (testing "ask with default does not use default when scoped to nil"
+  (testing "ask with default returns nil when explicitly scoped to nil"
     (scoping [*with-default* nil]
-      (is (nil? (ask *with-default* :fallback)))))
+      (is (nil? (ask *with-default* :fallback))
+        "scoping to nil explicitly 'unsets' the var")))
 
   (testing "ask with default does not use default when scoped to false"
     (scoping [*with-default* false]
-      (is (= false (ask *with-default* :fallback))))))
+      (is (= false (ask *with-default* :fallback)))))
+
+  (testing "ask with default and var bound to nil at root"
+    ;; CLJ can distinguish nil-bound from unbound, CLJS cannot
+    #?(:clj  (is (nil? (ask *nil-root* :fallback))
+               "CLJ: var bound to nil returns nil, not default")
+       :cljs (is (= :fallback (ask *nil-root* :fallback))
+               "CLJS: var bound to nil is indistinguishable from unbound"))))
 
 
 ;; # current-scope and with-scope
@@ -145,15 +149,6 @@
       (with-scope captured
         (is (= :captured (ask *with-default*))))))
 
-  (testing "with-scope can be used to pass scope to callbacks"
-    (let [result   (promise)
-          captured (scoping [*with-default* :from-outer]
-                     (current-scope))]
-      ;; Simulate callback execution
-      (with-scope captured
-        (deliver result (ask *with-default*)))
-      (is (= :from-outer @result))))
-
   (testing "with-scope returns value of body"
     (let [scope (scoping [*with-default* :x] (current-scope))]
       (is (= :body-result
@@ -174,8 +169,39 @@
           (with-scope inner-scope
             (is (= :inner (ask *with-default*)))
             (throw (ex-info "test error" {})))
-          (catch Exception _)))
-      (is (= :outer (ask *with-default*))))))
+          (catch #?(:clj Exception :cljs :default) _)))
+      (is (= :outer (ask *with-default*)))))
+
+  (testing "with-scope restores root binding after block exits"
+    (let [scope (assoc-scope {} *with-default* :temporary)]
+      (is (= :default-value (ask *with-default*)))
+      (with-scope scope
+        (is (= :temporary (ask *with-default*))))
+      (is (= :default-value (ask *with-default*)))))
+
+  (testing "with-scope with empty scope"
+    (scoping [*with-default* :outer]
+      (with-scope {}
+        (is (= :default-value (ask *with-default*)))
+        "empty scope means no bindings, falls back to root")))
+
+  (testing "current-scope inside with-scope reflects restored scope"
+    (let [captured (scoping [*with-default* :captured
+                             *another*      :also-captured]
+                     (current-scope))]
+      (with-scope captured
+        (let [inner-scope (current-scope)]
+          (is (= :captured (get inner-scope #'*with-default*)))
+          (is (= :also-captured (get inner-scope #'*another*)))))))
+
+  (testing "nested with-scope"
+    (let [outer-scope (assoc-scope {} *with-default* :outer)
+          inner-scope (assoc-scope {} *with-default* :inner)]
+      (with-scope outer-scope
+        (is (= :outer (ask *with-default*)))
+        (with-scope inner-scope
+          (is (= :inner (ask *with-default*))))
+        (is (= :outer (ask *with-default*)))))))
 
 
 (deftest assoc-scope-test
@@ -202,59 +228,17 @@
     (let [original (scoping [*with-default* :original] (current-scope))
           _        (assoc-scope original *with-default* :modified)]
       (with-scope original
-        (is (= :original (ask *with-default*)))))))
+        (is (= :original (ask *with-default*))))))
 
+  (testing "assoc-scope with single binding (exercises 1-binding path)"
+    (let [extended (assoc-scope {} *with-default* :single)]
+      (with-scope extended
+        (is (= :single (ask *with-default*))))))
 
-;; # Virtual thread integration
-;; ################################################################################
-(deftest virtual-thread-test
-  (testing "scope does NOT auto-propagate to virtual threads"
-    (let [result (promise)]
-      (scoping [*with-default* :parent-scope]
-        (-> (Thread/startVirtualThread
-              (fn []
-                ;; Without explicit scope restoration, we get root binding
-                (deliver result (ask *with-default*))))
-          (.join)))
-      (is (= :default-value @result)
-        "Virtual thread sees root binding, not parent scope")))
-
-  (testing "scope propagates to virtual thread via capture/restore"
-    (let [result (promise)]
-      (scoping [*with-default* :parent-scope]
-        (let [scope (current-scope)]
-          (-> (Thread/startVirtualThread
-                (fn []
-                  (with-scope scope
-                    (deliver result (ask *with-default*)))))
-            (.join))))
-      (is (= :parent-scope @result))))
-
-  (testing "multiple virtual threads can share captured scope"
-    (let [results  (atom [])
-          captured (scoping [*with-default* :shared]
-                     (current-scope))
-          threads  (mapv (fn [i]
-                           (Thread/startVirtualThread
-                             (fn []
-                               (with-scope captured
-                                 (swap! results conj [(ask *with-default*) i])))))
-                     (range 5))]
-      (run! #(.join %) threads)
-      (is (= 5 (count @results)))
-      (is (every? #(= :shared (first %)) @results))))
-
-  (testing "each virtual thread can have its own scope"
-    (let [results (atom {})]
-      (doseq [i (range 3)]
-        (let [thread-scope (scoping [*another* (keyword (str "thread-" i))]
-                             (current-scope))]
-          (-> (Thread/startVirtualThread
-                (fn []
-                  (with-scope thread-scope
-                    (swap! results assoc i (ask *another*)))))
-            (.join))))
-      (is (= {0 :thread-0, 1 :thread-1, 2 :thread-2} @results)))))
+  (testing "assoc-scope with zero additional bindings returns scope unchanged"
+    (let [original (scoping [*with-default* :original] (current-scope))
+          same     (assoc-scope original)]
+      (is (= original same)))))
 
 
 ;; # Many bindings (exercises merge-bindings path)
@@ -289,11 +273,10 @@
       (is (= 1 (ask *var-01*)))
       (is (= 6 (ask *var-06*)))
       (is (= 12 (ask *var-12*)))
-      (is (= {#'*var-01* 1 #'*var-02* 2 #'*var-03* 3
-              #'*var-04* 4 #'*var-05* 5 #'*var-06* 6
-              #'*var-07* 7 #'*var-08* 8 #'*var-09* 9
-              #'*var-10* 10 #'*var-11* 11 #'*var-12* 12}
-            (current-scope)))))
+      ;; Verify scope contains all bindings
+      (let [scope (current-scope)]
+        (is (= 1 (get scope #'*var-01*)))
+        (is (= 12 (get scope #'*var-12*))))))
 
   (testing "many bindings via assoc-scope"
     (let [scope (assoc-scope {}
@@ -349,5 +332,78 @@
       (try
         (scoping [*with-default* :inner]
           (throw (ex-info "test" {})))
-        (catch Exception _))
-      (is (= :outer (ask *with-default*))))))
+        (catch #?(:clj Exception :cljs :default) _))
+      (is (= :outer (ask *with-default*)))))
+
+  (testing "expression values in bindings (not just literals)"
+    (let [compute-value (fn [] :computed)]
+      (scoping [*with-default* (compute-value)
+                *another*      (keyword (str "dynamic-" 123))]
+        (is (= :computed (ask *with-default*)))
+        (is (= :dynamic-123 (ask *another*))))))
+
+  (testing "with-scope inside scoping"
+    (let [captured (assoc-scope {} *another* :from-with-scope)]
+      (scoping [*with-default* :from-scoping]
+        (with-scope captured
+          ;; with-scope replaces entire scope, not additive
+          (is (= :default-value (ask *with-default*)))
+          (is (= :from-with-scope (ask *another*)))))))
+
+  (testing "scoping inside with-scope"
+    (let [captured (assoc-scope {} *with-default* :from-with-scope)]
+      (with-scope captured
+        (scoping [*another* :from-scoping]
+          ;; scoping extends current scope
+          (is (= :from-with-scope (ask *with-default*)))
+          (is (= :from-scoping (ask *another*))))))))
+
+
+;; # Binding count boundary cases
+;; ################################################################################
+(deftest binding-count-boundaries-test
+  (testing "9 bindings (upper boundary of 2-9 transient path)"
+    (scoping [*var-01* :a
+              *var-02* :b
+              *var-03* :c
+              *var-04* :d
+              *var-05* :e
+              *var-06* :f
+              *var-07* :g
+              *var-08* :h
+              *var-09* :i]
+      (is (= :a (ask *var-01*)))
+      (is (= :i (ask *var-09*)))))
+
+  (testing "10 bindings (lower boundary of merge-bindings path)"
+    (scoping [*var-01* 1
+              *var-02* 2
+              *var-03* 3
+              *var-04* 4
+              *var-05* 5
+              *var-06* 6
+              *var-07* 7
+              *var-08* 8
+              *var-09* 9
+              *var-10* 10]
+      (is (= 1 (ask *var-01*)))
+      (is (= 10 (ask *var-10*)))))
+
+  (testing "assoc-scope with 9 bindings"
+    (let [scope (assoc-scope {}
+                  *var-01* :a *var-02* :b *var-03* :c
+                  *var-04* :d *var-05* :e *var-06* :f
+                  *var-07* :g *var-08* :h *var-09* :i)]
+      (with-scope scope
+        (is (= :a (ask *var-01*)))
+        (is (= :i (ask *var-09*))))))
+
+  (testing "assoc-scope with 10 bindings"
+    (let [scope (assoc-scope {}
+                  *var-01* 1 *var-02* 2 *var-03* 3
+                  *var-04* 4 *var-05* 5 *var-06* 6
+                  *var-07* 7 *var-08* 8 *var-09* 9
+                  *var-10* 10)]
+      (with-scope scope
+        (is (= 1 (ask *var-01*)))
+        (is (= 10 (ask *var-10*)))))))

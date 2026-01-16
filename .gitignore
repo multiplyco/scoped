@@ -1,13 +1,15 @@
-.idea/
 *.class
+*.iml
 *.jar
 .cpcache/
+.idea/
 .lein-deps-sum
 .lein-failures
 .lein-plugins/
 .lein-repl-history
 .nrepl-port
 .shadow-cljs
+/.clj-kondo/.cache/
 /checkouts/
 /classes/
 /lib/

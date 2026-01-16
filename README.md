@@ -4,7 +4,7 @@
 [![cljdoc](https://cljdoc.org/badge/co.multiply/scoped)](https://cljdoc.org/d/co.multiply/scoped)
 
 A Clojure/ClojureScript library for scoped values. On JDK 25+, uses Java's `ScopedValue` API for efficient context
-propagation with virtual threads. On older JDKs, falls back to `ThreadLocal`. In ClojureScript, falls back to `binding`.
+propagation with virtual threads. On older JDKs, falls back to `ThreadLocal`. Full API support in ClojureScript.
 
 ## Requirements
 
@@ -19,13 +19,13 @@ automatically falls back to a `ThreadLocal`-based implementation with identical 
 
 **ClojureScript:**
 
-- Any supported ClojureScript version (uses `binding`)
+- Any supported ClojureScript version
 
 ## Installation
 
 ```clojure
 ;; deps.edn
-co.multiply/scoped {:mvn/version "0.1.14"}
+co.multiply/scoped {:mvn/version "0.1.15"}
 ```
 
 ## Why scoped values?
@@ -36,8 +36,8 @@ accounted for the vast majority of the overhead involved. While I can't make bro
 scoped values cut about 95% of the overhead: from ~20μs to ~1μs per async operation.
 
 This library provides a way to use `ScopedValue` when running on JDK 25, while providing a semantically identical
-fallback to `ThreadLocal` when running on older versions of the JDK. It also provides some basic support for
-ClojureScript, to ease use in CLJC contexts.
+fallback to `ThreadLocal` when running on older versions of the JDK. Full API support is available in ClojureScript,
+enabling scope capture and restoration patterns in async contexts.
 
 ## API
 
@@ -100,8 +100,8 @@ The two-arity form returns a default value instead of throwing:
 
 This is useful for optional context that should be a no-op when not established.
 
-> **Note:** In CLJS, `nil` is treated as unbound since CLJS does not distinguish between
-> uninitialized vars and vars bound to `nil`.
+> **Note:** In CLJS, a var with value `nil` is indistinguishable from an unbound var when not
+> in scope. However, explicitly scoping to `nil` works correctly and returns `nil` (not the default).
 
 **Gotcha:** It can be easy to forget `ask` and reference the var directly. With a default value, this fails silently:
 
@@ -125,7 +125,7 @@ Prefer unbound vars. They're more likely to fail when used, making the mistake o
 ;; => ClassCastException: Var$Unbound cannot be cast to Number
 ```
 
-### `current-scope` (CLJ only)
+### `current-scope` (CLJ + CLJS)
 
 Capture the current scope map for later restoration:
 
@@ -140,7 +140,7 @@ Capture the current scope map for later restoration:
 ;; => {#'*user-id* 123}
 ```
 
-### `assoc-scope` (CLJ only)
+### `assoc-scope` (CLJ + CLJS)
 
 Extend a captured scope with additional bindings without creating another lambda:
 
@@ -162,7 +162,7 @@ Extend a captured scope with additional bindings without creating another lambda
 This is useful when you have a captured scope and want to add bindings before restoring it, avoiding the overhead of
 nesting `scoping` inside `with-scope`.
 
-### `with-scope` (CLJ only)
+### `with-scope` (CLJ + CLJS)
 
 Restore a previously captured scope:
 
@@ -216,6 +216,33 @@ Capture and restore scope across virtual thread boundaries:
 
 ;; Prints: "User: 123"
 ```
+
+## Async example (CLJS)
+
+In JavaScript, async callbacks (`setTimeout`, Promises, event handlers) run after the current scope exits.
+You must capture and restore the scope explicitly:
+
+```clojure
+(require '[co.multiply.scoped :refer [ask current-scope scoping with-scope]])
+
+(def ^:dynamic *user-id*)
+
+;; This WON'T work - scope exits before callback runs:
+(scoping [*user-id* 123]
+  (js/setTimeout
+    #(println "User:" (ask *user-id*))  ; Runs with empty scope!
+    100))
+
+;; This WILL work - capture and restore:
+(scoping [*user-id* 123]
+  (let [scope (current-scope)]
+    (js/setTimeout
+      #(with-scope scope
+         (println "User:" (ask *user-id*)))  ; Prints: "User: 123"
+      100)))
+```
+
+This pattern applies to all async boundaries: `setTimeout`, `js/Promise`, `core.async` channels, etc.
 
 ## License
 
