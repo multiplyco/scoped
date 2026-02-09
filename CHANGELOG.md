@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.16 - 2026-02-09
+
+- Fix cljdoc analysis failure by hiding `resolve` from the ClojureScript analyzer via reader conditionals.
+
 ## 0.1.15 - 2026-01-30
 
 **Breaking**

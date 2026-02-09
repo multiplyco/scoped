@@ -16,6 +16,6 @@
                 :deps       {io.github.clojure/tools.build {:mvn/version "0.10.11"}
                              slipset/deps-deploy           {:mvn/version "0.2.2"}}}
 
-  :cljdoc      {:extra-deps {io.github.cljdoc/cljdoc-analyzer {:git/tag "0.10.3" :git/sha "3f37a390"}}
+  :cljdoc      {:extra-deps {io.github.cljdoc/cljdoc-analyzer {:git/tag "v1.0.873" :git/sha "bf4f620c"}}
                 :main-opts  ["-m" "cljdoc-analyzer.cljdoc-main"]}}}
 

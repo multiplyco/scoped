@@ -111,7 +111,7 @@
               `(h/persistentAssoc ~scope (var ~sym) ~val)
               (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))
             ;; Resolve var at compile time, then reuse.
-            (if-let [resolved (and (symbol? sym) (resolve sym))]
+            (if-let [resolved (and (symbol? sym) #?(:clj (resolve sym) :cljs nil))]
               `(h/persistentAssoc ~scope ~resolved ~val)
               (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))))
 
@@ -123,7 +123,7 @@
                  (if (symbol? sym)
                    `(h/transientAssoc (var ~sym) ~val)
                    (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))
-                 (if-let [resolved (and (symbol? sym) (resolve sym))]
+                 (if-let [resolved (and (symbol? sym) #?(:clj (resolve sym) :cljs nil))]
                    `(h/transientAssoc ~resolved ~val)
                    (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))))
            (h/asPersistent))
@@ -133,7 +133,7 @@
                         (if (symbol? sym)
                           (conj v `(var ~sym) value)
                           (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))
-                        (if-let [resolved (and (symbol? sym) (resolve sym))]
+                        (if-let [resolved (and (symbol? sym) #?(:clj (resolve sym) :cljs nil))]
                           (conj v resolved value)
                           (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))))
               []

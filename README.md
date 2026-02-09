@@ -25,7 +25,7 @@ automatically falls back to a `ThreadLocal`-based implementation with identical 
 
 ```clojure
 ;; deps.edn
-co.multiply/scoped {:mvn/version "0.1.15"}
+co.multiply/scoped {:mvn/version "0.1.16"}
 ```
 
 ## Why scoped values?
@@ -102,6 +102,20 @@ This is useful for optional context that should be a no-op when not established.
 
 > **Note:** In CLJS, a var with value `nil` is indistinguishable from an unbound var when not
 > in scope. However, explicitly scoping to `nil` works correctly and returns `nil` (not the default).
+>
+> ```clojure
+> (def ^:dynamic *opt* nil)
+>
+> ;; Outside scope, CLJS can't tell nil-bound from unbound:
+> (ask *opt* :fallback)
+> ;; CLJ  => nil       (var is bound to nil)
+> ;; CLJS => :fallback  (nil looks unbound)
+>
+> ;; But explicitly scoping to nil works on both:
+> (scoping [*opt* nil]
+>   (ask *opt* :fallback))
+> ;; => nil (both CLJ and CLJS)
+> ```
 
 **Gotcha:** It can be easy to forget `ask` and reference the var directly. With a default value, this fails silently:
 

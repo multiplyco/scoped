@@ -4,7 +4,7 @@
     [deps-deploy.deps-deploy :as deploy]))
 
 (def lib 'co.multiply/scoped)
-(def version "0.1.15")
+(def version "0.1.16")
 (def class-dir "target/classes")
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 (def basis (delay (b/create-basis {:project "deps.edn"})))
