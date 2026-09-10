@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.17 - 2026-09-10
+
+- Evaluate the default expression in `(ask *var* default)` only when needed, on both CLJ and CLJS. Previously, the default was always evaluated.
+
 ## 0.1.16 - 2026-02-09
 
 - Fix cljdoc analysis failure by hiding `resolve` from the ClojureScript analyzer via reader conditionals.

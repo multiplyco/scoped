@@ -25,7 +25,7 @@ automatically falls back to a `ThreadLocal`-based implementation with identical 
 
 ```clojure
 ;; deps.edn
-co.multiply/scoped {:mvn/version "0.1.16"}
+co.multiply/scoped {:mvn/version "0.1.17"}
 ```
 
 ## Why scoped values?
@@ -99,6 +99,15 @@ The two-arity form returns a default value instead of throwing:
 ```
 
 This is useful for optional context that should be a no-op when not established.
+
+The default expression is evaluated only when needed:
+
+```clojure
+(ask *user* (load-default-user))  ; Loads the default only if *user* is unbound
+
+(scoping [*user* 123]
+  (ask *user* (load-default-user)))  ; => 123, without calling load-default-user
+```
 
 > **Note:** In CLJS, a var with value `nil` is indistinguishable from an unbound var when not
 > in scope. However, explicitly scoping to `nil` works correctly and returns `nil` (not the default).

@@ -10,6 +10,7 @@
 (def ^:dynamic *another* :another-default)
 (def ^:dynamic *unbound*)
 (def ^:dynamic *nil-root* nil)
+(def ^:dynamic *false-root* false)
 
 
 ;; # Basic scoping and ask
@@ -117,6 +118,48 @@
                "CLJ: var bound to nil returns nil, not default")
        :cljs (is (= :fallback (ask *nil-root* :fallback))
                "CLJS: var bound to nil is indistinguishable from unbound"))))
+
+
+(deftest ask-default-evaluation-test
+  (testing "default is not evaluated when a root binding is available"
+    (let [calls     (atom 0)
+          otherwise (fn [] (swap! calls inc) :fallback)]
+      (is (= :default-value (ask *with-default* (otherwise))))
+      (is (false? (ask *false-root* (otherwise))))
+      (is (zero? @calls))))
+
+  (testing "default is not evaluated when a scoped value is available"
+    (doseq [value [:scoped nil false]]
+      (let [calls (atom 0)]
+        (scoping [*unbound* value]
+          (is (= value (ask *unbound* (swap! calls inc)))))
+        (is (zero? @calls)))))
+
+  (testing "default is evaluated once per ask when needed"
+    (let [calls     (atom 0)
+          otherwise (fn [] (swap! calls inc) :fallback)]
+      (is (= :fallback (ask *unbound* (otherwise))))
+      (is (= 1 @calls))
+      (is (= :fallback (ask *unbound* (otherwise))))
+      (is (= 2 @calls))))
+
+  (testing "nil root binding only evaluates the default in CLJS"
+    (let [calls (atom 0)]
+      (is (= #?(:clj nil :cljs 1) (ask *nil-root* (swap! calls inc))))
+      (is (= #?(:clj 0 :cljs 1) @calls))))
+
+  (testing "default results are returned as-is, including nil, false and functions"
+    (doseq [fallback [nil false (fn [] :fallback)]]
+      (let [calls (atom 0)]
+        (is (= fallback (ask *unbound* (do (swap! calls inc) fallback))))
+        (is (= 1 @calls)))))
+
+  (testing "a throwing default is only evaluated when needed"
+    (is (= :default-value
+          (ask *with-default* (throw (ex-info "fallback" {})))))
+    (is (thrown-with-msg? #?(:clj clojure.lang.ExceptionInfo :cljs cljs.core/ExceptionInfo)
+          #"fallback"
+          (ask *unbound* (throw (ex-info "fallback" {})))))))
 
 
 ;; # current-scope and with-scope

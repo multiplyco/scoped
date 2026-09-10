@@ -68,7 +68,8 @@
    (ask *user-id*)     ;=> :default (falls back to var value)
    ```
 
-   The two-arity form returns `default` if the var is unbound:
+   The two-arity form evaluates and returns `default` only if the var is
+   unbound and not in scope:
 
    ```clojure
    (def ^:dynamic *user*)
@@ -86,5 +87,5 @@
      `(impl/get-scoped-var ~(resolve sym))))
   ([sym default]
    (h/if-cljs
-     `(impl/get-scoped-var (var ~sym) ~default)
-     `(impl/get-scoped-var ~(resolve sym) ~default))))
+     `(impl/-get-scoped-var (var ~sym) ~default)
+     `(impl/-get-scoped-var ~(resolve sym) ~default))))
