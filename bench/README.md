@@ -1,6 +1,14 @@
 # Conditional binding benchmarks
 
+For public-API read, construction, entry/exit and capture/restore measurements,
+see the [JVM runtime benchmark suite](RUNTIME.md).
+
 Recorded measurements and interpretation are in [RESULTS.md](RESULTS.md).
+
+These comparisons retain the Clojure construction algorithms from before the
+Java runtime experiment. Their expansion and merge loop are frozen in
+`co.multiply.scoped-bench-construction`; use `:bench-runtime` to measure the
+current public API. The original Clojure baseline requires no Java compilation.
 
 The `:bench` alias adds [Criterium 0.4.6](https://github.com/hugoduncan/criterium)
 and the benchmark source directory. It uses a fixed 512 MiB JVM heap. Run:
@@ -14,11 +22,11 @@ The runner compares three ways to construct a scope:
 
 - `baseline`: the original direct assoc operations, without sentinel support.
 - `function`: benchmark-local copies of the previous assoc wrapper functions.
-- `macro`: the current `h/persistentAssocSkip` and `h/transientAssocSkip` macros.
+- `macro`: the `h/persistentAssocSkip` and `h/transientAssocSkip` macros.
 
-The small-binding variants reuse the current `extend-scope` expansion, replacing
+The small-binding variants reuse the frozen `extend-scope` expansion, replacing
 only the association symbols. For ten or more bindings, the two comparison loops
-match `merge-resolved-bindings`, replacing only its association operation. These
+match its `merge-resolved-bindings`, replacing only its association operation. These
 baseline and function alternatives are confined to the benchmark namespace.
 
 One, two, and ten bindings exercise persistent assoc, unrolled transient assocs,

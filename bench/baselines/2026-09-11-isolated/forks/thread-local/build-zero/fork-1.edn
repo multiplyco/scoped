@@ -1,0 +1,281 @@
+{:protocol :isolated-case,
+ :schema-version 2,
+ :result
+ {:description "assoc-scope, zero bindings",
+  :diagnostics
+  {:measurement-warmup-ratio 0.9946119587024985,
+   :sample-ns-per-call
+   [1.636548966621997
+    1.6056660968888323
+    1.6102737200160235
+    1.64333646431822
+    1.6227298592457915
+    1.6235495678948
+    1.6256851449736676
+    1.6321000089013344
+    1.605453974255562
+    1.606734227503329
+    1.6064052776226658
+    1.6056042313421985
+    1.6575627263330015
+    1.6065484930490141
+    1.6287900692639659
+    1.605056937491869
+    1.6329938879553558
+    1.603719263212315
+    1.6123464045027447
+    1.6439659939980675
+    1.6040965449360425
+    1.6060141192999826
+    1.6048855587056632
+    1.631856510519846
+    1.6048923952849785
+    1.605237205307768
+    1.6053653120086746
+    1.6054448834261916
+    1.651712448683306
+    1.6110794142516625
+    1.6256838455806228
+    1.6045274873268367
+    1.6325016936201993
+    1.6039983784165435
+    1.6090615536512867
+    1.639824725003437
+    1.6062916627636339
+    1.604841671377445
+    1.6071298959667701
+    1.6166271974662099
+    1.605717024236691
+    1.6161032828468003
+    1.6229681633363964
+    1.6265209861123349
+    1.6528861959988883
+    1.6117455172519077
+    1.6279553224373704
+    1.6124863386335253
+    1.63467808181269
+    1.6112505206903363
+    1.6258995218569927
+    1.6573831426672285
+    1.6200678393092793
+    1.6271376645980915
+    1.6162796524835645
+    1.6212640766246829
+    1.6101274956416396
+    1.6030476230257993
+    1.7493025544746539
+    1.708781287532638],
+   :first-window-mean-ns 1.6212078030619559,
+   :last-first-ratio 1.0140150341717995,
+   :last-window-mean-ns 1.6439290858214572,
+   :window-samples 10,
+   :sampling-delta
+   {:compilation-ms 20, :classes-loaded 0, :gc-count 0, :gc-ms 0},
+   :sampling-state
+   {:before
+    {:uptime-ms 23962,
+     :compilation-ms 2196,
+     :classes-loaded 4789,
+     :gc-count 6,
+     :gc-ms 39},
+    :after
+    {:uptime-ms 83305,
+     :compilation-ms 2216,
+     :classes-loaded 4789,
+     :gc-count 6,
+     :gc-ms 39}},
+   :warmup-mean-ns 1.631419256168431},
+  :context-size 0,
+  :mean-ns 1.6226542288009722,
+  :ci-ns [1.6178468336456184 1.6305602609014984],
+  :criterium
+  {:overhead 0,
+   :samples
+   (997501708
+    978678125
+    981486542
+    1001638792
+    989078750
+    989578375
+    990880042
+    994790000
+    978548833
+    979329167
+    979128667
+    978640417
+    1010309917
+    979215959
+    992772541
+    978306833
+    995334833
+    977491500
+    982749875
+    1002022500
+    977721459
+    978890250
+    978202375
+    994641584
+    978206542
+    978416709
+    978494792
+    978543292
+    1006744083
+    981977625
+    990879250
+    977984125
+    995034833
+    977661625
+    980747708
+    999498333
+    979059417
+    978175625
+    979570333
+    985359084
+    978709166
+    985039750
+    989224000
+    991389500
+    1007459500
+    982383625
+    992263750
+    982835167
+    996361375
+    982081917
+    991010708
+    1010200458
+    987456208
+    991765375
+    985147250
+    988185333
+    981397416
+    977082125
+    1066226750
+    1041528416),
+   :runtime-details
+   {:spec-vendor "Oracle Corporation",
+    :spec-name "Java Virtual Machine Specification",
+    :vm-version "26.0.2+10-FR",
+    :name "73070@MacBookPro",
+    :clojure-version-string "1.12.5",
+    :java-runtime-version "26.0.2+10-FR",
+    :java-version "26.0.2",
+    :vm-name "OpenJDK 64-Bit Server VM",
+    :vm-vendor "Amazon.com Inc.",
+    :clojure-version
+    {:major 1, :minor 12, :incremental 5, :qualifier nil},
+    :spec-version "26",
+    :sun-arch-data-model "64",
+    :input-arguments
+    ["-XX:-OmitStackTraceInFastThrow"
+     "-Xms512m"
+     "-Xmx512m"
+     "-Dco.multiply.scoped.force-fallback=true"]},
+   :mean
+   [1.6226542288009721E-9
+    (1.6178468336456185E-9 1.6305602609014984E-9)],
+   :final-gc-time 10839416,
+   :execution-count 609515345,
+   :variance
+   [6.650844473290399E-22
+    (2.573409168187698E-22 1.5111796810673761E-21)],
+   :os-details
+   {:arch "aarch64",
+    :available-processors 10,
+    :name "Mac OS X",
+    :version "26.3.1"},
+   :tail-quantile 0.025,
+   :outlier-variance 0.016388888888888956,
+   :outliers
+   {:low-severe 0, :low-mild 0, :high-mild 0, :high-severe 2},
+   :warmup-time 20016892461,
+   :lower-q
+   [1.6037192632123153E-9
+    (1.6030476230257995E-9 1.6043012425716699E-9)],
+   :warmup-executions 12269618852,
+   :sample-count 60,
+   :upper-q
+   [1.6843671687215686E-9
+    (1.6517124486833061E-9 1.7493025544746541E-9)],
+   :total-time 59.341040209,
+   :sample-variance [6.360110935171553E-22 (0.0 0.0)],
+   :options
+   {:max-gc-attempts 100,
+    :samples 60,
+    :target-execution-time 1000000000,
+    :warmup-jit-period 20000000000,
+    :tail-quantile 0.025,
+    :bootstrap-size 1000,
+    :overhead 0},
+   :sample-mean
+   [1.6226291018426564E-9
+    (1.54697132073817E-9 1.6982868829471429E-9)]},
+  :id :build/zero,
+  :context-mode :ambient,
+  :allocation
+  {:status :measured,
+   :iterations 100000,
+   :samples-bytes [216 136 136],
+   :bytes-per-call 0.0016266666666666667}},
+ :suite :scoped-runtime,
+ :environment
+ {:suite-sha256
+  {"bench/co/multiply/scoped_bench_runner.clj"
+   "0c5bb3f894b75740206a2ee7c2ecaca0e460f58bcea0aee3d92ae73b240ce67e",
+   "bench/co/multiply/scoped_runtime_bench.clj"
+   "fccc412ac7f0489c40903e6fc25e974b98cb7ca1df50e6432f5ac4bb35232d12"},
+  :classpath
+  "bench:src:/Users/henrik/.m2/repository/criterium/criterium/0.4.6/criterium-0.4.6.jar:/Users/henrik/.m2/repository/org/clojure/clojure/1.12.5/clojure-1.12.5.jar:/Users/henrik/.m2/repository/org/clojure/core.specs.alpha/0.4.74/core.specs.alpha-0.4.74.jar:/Users/henrik/.m2/repository/org/clojure/spec.alpha/0.5.238/spec.alpha-0.5.238.jar",
+  :compiler-options nil,
+  :processors 10,
+  :java-vm "OpenJDK 64-Bit Server VM",
+  :jvm-arguments
+  ["-XX:-OmitStackTraceInFastThrow"
+   "-Xms512m"
+   "-Xmx512m"
+   "-Dco.multiply.scoped.force-fallback=true"],
+  :git
+  {:head "0b3dd159b88cf3072b59f19285dc2f0adb5aaf72",
+   :status
+   "M README.md\n M bench/README.md\n M bench/co/multiply/scoped_bench.clj\n M deps.edn\n?? bench/RUNTIME.md\n?? bench/baselines/\n?? bench/co/multiply/scoped_bench_construction.cljc\n?? bench/co/multiply/scoped_bench_runner.clj\n?? bench/co/multiply/scoped_bench_runner_test.clj\n?? bench/co/multiply/scoped_runtime_bench.clj\n?? bench/experiments/"},
+  :source-sha256
+  {"src/co/multiply/scoped.cljc"
+   "74628a6705de2d10fa2919bb6dfe36807c186e6603c7c705a78a96435a183d5e",
+   "src/co/multiply/scoped/helpers.cljc"
+   "35c7b4ed4c2c6950420ec4da147da9c2a222c5e98120b1b035b3a53997f74dfa",
+   "src/co/multiply/scoped/impl.cljc"
+   "68ce6ce1da6214b255856f8b5f31c6967c1fd0a97f43fa802c4f14570df82f3a"},
+  :arch "aarch64",
+  :deps-sha256
+  "b7513c536abbd0b846275d9e5556739f98caf2c12c02beb1ab7980e547a6e80f",
+  :benchmark-jvm-arguments
+  ["-XX:-OmitStackTraceInFastThrow" "-Xms512m" "-Xmx512m"],
+  :recorded-at "2026-09-11T11:17:56.257338Z",
+  :os-version "26.3.1",
+  :java-version "26.0.2+10-FR",
+  :process-name "73070@MacBookPro",
+  :clojure-version "1.12.5",
+  :os "Mac OS X",
+  :backend :thread-local},
+ :options
+ {:allocation-iterations 100000,
+  :output
+  "/Users/henrik/clojure/scoped/bench/baselines/2026-09-11-isolated/forks/thread-local/build-zero/fork-1.edn",
+  :seed 20260911,
+  :criterium
+  {:samples 60,
+   :warmup-jit-period 20000000000,
+   :target-execution-time 1000000000,
+   :bootstrap-size 1000,
+   :overhead 0},
+  :label "original Clojure baseline",
+  :forks 5,
+  :worker? true,
+  :allocation-samples 3,
+  :case-id :build/zero,
+  :fork 1,
+  :backend :thread-local},
+ :complete? true,
+ :case-id :build/zero,
+ :finished-at "2026-09-11T11:19:18.823141Z",
+ :fork 1,
+ :backend :thread-local}

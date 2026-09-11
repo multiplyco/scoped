@@ -1,0 +1,68 @@
+Measuring :ask/hit — Scoped hit, one-argument ask
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 28 iterations
+  compilation occurred before 151723 iterations
+  compilation occurred before 455113 iterations
+  compilation occurred before 606808 iterations
+  compilation occurred before 758503 iterations
+  compilation occurred before 1213588 iterations
+  compilation occurred before 2275453 iterations
+  compilation occurred before 3640708 iterations
+  compilation occurred before 3792403 iterations
+  compilation occurred before 4247488 iterations
+  compilation occurred before 5916133 iterations
+  compilation occurred before 7281388 iterations
+  compilation occurred before 10011898 iterations
+  compilation occurred before 14714443 iterations
+  compilation occurred before 18051733 iterations
+  compilation occurred before 24119533 iterations
+  compilation occurred before 27153433 iterations
+  compilation occurred before 30490723 iterations
+  compilation occurred before 37468693 iterations
+  compilation occurred before 38682253 iterations
+  compilation occurred before 58099213 iterations
+  compilation occurred before 59767858 iterations
+  compilation occurred before 77516173 iterations
+  compilation occurred before 78729733 iterations
+  compilation occurred before 91623808 iterations
+  compilation occurred before 104821273 iterations
+  compilation occurred before 172022158 iterations
+  compilation occurred before 179455213 iterations
+  compilation occurred before 183247588 iterations
+  compilation occurred before 183702673 iterations
+  compilation occurred before 184612843 iterations
+  compilation occurred before 199478953 iterations
+  compilation occurred before 200389123 iterations
+  compilation occurred before 204181498 iterations
+  compilation occurred before 222536593 iterations
+  compilation occurred before 222688288 iterations
+  compilation occurred before 276388318 iterations
+  compilation occurred before 328268008 iterations
+  compilation occurred before 351780733 iterations
+  compilation occurred before 371804473 iterations
+  compilation occurred before 386670583 iterations
+  compilation occurred before 402750253 iterations
+  compilation occurred before 405329068 iterations
+  compilation occurred before 406239238 iterations
+  compilation occurred before 409424833 iterations
+  compilation occurred before 409879918 iterations
+  compilation occurred before 416099413 iterations
+  compilation occurred before 425807893 iterations
+  compilation occurred before 486030808 iterations
+  compilation occurred before 560057968 iterations
+  compilation occurred before 776526733 iterations
+  compilation occurred before 779560633 iterations
+  compilation occurred before 815664043 iterations
+  compilation occurred before 834929308 iterations
+  compilation occurred before 838569988 iterations
+  compilation occurred before 844031008 iterations
+  compilation occurred before 844182703 iterations
+  compilation occurred before 854497963 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  6,14 ns/call, 95% CI [6,13, 6,16], 0,00 bytes/call

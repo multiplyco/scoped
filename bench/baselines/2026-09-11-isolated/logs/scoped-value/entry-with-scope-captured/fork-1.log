@@ -1,0 +1,70 @@
+Measuring :entry/with-scope-captured — Enter prebuilt scope, body captures a local
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 16 iterations
+  compilation occurred before 148812 iterations
+  compilation occurred before 297608 iterations
+  compilation occurred before 743996 iterations
+  compilation occurred before 892792 iterations
+  compilation occurred before 1190384 iterations
+  compilation occurred before 1487976 iterations
+  compilation occurred before 3422324 iterations
+  compilation occurred before 6398244 iterations
+  compilation occurred before 7142224 iterations
+  compilation occurred before 9969348 iterations
+  compilation occurred before 10118144 iterations
+  compilation occurred before 16367576 iterations
+  compilation occurred before 17706740 iterations
+  compilation occurred before 19789884 iterations
+  compilation occurred before 23658580 iterations
+  compilation occurred before 26634500 iterations
+  compilation occurred before 31693564 iterations
+  compilation occurred before 36752628 iterations
+  compilation occurred before 37942996 iterations
+  compilation occurred before 56988884 iterations
+  compilation occurred before 58625640 iterations
+  compilation occurred before 60857580 iterations
+  compilation occurred before 76034772 iterations
+  compilation occurred before 77076344 iterations
+  compilation occurred before 94634272 iterations
+  compilation occurred before 107877116 iterations
+  compilation occurred before 168585884 iterations
+  compilation occurred before 175876888 iterations
+  compilation occurred before 176620868 iterations
+  compilation occurred before 180043176 iterations
+  compilation occurred before 180191972 iterations
+  compilation occurred before 195517960 iterations
+  compilation occurred before 196261940 iterations
+  compilation occurred before 196410736 iterations
+  compilation occurred before 200279432 iterations
+  compilation occurred before 271106328 iterations
+  compilation occurred before 328392788 iterations
+  compilation occurred before 329731952 iterations
+  compilation occurred before 344611552 iterations
+  compilation occurred before 345950716 iterations
+  compilation occurred before 364699012 iterations
+  compilation occurred before 381066572 iterations
+  compilation occurred before 397434132 iterations
+  compilation occurred before 400558848 iterations
+  compilation occurred before 401005236 iterations
+  compilation occurred before 404576340 iterations
+  compilation occurred before 417670388 iterations
+  compilation occurred before 432549988 iterations
+  compilation occurred before 476593604 iterations
+  compilation occurred before 480462300 iterations
+  compilation occurred before 483735812 iterations
+  compilation occurred before 717196736 iterations
+  compilation occurred before 761686740 iterations
+  compilation occurred before 786089284 iterations
+  compilation occurred before 799927312 iterations
+  compilation occurred before 818973200 iterations
+  compilation occurred before 823139488 iterations
+  compilation occurred before 838019088 iterations
+  compilation occurred before 952294416 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  8,87 ns/call, 95% CI [8,84, 8,92], 56,00 bytes/call

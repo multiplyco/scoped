@@ -317,6 +317,13 @@ This pattern applies to all async boundaries: `setTimeout`, `js/Promise`, `core.
 
 ## Benchmarks
 
+The [runtime benchmark suite](bench/RUNTIME.md) measures the public API in
+isolated JVMs with extended warm-up, one-minute sampling and repeated forks:
+
+```sh
+clojure -M:bench-runtime '{:backends [:scoped-value :thread-local]}'
+```
+
 Run the JVM scope-construction benchmarks with Criterium:
 
 ```sh

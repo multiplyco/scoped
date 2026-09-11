@@ -1,0 +1,52 @@
+Measuring :entry/scoping-captured — Construct, enter, read; body captures two locals
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 34 iterations
+  compilation occurred before 327372 iterations
+  compilation occurred before 654710 iterations
+  compilation occurred before 2618738 iterations
+  compilation occurred before 10802188 iterations
+  compilation occurred before 14075568 iterations
+  compilation occurred before 17021610 iterations
+  compilation occurred before 21931680 iterations
+  compilation occurred before 31097144 iterations
+  compilation occurred before 37316566 iterations
+  compilation occurred before 38953256 iterations
+  compilation occurred before 40589946 iterations
+  compilation occurred before 52046776 iterations
+  compilation occurred before 58266198 iterations
+  compilation occurred before 69723028 iterations
+  compilation occurred before 80852520 iterations
+  compilation occurred before 83471224 iterations
+  compilation occurred before 125370488 iterations
+  compilation occurred before 128643868 iterations
+  compilation occurred before 136499980 iterations
+  compilation occurred before 136827318 iterations
+  compilation occurred before 167269752 iterations
+  compilation occurred before 169233780 iterations
+  compilation occurred before 227499944 iterations
+  compilation occurred before 238302098 iterations
+  compilation occurred before 260888420 iterations
+  compilation occurred before 371856002 iterations
+  compilation occurred before 386586212 iterations
+  compilation occurred before 395751676 iterations
+  compilation occurred before 430122166 iterations
+  compilation occurred before 430449504 iterations
+  compilation occurred before 431758856 iterations
+  compilation occurred before 432086194 iterations
+  compilation occurred before 440596982 iterations
+  compilation occurred before 447471080 iterations
+  compilation occurred before 479222866 iterations
+  compilation occurred before 592481814 iterations
+  compilation occurred before 706722776 iterations
+  compilation occurred before 755823476 iterations
+  compilation occurred before 760733546 iterations
+  compilation occurred before 761060884 iterations
+  compilation occurred before 761388222 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  25,06 ns/call, 95% CI [24,97, 25,18], 56,00 bytes/call

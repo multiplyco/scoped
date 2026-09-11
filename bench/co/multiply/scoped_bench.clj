@@ -5,7 +5,7 @@
     [clojure.pprint :as pprint]
     [clojure.walk :as walk]
     [co.multiply.scoped.helpers :as h]
-    [co.multiply.scoped.impl :as impl]
+    [co.multiply.scoped-bench-construction :as impl]
     [criterium.core :as criterium]))
 
 
@@ -47,13 +47,13 @@
                                   'co.multiply.scoped.helpers/persistentAssoc
                                   'co.multiply.scoped.helpers/transientAssocSkip
                                   'co.multiply.scoped.helpers/transientAssoc
-                                  'co.multiply.scoped.impl/merge-resolved-bindings
+                                  'co.multiply.scoped-bench-construction/merge-resolved-bindings
                                   'co.multiply.scoped-bench/merge-baseline}
                        :function {'co.multiply.scoped.helpers/persistentAssocSkip
                                   'co.multiply.scoped-bench/persistent-assoc-function
                                   'co.multiply.scoped.helpers/transientAssocSkip
                                   'co.multiply.scoped-bench/transient-assoc-function
-                                  'co.multiply.scoped.impl/merge-resolved-bindings
+                                  'co.multiply.scoped-bench-construction/merge-resolved-bindings
                                   'co.multiply.scoped-bench/merge-function}
                        :macro    {})]
     (walk/postwalk-replace replacements

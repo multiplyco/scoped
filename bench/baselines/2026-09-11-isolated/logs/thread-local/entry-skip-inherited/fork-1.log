@@ -1,0 +1,57 @@
+Measuring :entry/skip-inherited — Skip a binding and read inherited value
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 46 iterations
+  compilation occurred before 426960 iterations
+  compilation occurred before 853874 iterations
+  compilation occurred before 2134616 iterations
+  compilation occurred before 3415358 iterations
+  compilation occurred before 14088208 iterations
+  compilation occurred before 18357348 iterations
+  compilation occurred before 23480316 iterations
+  compilation occurred before 30737854 iterations
+  compilation occurred before 44399102 iterations
+  compilation occurred before 50802812 iterations
+  compilation occurred before 55071952 iterations
+  compilation occurred before 67879372 iterations
+  compilation occurred before 75990738 iterations
+  compilation occurred before 90932728 iterations
+  compilation occurred before 105447804 iterations
+  compilation occurred before 127647332 iterations
+  compilation occurred before 167777248 iterations
+  compilation occurred before 218153100 iterations
+  compilation occurred before 220714584 iterations
+  compilation occurred before 257429188 iterations
+  compilation occurred before 288166996 iterations
+  compilation occurred before 321893202 iterations
+  compilation occurred before 483266694 iterations
+  compilation occurred before 514858330 iterations
+  compilation occurred before 515712158 iterations
+  compilation occurred before 516139072 iterations
+  compilation occurred before 560111214 iterations
+  compilation occurred before 560965042 iterations
+  compilation occurred before 563526526 iterations
+  compilation occurred before 574626290 iterations
+  compilation occurred before 625002142 iterations
+  compilation occurred before 772714386 iterations
+  compilation occurred before 946041470 iterations
+  compilation occurred before 992575096 iterations
+  compilation occurred before 1006663258 iterations
+  compilation occurred before 1011359312 iterations
+  compilation occurred before 1096742112 iterations
+  compilation occurred before 1133456716 iterations
+  compilation occurred before 1139860426 iterations
+  compilation occurred before 1144983394 iterations
+  compilation occurred before 1147971792 iterations
+  compilation occurred before 1168890578 iterations
+  compilation occurred before 1169744406 iterations
+  compilation occurred before 1198347644 iterations
+  compilation occurred before 1366551760 iterations
+  compilation occurred before 1387470546 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  13,69 ns/call, 95% CI [13,64, 13,78], 0,00 bytes/call

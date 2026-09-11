@@ -1,0 +1,46 @@
+Measuring :workload/changing-scopes — Cycle 128 frames: changing parent sizes, values, skips, defaults and nested reads
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 18 iterations
+  compilation occurred before 175171 iterations
+  compilation occurred before 350324 iterations
+  compilation occurred before 1401242 iterations
+  compilation occurred before 5780067 iterations
+  compilation occurred before 7356444 iterations
+  compilation occurred before 8932821 iterations
+  compilation occurred before 11560116 iterations
+  compilation occurred before 16989859 iterations
+  compilation occurred before 20317766 iterations
+  compilation occurred before 20843225 iterations
+  compilation occurred before 21018378 iterations
+  compilation occurred before 22594755 iterations
+  compilation occurred before 27849345 iterations
+  compilation occurred before 28024498 iterations
+  compilation occurred before 32053017 iterations
+  compilation occurred before 43262809 iterations
+  compilation occurred before 43963421 iterations
+  compilation occurred before 52721071 iterations
+  compilation occurred before 67083617 iterations
+  compilation occurred before 68835147 iterations
+  compilation occurred before 74790349 iterations
+  compilation occurred before 77767950 iterations
+  compilation occurred before 89503201 iterations
+  compilation occurred before 90554119 iterations
+  compilation occurred before 132240533 iterations
+  compilation occurred before 135918746 iterations
+  compilation occurred before 198448367 iterations
+  compilation occurred before 207030864 iterations
+  compilation occurred before 211759995 iterations
+  compilation occurred before 211935148 iterations
+  compilation occurred before 230151060 iterations
+  compilation occurred before 231026825 iterations
+  compilation occurred before 231201978 iterations
+  compilation occurred before 235755956 iterations
+  compilation occurred before 239434169 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  75,06 ns/call, 95% CI [74,80, 75,65], 299,31 bytes/call

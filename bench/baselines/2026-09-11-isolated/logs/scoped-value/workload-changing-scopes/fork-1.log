@@ -1,0 +1,67 @@
+Measuring :workload/changing-scopes — Cycle 128 frames: changing parent sizes, values, skips, defaults and nested reads
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 5 iterations
+  compilation occurred before 5 iterations
+  compilation occurred before 48692 iterations
+  compilation occurred before 97379 iterations
+  compilation occurred before 146066 iterations
+  compilation occurred before 243440 iterations
+  compilation occurred before 827684 iterations
+  compilation occurred before 876371 iterations
+  compilation occurred before 925058 iterations
+  compilation occurred before 1119806 iterations
+  compilation occurred before 1509302 iterations
+  compilation occurred before 2044859 iterations
+  compilation occurred before 2483042 iterations
+  compilation occurred before 3213347 iterations
+  compilation occurred before 3602843 iterations
+  compilation occurred before 5355575 iterations
+  compilation occurred before 5793758 iterations
+  compilation occurred before 6037193 iterations
+  compilation occurred before 6280628 iterations
+  compilation occurred before 7741238 iterations
+  compilation occurred before 7935986 iterations
+  compilation occurred before 9007100 iterations
+  compilation occurred before 12025694 iterations
+  compilation occurred before 12220442 iterations
+  compilation occurred before 12415190 iterations
+  compilation occurred before 18647126 iterations
+  compilation occurred before 19133996 iterations
+  compilation occurred before 22347338 iterations
+  compilation occurred before 23369765 iterations
+  compilation occurred before 23418452 iterations
+  compilation occurred before 24879062 iterations
+  compilation occurred before 25171184 iterations
+  compilation occurred before 32766356 iterations
+  compilation occurred before 36758690 iterations
+  compilation occurred before 55162376 iterations
+  compilation occurred before 57548039 iterations
+  compilation occurred before 58813901 iterations
+  compilation occurred before 58862588 iterations
+  compilation occurred before 58911275 iterations
+  compilation occurred before 63974723 iterations
+  compilation occurred before 64218158 iterations
+  compilation occurred before 64266845 iterations
+  compilation occurred before 65532707 iterations
+  compilation occurred before 88659032 iterations
+  compilation occurred before 104774429 iterations
+  compilation occurred before 112418288 iterations
+  compilation occurred before 113197280 iterations
+  compilation occurred before 119331842 iterations
+  compilation occurred before 123226802 iterations
+  compilation occurred before 129263990 iterations
+  compilation occurred before 129994295 iterations
+  compilation occurred before 130383791 iterations
+  compilation occurred before 130578539 iterations
+  compilation occurred before 130919348 iterations
+  compilation occurred before 133353698 iterations
+  compilation occurred before 136664414 iterations
+  compilation occurred before 155847092 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  125,91 ns/call, 95% CI [125,56, 126,62], 534,31 bytes/call

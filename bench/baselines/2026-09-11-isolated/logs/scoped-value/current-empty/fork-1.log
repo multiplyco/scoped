@@ -1,0 +1,69 @@
+Measuring :current/empty — Capture explicitly bound empty scope
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 64 iterations
+  compilation occurred before 669203 iterations
+  compilation occurred before 1338342 iterations
+  compilation occurred before 2676620 iterations
+  compilation occurred before 15390261 iterations
+  compilation occurred before 22750790 iterations
+  compilation occurred before 29442180 iterations
+  compilation occurred before 48178072 iterations
+  compilation occurred before 62899130 iterations
+  compilation occurred before 78289327 iterations
+  compilation occurred before 79627605 iterations
+  compilation occurred before 97025219 iterations
+  compilation occurred before 106393165 iterations
+  compilation occurred before 109069721 iterations
+  compilation occurred before 123121640 iterations
+  compilation occurred before 165277397 iterations
+  compilation occurred before 170630509 iterations
+  compilation occurred before 254272884 iterations
+  compilation occurred before 262971691 iterations
+  compilation occurred before 341930093 iterations
+  compilation occurred before 346614066 iterations
+  compilation occurred before 405498298 iterations
+  compilation occurred before 524605040 iterations
+  compilation occurred before 760141968 iterations
+  compilation occurred before 760811107 iterations
+  compilation occurred before 790253223 iterations
+  compilation occurred before 808989115 iterations
+  compilation occurred before 877910432 iterations
+  compilation occurred before 879248710 iterations
+  compilation occurred before 881256127 iterations
+  compilation occurred before 883263544 iterations
+  compilation occurred before 900661158 iterations
+  compilation occurred before 980288699 iterations
+  compilation occurred before 1218502183 iterations
+  compilation occurred before 1443332887 iterations
+  compilation occurred before 1444002026 iterations
+  compilation occurred before 1547718571 iterations
+  compilation occurred before 1555079100 iterations
+  compilation occurred before 1639390614 iterations
+  compilation occurred before 1713665043 iterations
+  compilation occurred before 1777233248 iterations
+  compilation occurred before 1787270333 iterations
+  compilation occurred before 1787939472 iterations
+  compilation occurred before 1791285167 iterations
+  compilation occurred before 1799314835 iterations
+  compilation occurred before 1799983974 iterations
+  compilation occurred before 1835448341 iterations
+  compilation occurred before 1891656017 iterations
+  compilation occurred before 2142583142 iterations
+  compilation occurred before 2248307104 iterations
+  compilation occurred before 3424653466 iterations
+  compilation occurred before 3534392262 iterations
+  compilation occurred before 3568518351 iterations
+  compilation occurred before 3569187490 iterations
+  compilation occurred before 3597291328 iterations
+  compilation occurred before 3597960467 iterations
+  compilation occurred before 3682271981 iterations
+  compilation occurred before 3699000456 iterations
+  compilation occurred before 3769929190 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  2,80 ns/call, 95% CI [2,80, 2,82], 0,00 bytes/call

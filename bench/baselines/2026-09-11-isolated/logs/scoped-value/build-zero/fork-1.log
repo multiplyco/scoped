@@ -1,0 +1,46 @@
+Measuring :build/zero — assoc-scope, zero bindings
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 160 iterations
+  compilation occurred before 5967525 iterations
+  compilation occurred before 11934890 iterations
+  compilation occurred before 23869620 iterations
+  compilation occurred before 107412730 iterations
+  compilation occurred before 137249555 iterations
+  compilation occurred before 184988475 iterations
+  compilation occurred before 238694760 iterations
+  compilation occurred before 292401045 iterations
+  compilation occurred before 393846250 iterations
+  compilation occurred before 566899835 iterations
+  compilation occurred before 692214500 iterations
+  compilation occurred before 710116595 iterations
+  compilation occurred before 769790245 iterations
+  compilation occurred before 960745925 iterations
+  compilation occurred before 1092027955 iterations
+  compilation occurred before 1306853095 iterations
+  compilation occurred before 1497808775 iterations
+  compilation occurred before 1814079120 iterations
+  compilation occurred before 2345174605 iterations
+  compilation occurred before 2565967110 iterations
+  compilation occurred before 3162703610 iterations
+  compilation occurred before 4016036805 iterations
+  compilation occurred before 4630675400 iterations
+  compilation occurred before 6778926800 iterations
+  compilation occurred before 7023588765 iterations
+  compilation occurred before 7077295050 iterations
+  compilation occurred before 7214544445 iterations
+  compilation occurred before 7220511810 iterations
+  compilation occurred before 7226479175 iterations
+  compilation occurred before 7841117770 iterations
+  compilation occurred before 7876921960 iterations
+  compilation occurred before 8032073450 iterations
+  compilation occurred before 8157388115 iterations
+  compilation occurred before 9404567400 iterations
+  compilation occurred before 10866571825 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  1,70 ns/call, 95% CI [1,69, 1,71], 0,00 bytes/call

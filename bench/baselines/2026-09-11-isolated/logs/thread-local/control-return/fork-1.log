@@ -1,0 +1,67 @@
+Measuring :control/return — Array read and return; harness floor
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 95 iterations
+  compilation occurred before 937714 iterations
+  compilation occurred before 1875333 iterations
+  compilation occurred before 2812952 iterations
+  compilation occurred before 4688190 iterations
+  compilation occurred before 7501047 iterations
+  compilation occurred before 31879141 iterations
+  compilation occurred before 48756283 iterations
+  compilation occurred before 67508663 iterations
+  compilation occurred before 109701518 iterations
+  compilation occurred before 115327232 iterations
+  compilation occurred before 124703422 iterations
+  compilation occurred before 149081516 iterations
+  compilation occurred before 199712942 iterations
+  compilation occurred before 231591988 iterations
+  compilation occurred before 239092940 iterations
+  compilation occurred before 356295315 iterations
+  compilation occurred before 359108172 iterations
+  compilation occurred before 368484362 iterations
+  compilation occurred before 485686737 iterations
+  compilation occurred before 651645300 iterations
+  compilation occurred before 707902440 iterations
+  compilation occurred before 1062322422 iterations
+  compilation occurred before 1063260041 iterations
+  compilation occurred before 1108265753 iterations
+  compilation occurred before 1134519085 iterations
+  compilation occurred before 1232031461 iterations
+  compilation occurred before 1236719556 iterations
+  compilation occurred before 1237657175 iterations
+  compilation occurred before 1262035269 iterations
+  compilation occurred before 1281725268 iterations
+  compilation occurred before 1697090485 iterations
+  compilation occurred before 2022444278 iterations
+  compilation occurred before 2168712842 iterations
+  compilation occurred before 2179964270 iterations
+  compilation occurred before 2298104264 iterations
+  compilation occurred before 2489378540 iterations
+  compilation occurred before 2504380444 iterations
+  compilation occurred before 2510943777 iterations
+  compilation occurred before 2520319967 iterations
+  compilation occurred before 2522195205 iterations
+  compilation occurred before 2523132824 iterations
+  compilation occurred before 2568138536 iterations
+  compilation occurred before 2570951393 iterations
+  compilation occurred before 2571889012 iterations
+  compilation occurred before 2631896628 iterations
+  compilation occurred before 3002256133 iterations
+  compilation occurred before 3106331842 iterations
+  compilation occurred before 4685282238 iterations
+  compilation occurred before 4953441272 iterations
+  compilation occurred before 5040639839 iterations
+  compilation occurred before 5159717452 iterations
+  compilation occurred before 5160655071 iterations
+  compilation occurred before 5171906499 iterations
+  compilation occurred before 5198159831 iterations
+  compilation occurred before 5199097450 iterations
+  compilation occurred before 5282545541 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  1,83 ns/call, 95% CI [1,82, 1,84], 0,00 bytes/call

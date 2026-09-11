@@ -1,0 +1,25 @@
+Measuring :build/nine — assoc-scope, nine bindings
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 17 iterations
+  compilation occurred before 158103 iterations
+  compilation occurred before 316189 iterations
+  compilation occurred before 3635995 iterations
+  compilation occurred before 5374941 iterations
+  compilation occurred before 5533027 iterations
+  compilation occurred before 6955801 iterations
+  compilation occurred before 8220489 iterations
+  compilation occurred before 10433693 iterations
+  compilation occurred before 14860101 iterations
+  compilation occurred before 18021821 iterations
+  compilation occurred before 18812251 iterations
+  compilation occurred before 20393111 iterations
+  compilation occurred before 25135691 iterations
+  compilation occurred before 28929755 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  626,60 ns/call, 95% CI [624,37, 630,99], 936,00 bytes/call

@@ -1,0 +1,77 @@
+Measuring :capture/restore — Capture parent, enter empty context, restore and read
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 7 iterations
+  compilation occurred before 68893 iterations
+  compilation occurred before 137779 iterations
+  compilation occurred before 206665 iterations
+  compilation occurred before 275551 iterations
+  compilation occurred before 344437 iterations
+  compilation occurred before 413323 iterations
+  compilation occurred before 482209 iterations
+  compilation occurred before 551095 iterations
+  compilation occurred before 1584385 iterations
+  compilation occurred before 2755447 iterations
+  compilation occurred before 3788737 iterations
+  compilation occurred before 5579773 iterations
+  compilation occurred before 5993089 iterations
+  compilation occurred before 7301923 iterations
+  compilation occurred before 7370809 iterations
+  compilation occurred before 8197441 iterations
+  compilation occurred before 8886301 iterations
+  compilation occurred before 10952881 iterations
+  compilation occurred before 12261715 iterations
+  compilation occurred before 14672725 iterations
+  compilation occurred before 17014849 iterations
+  compilation occurred before 17565937 iterations
+  compilation occurred before 21079123 iterations
+  compilation occurred before 26176687 iterations
+  compilation occurred before 27072205 iterations
+  compilation occurred before 27485521 iterations
+  compilation occurred before 35614069 iterations
+  compilation occurred before 45326995 iterations
+  compilation occurred before 45464767 iterations
+  compilation occurred before 46360285 iterations
+  compilation occurred before 51940051 iterations
+  compilation occurred before 52146709 iterations
+  compilation occurred before 77978959 iterations
+  compilation occurred before 83214295 iterations
+  compilation occurred before 85143103 iterations
+  compilation occurred before 87347455 iterations
+  compilation occurred before 90516211 iterations
+  compilation occurred before 90791755 iterations
+  compilation occurred before 90929527 iterations
+  compilation occurred before 92720563 iterations
+  compilation occurred before 92789449 iterations
+  compilation occurred before 102777919 iterations
+  compilation occurred before 109735405 iterations
+  compilation occurred before 113455249 iterations
+  compilation occurred before 125441413 iterations
+  compilation occurred before 152651383 iterations
+  compilation occurred before 159126667 iterations
+  compilation occurred before 160091071 iterations
+  compilation occurred before 176417053 iterations
+  compilation occurred before 182892337 iterations
+  compilation occurred before 183925627 iterations
+  compilation occurred before 184890031 iterations
+  compilation occurred before 185303347 iterations
+  compilation occurred before 188816533 iterations
+  compilation occurred before 193363009 iterations
+  compilation occurred before 210791167 iterations
+  compilation occurred before 220504093 iterations
+  compilation occurred before 223879507 iterations
+  compilation occurred before 252604969 iterations
+  compilation occurred before 335474827 iterations
+  compilation occurred before 354487363 iterations
+  compilation occurred before 354556249 iterations
+  compilation occurred before 370262257 iterations
+  compilation occurred before 379079665 iterations
+  compilation occurred before 382041763 iterations
+  compilation occurred before 382523965 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  51,42 ns/call, 95% CI [51,21, 51,81], 112,00 bytes/call

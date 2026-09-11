@@ -1,0 +1,48 @@
+Measuring :workload/read-100 — One scope, 100 reads into a preallocated sink
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 2 iterations
+  compilation occurred before 2 iterations
+  compilation occurred before 16796 iterations
+  compilation occurred before 67178 iterations
+  compilation occurred before 117560 iterations
+  compilation occurred before 134354 iterations
+  compilation occurred before 570998 iterations
+  compilation occurred before 873290 iterations
+  compilation occurred before 1108406 iterations
+  compilation occurred before 1477874 iterations
+  compilation occurred before 1931312 iterations
+  compilation occurred before 1998488 iterations
+  compilation occurred before 2166428 iterations
+  compilation occurred before 2670248 iterations
+  compilation occurred before 3006128 iterations
+  compilation occurred before 3577124 iterations
+  compilation occurred before 4148120 iterations
+  compilation occurred before 4282472 iterations
+  compilation occurred before 6432104 iterations
+  compilation occurred before 6600044 iterations
+  compilation occurred before 7070276 iterations
+  compilation occurred before 8682500 iterations
+  compilation occurred before 11302364 iterations
+  compilation occurred before 12142064 iterations
+  compilation occurred before 12679472 iterations
+  compilation occurred before 19027604 iterations
+  compilation occurred before 20287154 iterations
+  compilation occurred before 20303948 iterations
+  compilation occurred before 20320742 iterations
+  compilation occurred before 22033730 iterations
+  compilation occurred before 22050524 iterations
+  compilation occurred before 22067318 iterations
+  compilation occurred before 22151288 iterations
+  compilation occurred before 22168082 iterations
+  compilation occurred before 22604726 iterations
+  compilation occurred before 22957400 iterations
+  compilation occurred before 24603212 iterations
+  compilation occurred before 30397142 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  647,41 ns/call, 95% CI [644,49, 652,61], 56,00 bytes/call

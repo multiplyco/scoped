@@ -1,0 +1,46 @@
+Measuring :workload/read-100 — One scope, 100 reads into a preallocated sink
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 1 iterations
+  compilation occurred before 1 iterations
+  compilation occurred before 10195 iterations
+  compilation occurred before 20389 iterations
+  compilation occurred before 50971 iterations
+  compilation occurred before 112135 iterations
+  compilation occurred before 122329 iterations
+  compilation occurred before 234463 iterations
+  compilation occurred before 316015 iterations
+  compilation occurred before 438343 iterations
+  compilation occurred before 530089 iterations
+  compilation occurred before 723775 iterations
+  compilation occurred before 784939 iterations
+  compilation occurred before 927655 iterations
+  compilation occurred before 988819 iterations
+  compilation occurred before 1202893 iterations
+  compilation occurred before 1253863 iterations
+  compilation occurred before 1488325 iterations
+  compilation occurred before 1620847 iterations
+  compilation occurred before 1865503 iterations
+  compilation occurred before 2171323 iterations
+  compilation occurred before 2568889 iterations
+  compilation occurred before 2599471 iterations
+  compilation occurred before 2609665 iterations
+  compilation occurred before 3221305 iterations
+  compilation occurred before 4006243 iterations
+  compilation occurred before 4301869 iterations
+  compilation occurred before 4679047 iterations
+  compilation occurred before 5270299 iterations
+  compilation occurred before 5280493 iterations
+  compilation occurred before 6391639 iterations
+  compilation occurred before 7696471 iterations
+  compilation occurred before 11549803 iterations
+  compilation occurred before 12049309 iterations
+  compilation occurred before 12314353 iterations
+  compilation occurred before 12324547 iterations
+  compilation occurred before 12334741 iterations
+  compilation occurred before 13394917 iterations
+  compilation occurred before 13445887 iterations
+  compilation occurred before 13456081 iterations
+  compilation occurred before 13466275 iterations
+  compilation occurred before 13721125 iterations
+Estimating execution count ...
+Sampling ...

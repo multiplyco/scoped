@@ -1,0 +1,32 @@
+Measuring :entry/scoping-ten — Construct, enter ten bindings; read last
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 8 iterations
+  compilation occurred before 74652 iterations
+  compilation occurred before 149296 iterations
+  compilation occurred before 223940 iterations
+  compilation occurred before 597160 iterations
+  compilation occurred before 2239328 iterations
+  compilation occurred before 3209700 iterations
+  compilation occurred before 3284344 iterations
+  compilation occurred before 3806852 iterations
+  compilation occurred before 4851868 iterations
+  compilation occurred before 5299732 iterations
+  compilation occurred before 7165832 iterations
+  compilation occurred before 8584068 iterations
+  compilation occurred before 8808000 iterations
+  compilation occurred before 9255864 iterations
+  compilation occurred before 11793760 iterations
+  compilation occurred before 13585216 iterations
+  compilation occurred before 15824536 iterations
+  compilation occurred before 18735652 iterations
+  compilation occurred before 22691784 iterations
+  compilation occurred before 28588660 iterations
+  compilation occurred before 29260456 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  542,18 ns/call, 95% CI [540,54, 545,93], 824,00 bytes/call

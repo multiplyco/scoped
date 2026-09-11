@@ -1,0 +1,54 @@
+Measuring :entry/scoping-two — Construct, enter two bindings; read second
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 16 iterations
+  compilation occurred before 16 iterations
+  compilation occurred before 151149 iterations
+  compilation occurred before 302282 iterations
+  compilation occurred before 453415 iterations
+  compilation occurred before 755681 iterations
+  compilation occurred before 1209080 iterations
+  compilation occurred before 3022676 iterations
+  compilation occurred before 4987405 iterations
+  compilation occurred before 6347602 iterations
+  compilation occurred before 7405533 iterations
+  compilation occurred before 9974794 iterations
+  compilation occurred before 11334991 iterations
+  compilation occurred before 14357651 iterations
+  compilation occurred before 17531444 iterations
+  compilation occurred before 17984843 iterations
+  compilation occurred before 19496173 iterations
+  compilation occurred before 24030163 iterations
+  compilation occurred before 27052823 iterations
+  compilation occurred before 32191345 iterations
+  compilation occurred before 35969670 iterations
+  compilation occurred before 37934399 iterations
+  compilation occurred before 38538931 iterations
+  compilation occurred before 52140901 iterations
+  compilation occurred before 57883955 iterations
+  compilation occurred before 59395285 iterations
+  compilation occurred before 59546418 iterations
+  compilation occurred before 77228979 iterations
+  compilation occurred before 78135777 iterations
+  compilation occurred before 101712525 iterations
+  compilation occurred before 109722574 iterations
+  compilation occurred before 117279224 iterations
+  compilation occurred before 171687104 iterations
+  compilation occurred before 178639222 iterations
+  compilation occurred before 178790355 iterations
+  compilation occurred before 182719813 iterations
+  compilation occurred before 182870946 iterations
+  compilation occurred before 186800404 iterations
+  compilation occurred before 198588778 iterations
+  compilation occurred before 199344443 iterations
+  compilation occurred before 199495576 iterations
+  compilation occurred before 201158039 iterations
+  compilation occurred before 273550746 iterations
+  compilation occurred before 273701879 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  61,29 ns/call, 95% CI [61,05, 61,78], 144,00 bytes/call

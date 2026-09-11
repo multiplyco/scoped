@@ -1,0 +1,60 @@
+Measuring :current/empty — Capture explicitly bound empty scope
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 217 iterations
+  compilation occurred before 1916039 iterations
+  compilation occurred before 3831861 iterations
+  compilation occurred before 15326793 iterations
+  compilation occurred before 59390699 iterations
+  compilation occurred before 93875495 iterations
+  compilation occurred before 136023579 iterations
+  compilation occurred before 182003307 iterations
+  compilation occurred before 210740637 iterations
+  compilation occurred before 227983035 iterations
+  compilation occurred before 247141255 iterations
+  compilation occurred before 312279203 iterations
+  compilation occurred before 348679821 iterations
+  compilation occurred before 408070303 iterations
+  compilation occurred before 480871539 iterations
+  compilation occurred before 601568325 iterations
+  compilation occurred before 728012577 iterations
+  compilation occurred before 752918263 iterations
+  compilation occurred before 978985259 iterations
+  compilation occurred before 990480191 iterations
+  compilation occurred before 1262526915 iterations
+  compilation occurred before 1392802811 iterations
+  compilation occurred before 1446445827 iterations
+  compilation occurred before 1486678089 iterations
+  compilation occurred before 2170626543 iterations
+  compilation occurred before 2367956209 iterations
+  compilation occurred before 2429262513 iterations
+  compilation occurred before 2517390325 iterations
+  compilation occurred before 2526969435 iterations
+  compilation occurred before 2528885257 iterations
+  compilation occurred before 2578696629 iterations
+  compilation occurred before 2618928891 iterations
+  compilation occurred before 2858406641 iterations
+  compilation occurred before 3051904663 iterations
+  compilation occurred before 3155359051 iterations
+  compilation occurred before 3467638037 iterations
+  compilation occurred before 4122849161 iterations
+  compilation occurred before 4423633215 iterations
+  compilation occurred before 4425549037 iterations
+  compilation occurred before 5090339271 iterations
+  compilation occurred before 5115244957 iterations
+  compilation occurred before 5117160779 iterations
+  compilation occurred before 5138234821 iterations
+  compilation occurred before 5140150643 iterations
+  compilation occurred before 5151645575 iterations
+  compilation occurred before 5247436675 iterations
+  compilation occurred before 5377712571 iterations
+  compilation occurred before 6071240135 iterations
+  compilation occurred before 6132546439 iterations
+  compilation occurred before 6184273633 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  3,12 ns/call, 95% CI [3,11, 3,15], 0,00 bytes/call

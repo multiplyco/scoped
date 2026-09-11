@@ -15,6 +15,17 @@
                 :jvm-opts    ["-Xms512m" "-Xmx512m"]
                 :main-opts   ["-m" "co.multiply.scoped-bench"]}
 
+  :bench-runtime {:extra-paths ["bench"]
+                  :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                               criterium/criterium {:mvn/version "0.4.6"}}
+                  :jvm-opts ["-Xms512m" "-Xmx512m"]
+                  :main-opts ["-m" "co.multiply.scoped-runtime-bench"]}
+
+  :bench-test  {:extra-paths ["bench"]
+                :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                             criterium/criterium {:mvn/version "0.4.6"}}
+                :main-opts ["-m" "co.multiply.scoped-bench-runner-test"]}
+
   :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "3.3.4"}}}
 
   :build       {:ns-default build
@@ -23,4 +34,3 @@
 
   :cljdoc      {:extra-deps {io.github.cljdoc/cljdoc-analyzer {:git/tag "v1.0.873" :git/sha "bf4f620c"}}
                 :main-opts  ["-m" "cljdoc-analyzer.cljdoc-main"]}}}
-

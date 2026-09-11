@@ -1,0 +1,63 @@
+Measuring :entry/with-scope — Enter prebuilt scope, constant body
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 70 iterations
+  compilation occurred before 662131 iterations
+  compilation occurred before 1324192 iterations
+  compilation occurred before 3310375 iterations
+  compilation occurred before 5296558 iterations
+  compilation occurred before 22510144 iterations
+  compilation occurred before 34427242 iterations
+  compilation occurred before 45020218 iterations
+  compilation occurred before 47006401 iterations
+  compilation occurred before 75475024 iterations
+  compilation occurred before 76799146 iterations
+  compilation occurred before 78123268 iterations
+  compilation occurred before 85405939 iterations
+  compilation occurred before 105267769 iterations
+  compilation occurred before 121157233 iterations
+  compilation occurred before 141019063 iterations
+  compilation occurred before 166177381 iterations
+  compilation occurred before 198618370 iterations
+  compilation occurred before 215169895 iterations
+  compilation occurred before 251583250 iterations
+  compilation occurred before 260190043 iterations
+  compilation occurred before 338313241 iterations
+  compilation occurred before 342285607 iterations
+  compilation occurred before 445567123 iterations
+  compilation occurred before 479994295 iterations
+  compilation occurred before 513759406 iterations
+  compilation occurred before 768652891 iterations
+  compilation occurred before 798445636 iterations
+  compilation occurred before 800431819 iterations
+  compilation occurred before 868624102 iterations
+  compilation occurred before 869948224 iterations
+  compilation occurred before 873258529 iterations
+  compilation occurred before 873920590 iterations
+  compilation occurred before 891134176 iterations
+  compilation occurred before 905037457 iterations
+  compilation occurred before 969257374 iterations
+  compilation occurred before 1241364445 iterations
+  compilation occurred before 1424755342 iterations
+  compilation occurred before 1561801969 iterations
+  compilation occurred before 1568422579 iterations
+  compilation occurred before 1622049520 iterations
+  compilation occurred before 1622711581 iterations
+  compilation occurred before 1757772025 iterations
+  compilation occurred before 1759096147 iterations
+  compilation occurred before 1767702940 iterations
+  compilation occurred before 1772337367 iterations
+  compilation occurred before 1776309733 iterations
+  compilation occurred before 1780282099 iterations
+  compilation occurred before 1812723088 iterations
+  compilation occurred before 1858405297 iterations
+  compilation occurred before 2119257331 iterations
+  compilation occurred before 2151698320 iterations
+  compilation occurred before 2556217591 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  6,15 ns/call, 95% CI [6,13, 6,20], 0,00 bytes/call

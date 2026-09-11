@@ -1,0 +1,64 @@
+Measuring :nested/override — Two entries, inner override, three reads and restoration
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 4 iterations
+  compilation occurred before 40150 iterations
+  compilation occurred before 200734 iterations
+  compilation occurred before 281026 iterations
+  compilation occurred before 361318 iterations
+  compilation occurred before 401464 iterations
+  compilation occurred before 521902 iterations
+  compilation occurred before 562048 iterations
+  compilation occurred before 722632 iterations
+  compilation occurred before 923362 iterations
+  compilation occurred before 1364968 iterations
+  compilation occurred before 1806574 iterations
+  compilation occurred before 1846720 iterations
+  compilation occurred before 2649640 iterations
+  compilation occurred before 3813874 iterations
+  compilation occurred before 4737232 iterations
+  compilation occurred before 4937962 iterations
+  compilation occurred before 6383218 iterations
+  compilation occurred before 7186138 iterations
+  compilation occurred before 8551102 iterations
+  compilation occurred before 9916066 iterations
+  compilation occurred before 10237234 iterations
+  compilation occurred before 11722636 iterations
+  compilation occurred before 11762782 iterations
+  compilation occurred before 15375922 iterations
+  compilation occurred before 15777382 iterations
+  compilation occurred before 20755486 iterations
+  compilation occurred before 28905124 iterations
+  compilation occurred before 31996366 iterations
+  compilation occurred before 32076658 iterations
+  compilation occurred before 32116804 iterations
+  compilation occurred before 45485422 iterations
+  compilation occurred before 47452576 iterations
+  compilation occurred before 48536518 iterations
+  compilation occurred before 48576664 iterations
+  compilation occurred before 52751848 iterations
+  compilation occurred before 52952578 iterations
+  compilation occurred before 52992724 iterations
+  compilation occurred before 54036520 iterations
+  compilation occurred before 73105870 iterations
+  compilation occurred before 73146016 iterations
+  compilation occurred before 86394196 iterations
+  compilation occurred before 92737264 iterations
+  compilation occurred before 93339454 iterations
+  compilation occurred before 102332158 iterations
+  compilation occurred before 106587634 iterations
+  compilation occurred before 107189824 iterations
+  compilation occurred before 107711722 iterations
+  compilation occurred before 107952598 iterations
+  compilation occurred before 109959898 iterations
+  compilation occurred before 112689826 iterations
+  compilation occurred before 128507350 iterations
+  compilation occurred before 130514650 iterations
+  compilation occurred before 153638746 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  114,85 ns/call, 95% CI [114,33, 115,49], 224,00 bytes/call

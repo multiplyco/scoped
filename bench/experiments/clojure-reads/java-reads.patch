@@ -1,0 +1,67 @@
+--- a/src/co/multiply/scoped.clj
++++ b/src/co/multiply/scoped.clj
+@@ -100,7 +100,7 @@
+   ([sym]
+    (h/if-cljs
+      `(impl/get-scoped-var (var ~sym))
+-     `(impl/get-scoped-var ~(resolve sym))))
++     `(co.multiply.scoped.ScopedRuntime/get ~(resolve sym))))
+   ([sym default]
+    (h/if-cljs
+      `(impl/-get-scoped-var (var ~sym) ~default)
+--- a/src/co/multiply/scoped/impl.cljc
++++ b/src/co/multiply/scoped/impl.cljc
+@@ -1,11 +1,10 @@
+ (ns co.multiply.scoped.impl
+   #?(:cljs (:require-macros co.multiply.scoped.impl))
+-  (:require [co.multiply.scoped.helpers :as h])
+-  #?(:clj (:import [clojure.lang IDeref Var$Unbound])))
++  (:require [co.multiply.scoped.helpers :as h]))
+ 
+ 
+ #?(:cljs (defonce ^:dynamic carrier {}))
+-(defonce ^:no-doc not-found #?(:clj (Object.) :cljs (js/Object.)))
++#?(:cljs (defonce ^:no-doc not-found (js/Object.)))
+ 
+ 
+ (defmacro current-scope
+@@ -17,25 +16,24 @@
+ 
+ (defmacro ^:no-doc -get-scoped-var
+   [v default]
+-  `(let [not-found# not-found
+-         value# (h/getOrDefault (current-scope) ~v not-found#)]
+-     (h/if-cljs
+-       (if (identical? not-found# value#)
++  (h/if-cljs
++    `(let [value# (h/getOrDefault (current-scope) ~v not-found)]
++       (if (identical? not-found value#)
+          (if-some [value# (deref ~v)] value# ~default)
+-         value#)
+-       (if (identical? not-found# value#)
+-         (let [value# (IDeref/.deref ~v)]
+-           (if (instance? Var$Unbound value#) ~default value#))
++         value#))
++    `(let [value# (co.multiply.scoped.ScopedRuntime/lookup ~v)]
++       (if (identical? co.multiply.scoped.ScopedRuntime/UNBOUND value#)
++         ~default
+          value#))))
+ 
+ 
+-(defn get-scoped-var
+-  ([v]
+-   (co.multiply.scoped.impl/-get-scoped-var v
+-     #?(:clj (throw (IllegalStateException. (str "Unbound: " v)))
+-        :cljs (throw (js/Error. (str "Unbound: " v))))))
+-  ([v default]
+-   (co.multiply.scoped.impl/-get-scoped-var v default)))
++#?(:cljs
++   (defn get-scoped-var
++     ([v]
++      (co.multiply.scoped.impl/-get-scoped-var v
++        (throw (js/Error. (str "Unbound: " v)))))
++     ([v default]
++      (co.multiply.scoped.impl/-get-scoped-var v default))))
+ 
+ 
+ #?(:cljs

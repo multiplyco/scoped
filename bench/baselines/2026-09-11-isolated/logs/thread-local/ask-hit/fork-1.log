@@ -1,0 +1,77 @@
+Measuring :ask/hit — Scoped hit, one-argument ask
+Warming up for JIT optimisations 20000000000 ...
+  classes loaded before 47 iterations
+  compilation occurred before 47 iterations
+  compilation occurred before 457529 iterations
+  compilation occurred before 915011 iterations
+  compilation occurred before 1372493 iterations
+  compilation occurred before 1829975 iterations
+  compilation occurred before 3659903 iterations
+  compilation occurred before 15554435 iterations
+  compilation occurred before 20129255 iterations
+  compilation occurred before 30193859 iterations
+  compilation occurred before 43003355 iterations
+  compilation occurred before 52152995 iterations
+  compilation occurred before 54440405 iterations
+  compilation occurred before 59015225 iterations
+  compilation occurred before 72739685 iterations
+  compilation occurred before 84176735 iterations
+  compilation occurred before 112998101 iterations
+  compilation occurred before 115285511 iterations
+  compilation occurred before 116200475 iterations
+  compilation occurred before 116657957 iterations
+  compilation occurred before 175215653 iterations
+  compilation occurred before 179790473 iterations
+  compilation occurred before 233773349 iterations
+  compilation occurred before 236518241 iterations
+  compilation occurred before 236975723 iterations
+  compilation occurred before 332131979 iterations
+  compilation occurred before 355006079 iterations
+  compilation occurred before 517869671 iterations
+  compilation occurred before 551723339 iterations
+  compilation occurred before 553095785 iterations
+  compilation occurred before 553553267 iterations
+  compilation occurred before 601131395 iterations
+  compilation occurred before 603418805 iterations
+  compilation occurred before 603876287 iterations
+  compilation occurred before 604333769 iterations
+  compilation occurred before 615770819 iterations
+  compilation occurred before 669753695 iterations
+  compilation occurred before 670211177 iterations
+  compilation occurred before 857778797 iterations
+  compilation occurred before 984501311 iterations
+  compilation occurred before 984958793 iterations
+  compilation occurred before 1079657567 iterations
+  compilation occurred before 1083774905 iterations
+  compilation occurred before 1093382027 iterations
+  compilation occurred before 1214157275 iterations
+  compilation occurred before 1215072239 iterations
+  compilation occurred before 1221476987 iterations
+  compilation occurred before 1224679361 iterations
+  compilation occurred before 1228339217 iterations
+  compilation occurred before 1230626627 iterations
+  compilation occurred before 1252585763 iterations
+  compilation occurred before 1272257489 iterations
+  compilation occurred before 1284152021 iterations
+  compilation occurred before 1464399929 iterations
+  compilation occurred before 1486816547 iterations
+  compilation occurred before 1764965603 iterations
+  compilation occurred before 1765423085 iterations
+  compilation occurred before 2341392923 iterations
+  compilation occurred before 2346882707 iterations
+  compilation occurred before 2458965797 iterations
+  compilation occurred before 2459423279 iterations
+  compilation occurred before 2517523493 iterations
+  compilation occurred before 2517980975 iterations
+  compilation occurred before 2530332989 iterations
+  compilation occurred before 2534907809 iterations
+  compilation occurred before 2535365291 iterations
+  compilation occurred before 2576081189 iterations
+Estimating execution count ...
+Sampling ...
+Final GC...
+Checking GC...
+Finding outliers ...
+Bootstrapping ...
+Checking outlier significance
+  6,34 ns/call, 95% CI [6,33, 6,38], 0,00 bytes/call
