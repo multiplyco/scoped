@@ -1,9 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.18 - 2026-09-11
 
 - Add the `skip` sentinel for conditional bindings in `scoping` and `assoc-scope`, on both CLJ and CLJS. Skipping preserves an existing binding or its absence; `nil` and `false` remain explicit values.
-- Add a Criterium `:bench` alias, comparison benchmarks, and recorded measurements for conditional scope construction.
+- Include JVM-specific tests in the default Clojure test suite.
 
 ## 0.1.17 - 2026-09-10
 

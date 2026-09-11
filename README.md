@@ -25,7 +25,7 @@ automatically falls back to a `ThreadLocal`-based implementation with identical 
 
 ```clojure
 ;; deps.edn
-co.multiply/scoped {:mvn/version "0.1.17"}
+co.multiply/scoped {:mvn/version "0.1.18"}
 ```
 
 ## Why scoped values?
