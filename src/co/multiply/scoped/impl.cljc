@@ -89,7 +89,7 @@
       (if (< var-idx bindings-count)
         (let [value-idx (unchecked-inc-int var-idx)]
           (recur (unchecked-inc-int value-idx)
-            (h/transientAssoc scope
+            (h/transientAssocSkip scope
               (h/vecNth bindings var-idx)
               (h/vecNth bindings value-idx))))
         (h/asPersistent scope)))))
@@ -108,11 +108,11 @@
           (if is-cljs
             ;; Var has to be resolved at runtime, in CLJS world.
             (if (symbol? sym)
-              `(h/persistentAssoc ~scope (var ~sym) ~val)
+              `(h/persistentAssocSkip ~scope (var ~sym) ~val)
               (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))
             ;; Resolve var at compile time, then reuse.
             (if-let [resolved (and (symbol? sym) #?(:clj (resolve sym) :cljs nil))]
-              `(h/persistentAssoc ~scope ~resolved ~val)
+              `(h/persistentAssocSkip ~scope ~resolved ~val)
               (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))))
 
       ;; Else
@@ -121,10 +121,10 @@
            ~@(for [[sym val] pairs]
                (if is-cljs
                  (if (symbol? sym)
-                   `(h/transientAssoc (var ~sym) ~val)
+                   `(h/transientAssocSkip (var ~sym) ~val)
                    (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))
                  (if-let [resolved (and (symbol? sym) #?(:clj (resolve sym) :cljs nil))]
-                   `(h/transientAssoc ~resolved ~val)
+                   `(h/transientAssocSkip ~resolved ~val)
                    (throw (IllegalArgumentException. (str "Cannot resolve: " sym))))))
            (h/asPersistent))
         `(merge-resolved-bindings ~scope

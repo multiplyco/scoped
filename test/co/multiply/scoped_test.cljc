@@ -2,7 +2,8 @@
   "Tests for scoped values library."
   (:require
     [clojure.test :refer [deftest is testing]]
-    [co.multiply.scoped :refer [ask assoc-scope current-scope scoping with-scope]]))
+    [co.multiply.scoped :refer [ask assoc-scope current-scope scoping skip with-scope]]
+    [co.multiply.scoped.helpers :as h]))
 
 
 ;; Test vars with different initial states
@@ -31,8 +32,8 @@
 
   (testing "scoping returns value of body"
     (is (= :result
-          (scoping [*with-default* :ignored]
-            :result))))
+           (scoping [*with-default* :ignored]
+             :result))))
 
   (testing "scoping restores root binding after block exits"
     (is (= :default-value (ask *with-default*)))
@@ -156,9 +157,9 @@
 
   (testing "a throwing default is only evaluated when needed"
     (is (= :default-value
-          (ask *with-default* (throw (ex-info "fallback" {})))))
+           (ask *with-default* (throw (ex-info "fallback" {})))))
     (is (thrown-with-msg? #?(:clj clojure.lang.ExceptionInfo :cljs cljs.core/ExceptionInfo)
-          #"fallback"
+                          #"fallback"
           (ask *unbound* (throw (ex-info "fallback" {})))))))
 
 
@@ -195,8 +196,8 @@
   (testing "with-scope returns value of body"
     (let [scope (scoping [*with-default* :x] (current-scope))]
       (is (= :body-result
-            (with-scope scope
-              :body-result)))))
+             (with-scope scope
+               :body-result)))))
 
   (testing "with-scope restores previous scope after normal exit"
     (scoping [*with-default* :outer]
@@ -298,6 +299,7 @@
 (def ^:dynamic *var-10*)
 (def ^:dynamic *var-11*)
 (def ^:dynamic *var-12*)
+
 
 (deftest many-bindings-test
   (testing "10+ bindings triggers merge-bindings path"
@@ -450,3 +452,85 @@
       (with-scope scope
         (is (= 1 (ask *var-01*)))
         (is (= 10 (ask *var-10*)))))))
+
+
+;; # Conditional bindings
+;; ################################################################################
+(deftest skip-test
+  (testing "skip preserves absence and leaves defaults up to each reader"
+    (scoping [*unbound* skip]
+      (is (not (contains? (current-scope) #'*unbound*)))
+      (is (= [:a :b] [(ask *unbound* :a) (ask *unbound* :b)]))
+      (is (thrown? #?(:clj IllegalStateException :cljs js/Error)
+            (ask *unbound*)))))
+
+  (testing "skip preserves fallback to the var's value"
+    (scoping [*with-default* skip]
+      (is (= :default-value (ask *with-default* :fallback)))))
+
+  (testing "skip inherits nil, false, and ordinary values without using defaults"
+    (doseq [value [nil false :outer]]
+      (scoping [*unbound* value]
+        (let [outer (current-scope)
+              captured (scoping [*unbound* skip *another* :inner]
+                         (is (= value (ask *unbound* (throw (ex-info "unexpected default" {})))))
+                         (current-scope))]
+          (with-scope captured
+            (is (= value (ask *unbound* :fallback)))
+            (is (= :inner (ask *another*))))
+          (is (= outer (current-scope)))))))
+
+  (testing "a skipped duplicate binding preserves the preceding binding"
+    (scoping [*unbound* :first *unbound* skip]
+      (is (= :first (ask *unbound*)))))
+
+  (testing "binding expressions can choose to skip, including when values are nil"
+    (doseq [available? [false true]]
+      (scoping [*unbound* (if available? nil skip)]
+        (is (= (when-not available? :fallback) (ask *unbound* :fallback)))))))
+
+
+(deftest skip-construction-paths-test
+  (doseq [[n extend] [[1 (fn [scope value record]
+                           (assoc-scope (record 0 scope) *var-01* (record 1 value)))]
+                      [2 (fn [scope value record]
+                           (assoc-scope (record 0 scope)
+                             *var-01* (record 1 value) *var-02* (record 2 skip)))]
+                      [9 (fn [scope value record]
+                           (assoc-scope (record 0 scope)
+                             *var-01* (record 1 value) *var-02* (record 2 skip)
+                             *var-03* (record 3 skip) *var-04* (record 4 skip)
+                             *var-05* (record 5 skip) *var-06* (record 6 skip)
+                             *var-07* (record 7 skip) *var-08* (record 8 skip)
+                             *var-09* (record 9 skip)))]
+                      [10 (fn [scope value record]
+                            (assoc-scope (record 0 scope)
+                              *var-01* (record 1 value) *var-02* (record 2 skip)
+                              *var-03* (record 3 skip) *var-04* (record 4 skip)
+                              *var-05* (record 5 skip) *var-06* (record 6 skip)
+                              *var-07* (record 7 skip) *var-08* (record 8 skip)
+                              *var-09* (record 9 skip) *var-10* (record 10 skip)))]]
+          scope [{} (assoc-scope {} *var-01* :outer *var-02* :inherited)]
+          value [skip nil false :new #?(:clj (Object.) :cljs (js/Object.))]]
+    (testing (str n " bindings preserve scope contents and evaluate forms once, in order")
+      (let [calls (atom [])
+            record (fn [i v] (swap! calls conj i) v)
+            result (extend scope value record)]
+        (is (= (if (identical? skip value) scope (assoc scope #'*var-01* value))
+               result))
+        (is (= (vec (range (inc n))) @calls))))))
+
+
+(deftest assoc-wrapper-evaluation-test
+  (doseq [value [skip nil false :value]]
+    (let [calls (atom [])
+          record (fn [k v] (swap! calls conj k) v)
+          expected (if (identical? skip value) {} {:key value})]
+      (is (= expected (h/persistentAssocSkip (record :map {})
+                        (record :key :key) (record :value value))))
+      (is (= [:map :key :value] @calls))
+      (reset! calls [])
+      (is (= expected (persistent!
+                        (h/transientAssocSkip (record :map (transient {}))
+                          (record :key :key) (record :value value)))))
+      (is (= [:map :key :value] @calls)))))

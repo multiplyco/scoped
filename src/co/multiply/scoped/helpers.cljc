@@ -7,6 +7,9 @@
 
 ;; ## Helpers
 ;; ############################################################
+(defonce ^:no-doc skip #?(:clj (Object.) :cljs (js/Object.)))
+
+
 (defmacro if-cljs
   "Helper for switching between ClojureScript and Clojure implementations in macros."
   [then else]
@@ -24,6 +27,14 @@
     `(Associative/.assoc ~coll ~k ~v)))
 
 
+(defmacro ^:no-doc persistentAssocSkip
+  [m k v]
+  `(let [m# ~m
+         k# ~k
+         v# ~v]
+     (if (identical? skip v#) m# (persistentAssoc m# k# v#))))
+
+
 (defmacro ^:no-doc asTransient
   [coll]
   (if-cljs
@@ -36,6 +47,14 @@
   (if-cljs
     `(cljs.core/-assoc! ~coll ~k ~v)
     `(ITransientAssociative/.assoc ~coll ~k ~v)))
+
+
+(defmacro ^:no-doc transientAssocSkip
+  [m k v]
+  `(let [m# ~m
+         k# ~k
+         v# ~v]
+     (if (identical? skip v#) m# (transientAssoc m# k# v#))))
 
 
 (defmacro ^:no-doc asPersistent

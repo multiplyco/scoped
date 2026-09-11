@@ -5,6 +5,14 @@
     [co.multiply.scoped.impl :as impl]))
 
 
+(def skip
+  "Sentinel for omitting a binding in `scoping` or `assoc-scope`.
+
+   Leaves the existing binding, or its absence, unchanged. Unlike `nil`
+   and `false`, this value is not added to the scope."
+  h/skip)
+
+
 (defmacro current-scope
   "Returns the current scope map, or an empty map if no scope is active.
 
@@ -18,7 +26,8 @@
 
    Takes a scope (as returned by `current-scope`) and var-value pairs,
    returns a new scope with the bindings added. Does not establish the
-   scope - use `with-scope` for that.
+   scope - use `with-scope` for that. A value of `skip` leaves the existing
+   binding, or its absence, unchanged; `nil` and `false` are ordinary values.
 
    ```clojure
    (with-scope (assoc-scope captured-scope *user-id* 123)
@@ -47,7 +56,15 @@
      (ask *user-id*))  ;=> 123
    ```
 
-   Scopes can be nested; inner bindings shadow outer ones for the same var."
+   Scopes can be nested; inner bindings shadow outer ones for the same var.
+   Use `skip` to omit a binding and preserve normal lookup, for example:
+
+   ```clojure
+   (scoping [*user-id* (if available? user-id skip)]
+     (ask *user-id* :anonymous))
+   ```
+
+   `nil` and `false` still establish explicit bindings."
   [bindings & body]
   `(impl/with-scope (impl/extend-scope (impl/current-scope) ~bindings) ~@body))
 

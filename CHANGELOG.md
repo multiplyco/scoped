@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add the `skip` sentinel for conditional bindings in `scoping` and `assoc-scope`, on both CLJ and CLJS. Skipping preserves an existing binding or its absence; `nil` and `false` remain explicit values.
+- Add a Criterium `:bench` alias, comparison benchmarks, and recorded measurements for conditional scope construction.
+
 ## 0.1.17 - 2026-09-10
 
 - Evaluate the default expression in `(ask *var* default)` only when needed, on both CLJ and CLJS. Previously, the default was always evaluated.

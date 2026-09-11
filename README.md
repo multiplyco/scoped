@@ -68,6 +68,46 @@ Scopes nest naturally; inner bindings shadow outer ones:
 ;; => 2
 ```
 
+### `skip` (CLJ + CLJS)
+
+Use `skip` to conditionally omit a binding in `scoping` or `assoc-scope`:
+
+```clojure
+(require '[co.multiply.scoped :refer [ask scoping skip]])
+
+(def ^:dynamic *user*)
+
+(let [available? false
+      user nil]
+  (scoping [*user* (if available? user skip)]
+    (ask *user* :anonymous)))
+;; => :anonymous
+
+(scoping [*user* nil]
+  (ask *user* :anonymous))
+;; => nil
+```
+
+`skip` leaves an existing outer binding intact, including `nil` or `false`.
+When there is no scoped binding, normal fallback to the var's value or the
+reader's default still applies. It never adds the sentinel to the scope map.
+Use `if` to choose `skip` explicitly; `when` still returns `nil` when false.
+
+```clojure
+(scoping [*user* :outer]
+  (scoping [*user* skip]
+    (ask *user* :anonymous)))
+;; => :outer
+
+(scoping [*user* skip]
+  [(ask *user* :anonymous)
+   (ask *user* :guest)])
+;; => [:anonymous :guest] (the var remains unbound)
+```
+
+With no scoped binding or var value, `(ask *user*)` still throws. Skipping a
+binding does not choose a default on behalf of its readers.
+
 ### `ask` (CLJ + CLJS)
 
 Access a scoped value. Falls back to the var's root binding if not in scope:
@@ -168,7 +208,7 @@ Capture the current scope map for later restoration:
 Extend a captured scope with additional bindings without creating another lambda:
 
 ```clojure
-(require '[co.multiply.scoped :refer [assoc-scope current-scope scoping]])
+(require '[co.multiply.scoped :refer [assoc-scope current-scope scoping skip]])
 
 (def ^:dynamic *user-id*)
 (def ^:dynamic *request-id*)
@@ -180,6 +220,14 @@ Extend a captured scope with additional bindings without creating another lambda
 (assoc-scope captured *request-id* "abc")
 
 ;; => {#'*user-id* 123, #'*request-id* "abc"}
+```
+
+`skip` also leaves captured bindings unchanged, while `nil` remains an explicit value:
+
+```clojure
+(assoc-scope captured *user-id* skip *request-id* nil)
+
+;; => {#'*user-id* 123, #'*request-id* nil}
 ```
 
 This is useful when you have a captured scope and want to add bindings before restoring it, avoiding the overhead of
@@ -266,6 +314,18 @@ You must capture and restore the scope explicitly:
 ```
 
 This pattern applies to all async boundaries: `setTimeout`, `js/Promise`, `core.async` channels, etc.
+
+## Benchmarks
+
+Run the JVM scope-construction benchmarks with Criterium:
+
+```sh
+clojure -M:bench
+```
+
+See the [benchmark guide](bench/README.md) for options and methodology, and
+[recorded measurements](bench/RESULTS.md) for comparisons of the original
+associations, function wrappers, and macro wrappers.
 
 ## License
 

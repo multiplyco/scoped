@@ -10,6 +10,11 @@
   :test        {:extra-paths ["test"]
                 :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
 
+  :bench       {:extra-paths ["bench"]
+                :extra-deps  {criterium/criterium {:mvn/version "0.4.6"}}
+                :jvm-opts    ["-Xms512m" "-Xmx512m"]
+                :main-opts   ["-m" "co.multiply.scoped-bench"]}
+
   :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "3.3.4"}}}
 
   :build       {:ns-default build
