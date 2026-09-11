@@ -91,6 +91,32 @@
       (is (= false (ask *with-default*))))))
 
 
+(deftest opaque-values-test
+  (testing "scoped values are returned by identity, including internal-looking keywords"
+    (doseq [value [:co.multiply.scoped.impl/not-found
+                   (fn [] :value)
+                   #?(:clj (Object.) :cljs (js/Object.))]]
+      (scoping [*unbound* value]
+        (is (identical? value (ask *unbound*)))
+        (is (identical? value (ask *unbound* :fallback)))))))
+
+
+(deftest binding-evaluation-failure-test
+  (testing "a failing binding leaves the parent scope intact and skips later forms"
+    (let [calls (atom [])
+          failure (ex-info "binding failed" {})]
+      (scoping [*with-default* :outer]
+        (is (identical? failure
+              (try
+                (scoping [*with-default* (do (swap! calls conj :first) :inner)
+                          *another* (throw failure)
+                          *unbound* (swap! calls conj :last)]
+                  (swap! calls conj :body))
+                (catch #?(:clj Exception :cljs :default) e e))))
+        (is (= [:first] @calls))
+        (is (= :outer (ask *with-default*)))))))
+
+
 ;; # ask with default value
 ;; ################################################################################
 (deftest ask-with-default-test
@@ -534,3 +560,64 @@
                         (h/transientAssocSkip (record :map (transient {}))
                           (record :key :key) (record :value value)))))
       (is (= [:map :key :value] @calls)))))
+
+
+(deftest fixed-arity-values-test
+  (doseq [[n extend]
+          [[3 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)))]
+           [4 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)
+                  *var-04* (nth values 3)))]
+           [5 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)
+                  *var-04* (nth values 3)
+                  *var-05* (nth values 4)))]
+           [6 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)
+                  *var-04* (nth values 3)
+                  *var-05* (nth values 4)
+                  *var-06* (nth values 5)))]
+           [7 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)
+                  *var-04* (nth values 3)
+                  *var-05* (nth values 4)
+                  *var-06* (nth values 5)
+                  *var-07* (nth values 6)))]
+           [8 (fn [scope values]
+                (assoc-scope scope
+                  *var-01* (nth values 0)
+                  *var-02* (nth values 1)
+                  *var-03* (nth values 2)
+                  *var-04* (nth values 3)
+                  *var-05* (nth values 4)
+                  *var-06* (nth values 5)
+                  *var-07* (nth values 6)
+                  *var-08* (nth values 7)))]]
+          base [{} (assoc-scope {} *var-01* :inherited *var-02* :outer)]
+          mode [:mixed :skip]]
+    (let [vars [#'*var-01* #'*var-02* #'*var-03* #'*var-04*
+                #'*var-05* #'*var-06* #'*var-07* #'*var-08*]
+          values (mapv (fn [i]
+                         (if (= mode :skip) skip
+                             (case (mod i 4) 0 nil 1 false 2 skip 3 [i :value])))
+                   (range n))
+          expected (reduce (fn [scope [k v]]
+                             (if (identical? skip v) scope (assoc scope k v)))
+                     base (map vector vars values))]
+      (is (= expected (extend base values)) (str "Fixed arity " n ", " mode)))))

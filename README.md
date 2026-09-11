@@ -327,11 +327,24 @@ clojure -M:bench-runtime '{:backends [:scoped-value :thread-local]}'
 Run the JVM scope-construction benchmarks with Criterium:
 
 ```sh
-clojure -M:bench
+clojure -T:build compile-java
 ```
 
-See the [benchmark guide](bench/README.md) for options and methodology, and
-[recorded measurements](bench/RESULTS.md) for comparisons of the original
+The base classes target Java 9; the ScopedValue backend targets Java 25 and is
+loaded only on compatible JVMs. Published JARs contain compiled classes. Local
+and Git dependencies support `clojure -X:deps prep`; the `bb` development and
+test tasks compile automatically. `clojure -T:build jar` builds both backends.
+
+Run the JVM runtime benchmarks with Criterium:
+
+```sh
+clojure -M:bench-runtime
+```
+
+See the [runtime benchmark guide](bench/RUNTIME.md) for reads, construction,
+entry/exit, nesting and capture/restore, including time and allocation baselines.
+The [conditional-binding benchmark guide](bench/README.md) documents `clojure -M:bench`;
+see its [recorded measurements](bench/RESULTS.md) for comparisons of the original
 associations, function wrappers, and macro wrappers.
 
 ## License

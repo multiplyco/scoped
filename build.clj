@@ -3,24 +3,41 @@
     [clojure.tools.build.api :as b]
     [deps-deploy.deps-deploy :as deploy]))
 
+
 (def lib 'co.multiply/scoped)
 (def version "0.1.18")
 (def class-dir "target/classes")
 (def jar-file (format "target/%s-%s.jar" (name lib) version))
 (def basis (delay (b/create-basis {:project "deps.edn"})))
 
-(defn clean [_]
+
+(defn clean
+  [_]
   (b/delete {:path "target"}))
+
 
 (defn version-str
   "Print the current version string."
   [_]
   (println version))
 
+
 (def scm-url "https://github.com/multiplyco/scoped")
 
-(defn jar [_]
+
+(defn compile-java
+  "Compile with JDK 25+: the base runtime targets Java 9, ScopedValue targets 25."
+  [_]
+  (b/javac {:src-dirs ["src-java/jdk9"] :class-dir class-dir :basis @basis
+            :javac-opts ["--release" "9" "-Xlint:all"]})
+  (b/javac {:src-dirs ["src-java/jdk25"] :class-dir class-dir :basis @basis
+            :javac-opts ["--release" "25" "-Xlint:all"]}))
+
+
+(defn jar
+  [_]
   (clean nil)
+  (compile-java nil)
   (b/write-pom {:class-dir class-dir
                 :lib       lib
                 :version   version
@@ -40,7 +57,9 @@
           :jar-file  jar-file})
   (println "Built:" jar-file))
 
-(defn install [_]
+
+(defn install
+  [_]
   (jar nil)
   (b/install {:basis     @basis
               :lib       lib
@@ -48,6 +67,7 @@
               :jar-file  jar-file
               :class-dir class-dir})
   (println "Installed:" lib version))
+
 
 (defn tag
   "Create and push a version tag."
@@ -57,7 +77,9 @@
     (b/git-process {:git-args ["push" "origin" tag]})
     (println "Tagged and pushed:" tag)))
 
-(defn deploy [_]
+
+(defn deploy
+  [_]
   (jar nil)
   (deploy/deploy {:installer  :remote
                   :artifact   jar-file

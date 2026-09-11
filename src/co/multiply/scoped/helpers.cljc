@@ -7,7 +7,7 @@
 
 ;; ## Helpers
 ;; ############################################################
-(defonce ^:no-doc skip #?(:clj (Object.) :cljs (js/Object.)))
+(defonce ^:no-doc skip #?(:clj co.multiply.scoped.ScopedRuntime/SKIP :cljs (js/Object.)))
 
 
 (defmacro if-cljs

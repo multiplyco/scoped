@@ -1,5 +1,4 @@
 (ns co.multiply.scoped
-  #?(:cljs (:require-macros co.multiply.scoped))
   (:require
     [co.multiply.scoped.helpers :as h]
     [co.multiply.scoped.impl :as impl]))

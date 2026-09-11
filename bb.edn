@@ -1,5 +1,9 @@
 {:tasks
- {dev                   {:doc  "Start nREPL server"
+ {compile-java          {:doc  "Compile JVM runtime (requires JDK 25+)"
+                         :task (shell "clj -T:build compile-java")}
+
+  dev                   {:doc  "Start nREPL server"
+                         :depends [compile-java]
                          :task (shell "clj -M:dev -m nrepl.cmdline --interactive")}
 
   test                  {:doc     "Run all tests (CLJ + CLJS)"
@@ -9,12 +13,15 @@
                          :depends [test:clj:scoped-value test:clj:thread-local]}
 
   test:clj:scoped-value {:doc  "Run Clojure tests with ScopedValue (JDK 25+)"
+                         :depends [compile-java]
                          :task (shell "clj -M:test -m kaocha.runner")}
 
   test:clj:thread-local {:doc  "Run Clojure tests with ThreadLocal fallback"
+                         :depends [compile-java]
                          :task (shell "clj -J-Dco.multiply.scoped.force-fallback=true -M:test -m kaocha.runner")}
 
   test:cljs             {:doc  "Run ClojureScript tests"
+                         :depends [compile-java]
                          :task (do
                                  (shell "bunx shadow-cljs compile ci")
                                  (shell "bunx karma start --single-run"))}
@@ -45,4 +52,3 @@
                                     (shell "clj -M:cljdoc"
                                       (format "{:project \"co.multiply/scoped\" :version \"%s\" :jarpath \"target/scoped-%s.jar\" :pompath \"target/classes/META-INF/maven/co.multiply/scoped/pom.xml\"}"
                                         v v)))}}}
-

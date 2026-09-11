@@ -6,8 +6,8 @@
    - Virtual thread integration"
   (:require
     [clojure.test :refer [deftest is testing]]
-    [co.multiply.scoped :refer [ask current-scope scoping with-scope]]
-    [co.multiply.scoped.impl :as impl]))
+    [co.multiply.scoped :refer [ask assoc-scope current-scope scoping with-scope]])
+  (:import [co.multiply.scoped ScopedRuntime]))
 
 
 ;; Test vars
@@ -18,15 +18,30 @@
 ;; # Implementation detection
 ;; ################################################################################
 (deftest implementation-test
-  (testing "carrier type matches expected implementation"
+  (testing "Java backend matches the runtime and fallback property"
     (let [force-fallback? (= (System/getProperty "co.multiply.scoped.force-fallback") "true")
-          jdk-25+?        (>= (.feature (Runtime/version)) 25)
-          carrier         @#'impl/carrier]
-      (if (and jdk-25+? (not force-fallback?))
-        (is (instance? java.lang.ScopedValue carrier)
-          "Expected ScopedValue on JDK 25+ without force-fallback")
-        (is (instance? ThreadLocal carrier)
-          "Expected ThreadLocal on JDK < 25 or with force-fallback")))))
+          jdk-25+?        (>= (.major (Runtime/version)) 25)]
+      (is (= (if (and jdk-25+? (not force-fallback?))
+               "ScopedValueBackend" "ThreadLocalBackend")
+             (ScopedRuntime/backendName))))))
+
+
+(deftest dynamic-binding-fallback-test
+  (binding [*with-default* :thread-bound]
+    (is (= :thread-bound (ask *with-default*)))
+    (is (= :thread-bound (ask *with-default* :fallback)))
+    (scoping [*with-default* nil]
+      (is (nil? (ask *with-default* :fallback))))
+    (is (= :thread-bound (ask *with-default*)))))
+
+
+(deftest throwable-cleanup-test
+  (let [failure (Error. "body failed")]
+    (scoping [*with-default* :outer]
+      (is (identical? failure
+            (try (with-scope (assoc-scope {} *with-default* :inner) (throw failure))
+              (catch Throwable t t))))
+      (is (= :outer (ask *with-default*))))))
 
 
 ;; # Virtual thread integration

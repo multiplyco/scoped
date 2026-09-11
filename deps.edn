@@ -1,4 +1,7 @@
-{:paths ["src"]
+{:paths ["src" "target/classes"]
+
+ :deps/prep-lib {:alias :build :fn compile-java
+                 :ensure "target/classes/co/multiply/scoped/ScopedValueBackend.class"}
 
  :deps  {#_#_org.clojure/clojure {:mvn/version "1.12.4"}
          #_#_org.clojure/clojurescript {:mvn/version "1.12.134"}}
