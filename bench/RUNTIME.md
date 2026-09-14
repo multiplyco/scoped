@@ -1,18 +1,22 @@
 # JVM runtime benchmarks
 
+For a roughly one-minute development loop using these same workloads, see the
+[development suite](DEV.md): `bb bench:dev` or `clojure -M:bench-dev`.
+The isolated protocol below remains the longer confirmation suite.
+
 The public-API suite measures reads, construction, scope entry, nesting and
 capture. The current protocol uses **one case per fresh JVM**, with **five forks
 per case/backend**, **20 seconds of warm-up**, and **60 samples targeting one
 second each**. Criterium 0.4.6 and Clojure 1.12.5 are pinned by the benchmark alias;
 workers inherit the fixed 512 MiB heap. Run workers serially.
 
-The implementation experiments are saved in Git stash
-`6fbf3f8a8deee6fbf2d464cb4c0de0e3ae975ad5`. Active production sources match
-`0b3dd159b88cf3072b59f19285dc2f0adb5aaf72`, the original Clojure implementation.
-The stash includes the Java runtime, CLJ/CLJS split, build changes and experimental
-tests. Benchmark code, historical results and benchmark-only dependency aliases
-remain in the working tree. Applying the stash later may require merging the
-benchmark aliases in `deps.edn` and the README benchmark section.
+The original Clojure baseline was captured from
+`0b3dd159b88cf3072b59f19285dc2f0adb5aaf72`. Earlier implementation experiments
+are preserved in stash `6fbf3f8a8deee6fbf2d464cb4c0de0e3ae975ad5` and the
+historical experiment directories. The active Java implementation now uses a
+multi-release runtime JAR with a Java 17 base and Java 25 carrier replacement;
+compile it with `bb compile:java` before a direct Clojure benchmark invocation.
+The benchmark alias loads that JAR so fresh workers use Java's class selection.
 
 ## Run a baseline
 
@@ -25,7 +29,7 @@ clojure -M:bench-runtime '{:backends [:scoped-value :thread-local] :label "origi
 The complete 31-case matrix runs 310 fresh JVMs and takes roughly seven hours.
 Each backend is selected in its worker JVM before the library loads. With no
 `:backends` option, the runner selects the current JVM's default backend (or
-ThreadLocal when `co.multiply.scoped.force-fallback=true`). The original Clojure
+ThreadLocal when `jdk.util.jar.version=17` selects the base carrier). The original Clojure
 baseline does not require Java compilation. When restoring the Java experiment,
 compile its runtime before benchmarking it.
 
@@ -71,7 +75,7 @@ aggregation, worker isolation and options:
 ```sh
 clojure -M:bench-test
 clojure -M:bench-runtime '{:verify-only? true}'
-clojure -J-Dco.multiply.scoped.force-fallback=true -M:bench-runtime '{:verify-only? true}'
+clojure -J-Djdk.util.jar.version=17 -M:bench-runtime '{:verify-only? true}'
 clojure -M:bench-runtime '{:list? true}'
 ```
 

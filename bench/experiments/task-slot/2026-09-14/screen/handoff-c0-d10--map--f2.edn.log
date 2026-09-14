@@ -1,0 +1,15 @@
+Task-slot comparison :screen {:spec {:context-size 0, :depth 10, :mode :handoff}, :model map, :fork 2}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 2042624 in 16 samples of 127664 calls.
+      Execution time sample mean : 427,489307 ns
+             Execution time mean : 427,800529 ns
+Execution time sample std-deviation : 100,141730 ns
+    Execution time std-deviation : 102,138849 ns
+   Execution time lower quantile : 375,486308 ns ( 2,5%)
+   Execution time upper quantile : 654,507961 ns (97,5%)
+
+Found 3 outliers in 16 samples (18,7500 %)
+	low-severe	 3 (18,7500 %)
+ Variance from outliers : 80,1190 % Variance is severely inflated by outliers

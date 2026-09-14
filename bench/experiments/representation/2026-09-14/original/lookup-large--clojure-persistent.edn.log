@@ -1,0 +1,19 @@
+Standard criterium/bench: :lookup/large clojure-persistent on 25.0.2+10-LTS
+Default settings: {:max-gc-attempts 100, :samples 60, :target-execution-time 1000000000, :warmup-jit-period 10000000000, :tail-quantile 0.025, :bootstrap-size 1000}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 4812177060 in 60 samples of 80202951 calls.
+      Execution time sample mean : 10,499365 ns
+             Execution time mean : 10,500089 ns
+Execution time sample std-deviation : 0,229494 ns
+    Execution time std-deviation : 0,236636 ns
+   Execution time lower quantile : 10,346678 ns ( 2,5%)
+   Execution time upper quantile : 11,095457 ns (97,5%)
+                   Overhead used : 1,952948 ns
+
+Found 4 outliers in 60 samples (6,6667 %)
+	low-severe	 4 (6,6667 %)
+ Variance from outliers : 10,9688 % Variance is moderately inflated by outliers
+Allocation: {:iterations 1000000, :samples-bytes [136 136 136], :bytes-per-call 1.36E-4}
+Saved target/bench/representation/2026-09-14-full/lookup-large--clojure-persistent.edn

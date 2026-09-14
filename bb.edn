@@ -1,27 +1,36 @@
 {:tasks
- {compile-java          {:doc  "Compile JVM runtime (requires JDK 25+)"
+ {compile:java          {:doc  "Compile JVM runtime (requires JDK 25+)"
                          :task (shell "clj -T:build compile-java")}
 
   dev                   {:doc  "Start nREPL server"
-                         :depends [compile-java]
+                         :depends [compile:java]
                          :task (shell "clj -M:dev -m nrepl.cmdline --interactive")}
+
+  bench:dev             {:doc "Run fast JVM development benchmarks (optional EDN options)"
+                         :depends [compile:java]
+                         :task (apply shell "clojure -M:bench-dev" *command-line-args*)}
+
+  bench:dev:thread-local {:doc "Run fast JVM benchmarks with the ThreadLocal backend"
+                         :depends [compile:java]
+                         :task (apply shell "clojure -J-Djdk.util.jar.version=17 -M:bench-dev" *command-line-args*)}
 
   test                  {:doc     "Run all tests (CLJ + CLJS)"
                          :depends [test:clj test:cljs]}
 
-  test:clj              {:doc     "Run Clojure tests (both implementations)"
-                         :depends [test:clj:scoped-value test:clj:thread-local]}
+  test:clj              {:doc "Build once and test the JAR on JDK 17, JDK 25 and the base carrier on 25"
+                         :task (shell "clj -T:build test-jar")}
 
-  test:clj:scoped-value {:doc  "Run Clojure tests with ScopedValue (JDK 25+)"
-                         :depends [compile-java]
-                         :task (shell "clj -M:test -m kaocha.runner")}
+  test:clj:jdk17        {:doc "Test the packaged JAR on actual JDK 17"
+                         :task (shell "clj -T:build test-jar :runtimes '[:jdk17]'")}
 
-  test:clj:thread-local {:doc  "Run Clojure tests with ThreadLocal fallback"
-                         :depends [compile-java]
-                         :task (shell "clj -J-Dco.multiply.scoped.force-fallback=true -M:test -m kaocha.runner")}
+  test:clj:scoped-value {:doc "Test the packaged JAR with ScopedValue on JDK 25"
+                         :task (shell "clj -T:build test-jar :runtimes '[:jdk25]'")}
+
+  test:clj:thread-local {:doc "Test the packaged JAR's base carrier on JDK 25"
+                         :task (shell "clj -T:build test-jar :runtimes '[:thread-local]'")}
 
   test:cljs             {:doc  "Run ClojureScript tests"
-                         :depends [compile-java]
+                         :depends [compile:java]
                          :task (do
                                  (shell "bunx shadow-cljs compile ci")
                                  (shell "bunx karma start --single-run"))}

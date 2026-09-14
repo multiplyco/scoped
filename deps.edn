@@ -1,7 +1,7 @@
-{:paths ["src" "target/classes"]
+{:paths ["src" "target/scoped-runtime.jar"]
 
  :deps/prep-lib {:alias :build :fn compile-java
-                 :ensure "target/classes/co/multiply/scoped/ScopedValueBackend.class"}
+                 :ensure "target/scoped-runtime.jar"}
 
  :deps  {#_#_org.clojure/clojure {:mvn/version "1.12.4"}
          #_#_org.clojure/clojurescript {:mvn/version "1.12.134"}}
@@ -11,7 +11,8 @@
                 :extra-deps  {nrepl/nrepl {:mvn/version "1.5.1"}}}
 
   :test        {:extra-paths ["test"]
-                :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+                :extra-deps  {org.clojure/clojure {:mvn/version "1.12.5"}
+                              lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
 
   :bench       {:extra-paths ["bench"]
                 :extra-deps  {criterium/criterium {:mvn/version "0.4.6"}}
@@ -24,10 +25,43 @@
                   :jvm-opts ["-Xms512m" "-Xmx512m"]
                   :main-opts ["-m" "co.multiply.scoped-runtime-bench"]}
 
+  :bench-dev   {:extra-paths ["bench"]
+                :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                             criterium/criterium {:mvn/version "0.4.6"}}
+                :jvm-opts ["-Xms512m" "-Xmx512m"]
+                :main-opts ["-m" "co.multiply.scoped-dev-bench"]}
+
   :bench-test  {:extra-paths ["bench"]
                 :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
                              criterium/criterium {:mvn/version "0.4.6"}}
                 :main-opts ["-m" "co.multiply.scoped-bench-runner-test"]}
+
+  :bench-profile {:extra-paths ["bench"]
+                  :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                               criterium/criterium {:mvn/version "0.4.6"}}
+                  :jvm-opts ["-Xms512m" "-Xmx512m"]
+                  :main-opts ["-m" "co.multiply.scoped-allocation-profile"]}
+
+  :bench-representation {:replace-paths ["bench/experiments/representation/clj"
+                                        "target/bench/representation/classes"]
+                         :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                                      criterium/criterium {:mvn/version "0.4.6"}}
+                         :jvm-opts ["-Xms512m" "-Xmx512m"]
+                         :main-opts ["-m" "co.multiply.scoped-representation-bench"]}
+
+  :bench-batch {:replace-paths ["bench/experiments/representation/clj"
+                               "target/bench/representation/classes"]
+                :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                             criterium/criterium {:mvn/version "0.4.6"}}
+                :jvm-opts ["-Xms512m" "-Xmx512m"]
+                :main-opts ["-m" "co.multiply.scoped-batch-bench"]}
+
+  :bench-task-slot {:replace-paths ["bench/experiments/task-slot/clj"
+                                   "target/bench/task-slot/classes"]
+                    :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                                 criterium/criterium {:mvn/version "0.4.6"}}
+                    :jvm-opts ["-Xms512m" "-Xmx512m"]
+                    :main-opts ["-m" "co.multiply.scoped-task-slot-bench"]}
 
   :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "3.3.4"}}}
 

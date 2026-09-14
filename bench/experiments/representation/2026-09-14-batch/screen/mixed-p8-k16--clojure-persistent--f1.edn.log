@@ -1,0 +1,13 @@
+Batch crossover :screen {:spec {:parent-size 8, :batch-size 16, :workload :mixed}, :model clojure-persistent, :fork 1}
+Settings: {:samples 12, :warmup-jit-period 3000000000, :target-execution-time 50000000, :bootstrap-size 300, :overhead 0}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 754548 in 12 samples of 62879 calls.
+      Execution time sample mean : 798,887932 ns
+             Execution time mean : 798,777989 ns
+Execution time sample std-deviation : 7,791888 ns
+    Execution time std-deviation : 8,295894 ns
+   Execution time lower quantile : 785,085243 ns ( 2,5%)
+   Execution time upper quantile : 809,079740 ns (97,5%)
+Saved target/bench/representation/2026-09-14-batch-screen/mixed-p8-k16--clojure-persistent--f1.edn

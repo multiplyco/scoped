@@ -1,0 +1,19 @@
+Batch crossover :full {:spec {:parent-size 32, :batch-size 16, :workload :override}, :model clojure-persistent, :fork 1}
+Settings: {:max-gc-attempts 100, :samples 60, :target-execution-time 1000000000, :warmup-jit-period 10000000000, :tail-quantile 0.025, :bootstrap-size 1000}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 97271640 in 60 samples of 1621194 calls.
+      Execution time sample mean : 618,416829 ns
+             Execution time mean : 618,552606 ns
+Execution time sample std-deviation : 7,503346 ns
+    Execution time std-deviation : 7,671369 ns
+   Execution time lower quantile : 614,358926 ns ( 2,5%)
+   Execution time upper quantile : 628,560906 ns (97,5%)
+                   Overhead used : 1,902607 ns
+
+Found 11 outliers in 60 samples (18,3333 %)
+	low-severe	 7 (11,6667 %)
+	low-mild	 4 (6,6667 %)
+ Variance from outliers : 1,6389 % Variance is slightly inflated by outliers
+Saved target/bench/representation/2026-09-14-batch-full/override-p32-k16--clojure-persistent--f1.edn

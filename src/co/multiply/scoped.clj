@@ -100,7 +100,7 @@
   ([sym]
    (h/if-cljs
      `(impl/get-scoped-var (var ~sym))
-     `(impl/get-scoped-var ~(resolve sym))))
+     `(co.multiply.scoped.ScopedRuntime/get ~(resolve sym))))
   ([sym default]
    (h/if-cljs
      `(impl/-get-scoped-var (var ~sym) ~default)

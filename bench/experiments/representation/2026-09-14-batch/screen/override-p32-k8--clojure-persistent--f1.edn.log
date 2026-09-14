@@ -1,0 +1,18 @@
+Batch crossover :screen {:spec {:parent-size 32, :batch-size 8, :workload :override}, :model clojure-persistent, :fork 1}
+Settings: {:samples 12, :warmup-jit-period 3000000000, :target-execution-time 50000000, :bootstrap-size 300, :overhead 0}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 2110572 in 12 samples of 175881 calls.
+      Execution time sample mean : 288,091945 ns
+             Execution time mean : 288,240365 ns
+Execution time sample std-deviation : 2,606955 ns
+    Execution time std-deviation : 2,781685 ns
+   Execution time lower quantile : 282,923306 ns ( 2,5%)
+   Execution time upper quantile : 291,912805 ns (97,5%)
+
+Found 2 outliers in 12 samples (16,6667 %)
+	low-severe	 1 (8,3333 %)
+	low-mild	 1 (8,3333 %)
+ Variance from outliers : 7,6389 % Variance is slightly inflated by outliers
+Saved target/bench/representation/2026-09-14-batch-screen/override-p32-k8--clojure-persistent--f1.edn

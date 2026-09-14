@@ -1,7 +1,6 @@
 (ns co.multiply.scoped.impl
   #?(:cljs (:require-macros co.multiply.scoped.impl))
-  (:require [co.multiply.scoped.helpers :as h])
-  #?(:clj (:import [clojure.lang IDeref Var$Unbound])))
+  (:require [co.multiply.scoped.helpers :as h]))
 
 
 #?(:cljs (defonce ^:dynamic carrier {}))
@@ -17,15 +16,16 @@
 
 (defmacro ^:no-doc -get-scoped-var
   [v default]
-  `(let [not-found# not-found
-         value# (h/getOrDefault (current-scope) ~v not-found#)]
-     (h/if-cljs
+  (h/if-cljs
+    `(let [not-found# not-found
+           value# (h/getOrDefault (current-scope) ~v not-found#)]
        (if (identical? not-found# value#)
          (if-some [value# (deref ~v)] value# ~default)
-         value#)
-       (if (identical? not-found# value#)
-         (let [value# (IDeref/.deref ~v)]
-           (if (instance? Var$Unbound value#) ~default value#))
+         value#))
+    ;; Keep only the lazy default expression in the caller; lookup lives in Java.
+    `(let [value# (co.multiply.scoped.ScopedRuntime/lookup ~v)]
+       (if (identical? co.multiply.scoped.ScopedRuntime/UNBOUND value#)
+         ~default
          value#))))
 
 

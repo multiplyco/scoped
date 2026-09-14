@@ -1,0 +1,20 @@
+Standard criterium/bench: :extend/small clojure-transient on 25.0.2+10-LTS
+Default settings: {:max-gc-attempts 100, :samples 60, :target-execution-time 1000000000, :warmup-jit-period 10000000000, :tail-quantile 0.025, :bootstrap-size 1000}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 571135140 in 60 samples of 9518919 calls.
+      Execution time sample mean : 104,373866 ns
+             Execution time mean : 104,401116 ns
+Execution time sample std-deviation : 2,006780 ns
+    Execution time std-deviation : 2,103504 ns
+   Execution time lower quantile : 103,290728 ns ( 2,5%)
+   Execution time upper quantile : 110,393315 ns (97,5%)
+                   Overhead used : 1,887641 ns
+
+Found 6 outliers in 60 samples (10,0000 %)
+	low-severe	 2 (3,3333 %)
+	low-mild	 4 (6,6667 %)
+ Variance from outliers : 9,3585 % Variance is slightly inflated by outliers
+Allocation: {:iterations 1000000, :samples-bytes [200000136 200000136 200000136], :bytes-per-call 200.000136}
+Saved target/bench/representation/2026-09-14-full/extend-small--clojure-transient.edn

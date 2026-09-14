@@ -78,10 +78,12 @@
   [options backend]
   (let [inherited (.getInputArguments (ManagementFactory/getRuntimeMXBean))
         args (remove #(or (str/starts-with? % "-Dclojure.basis=")
-                        (str/starts-with? % "-Dco.multiply.scoped.force-fallback=")) inherited)]
+                        (str/starts-with? % "-Djdk.util.jar.version=")
+                        (str/starts-with? % "-Djdk.util.jar.enableMultiRelease=")) inherited)]
     (vec (concat [(str (System/getProperty "java.home") "/bin/java")]
            args
-           [(str "-Dco.multiply.scoped.force-fallback=" (= backend :thread-local))
+           [(str "-Djdk.util.jar.version=" (if (= backend :thread-local) 17 (.major (Runtime/version))))
+            "-Djdk.util.jar.enableMultiRelease=true"
             "-cp" (System/getProperty "java.class.path") "clojure.main"
             "-m" "co.multiply.scoped-runtime-bench" (pr-str options)]))))
 

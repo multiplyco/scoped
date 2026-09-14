@@ -1,7 +1,8 @@
 # Conditional binding benchmarks
 
 For public-API read, construction, entry/exit and capture/restore measurements,
-see the [JVM runtime benchmark suite](RUNTIME.md).
+use the [fast development suite](DEV.md) during implementation work, or the
+[JVM runtime benchmark suite](RUNTIME.md) for isolated measurements.
 
 Recorded measurements and interpretation are in [RESULTS.md](RESULTS.md).
 

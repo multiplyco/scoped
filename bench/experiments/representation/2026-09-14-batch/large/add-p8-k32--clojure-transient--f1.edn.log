@@ -1,0 +1,13 @@
+Batch crossover :screen {:spec {:parent-size 8, :batch-size 32, :workload :add}, :model clojure-transient, :fork 1}
+Settings: {:samples 12, :warmup-jit-period 3000000000, :target-execution-time 50000000, :bootstrap-size 300, :overhead 0}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 318852 in 12 samples of 26571 calls.
+      Execution time sample mean : 1,882050 µs
+             Execution time mean : 1,881999 µs
+Execution time sample std-deviation : 16,428010 ns
+    Execution time std-deviation : 17,168208 ns
+   Execution time lower quantile : 1,851285 µs ( 2,5%)
+   Execution time upper quantile : 1,903484 µs (97,5%)
+Saved target/bench/representation/2026-09-14-batch-large/add-p8-k32--clojure-transient--f1.edn

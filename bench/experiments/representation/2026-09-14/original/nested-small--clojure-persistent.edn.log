@@ -1,0 +1,20 @@
+Standard criterium/bench: :nested/small clojure-persistent on 25.0.2+10-LTS
+Default settings: {:max-gc-attempts 100, :samples 60, :target-execution-time 1000000000, :warmup-jit-period 10000000000, :tail-quantile 0.025, :bootstrap-size 1000}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 534242580 in 60 samples of 8904043 calls.
+      Execution time sample mean : 110,992270 ns
+             Execution time mean : 111,013779 ns
+Execution time sample std-deviation : 1,528038 ns
+    Execution time std-deviation : 1,606649 ns
+   Execution time lower quantile : 109,846534 ns ( 2,5%)
+   Execution time upper quantile : 115,174423 ns (97,5%)
+                   Overhead used : 1,949909 ns
+
+Found 4 outliers in 60 samples (6,6667 %)
+	low-severe	 1 (1,6667 %)
+	low-mild	 3 (5,0000 %)
+ Variance from outliers : 1,6389 % Variance is slightly inflated by outliers
+Allocation: {:iterations 1000000, :samples-bytes [384000136 384000136 384000136], :bytes-per-call 384.000136}
+Saved target/bench/representation/2026-09-14-full/nested-small--clojure-persistent.edn

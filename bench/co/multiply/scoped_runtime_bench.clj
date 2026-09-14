@@ -257,11 +257,14 @@
    :processors (.availableProcessors (Runtime/getRuntime))
    :jvm-arguments (vec (.getInputArguments (ManagementFactory/getRuntimeMXBean)))
    :benchmark-jvm-arguments (vec (remove #(or (str/starts-with? % "-Dclojure.basis=")
-                                            (str/starts-with? % "-Dco.multiply.scoped.force-fallback="))
+                                            (str/starts-with? % "-Djdk.util.jar.version=")
+                                            (str/starts-with? % "-Djdk.util.jar.enableMultiRelease="))
                                    (.getInputArguments (ManagementFactory/getRuntimeMXBean))))
    :compiler-options *compiler-options*
-   :backend (if (or (= "true" (System/getProperty "co.multiply.scoped.force-fallback"))
-                  (< (.major (Runtime/version)) 25)) :thread-local :scoped-value)})
+   :multi-release-version (.feature (java.util.jar.JarFile/runtimeVersion))
+   :multi-release-enabled? (not= "false" (System/getProperty "jdk.util.jar.enableMultiRelease"))
+   :backend (if (or (= "false" (System/getProperty "jdk.util.jar.enableMultiRelease"))
+                  (< (.feature (java.util.jar.JarFile/runtimeVersion)) 25)) :thread-local :scoped-value)})
 
 
 (defn runtime-state

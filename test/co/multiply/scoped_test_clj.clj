@@ -18,10 +18,10 @@
 ;; # Implementation detection
 ;; ################################################################################
 (deftest implementation-test
-  (testing "Java backend matches the runtime and fallback property"
-    (let [force-fallback? (= (System/getProperty "co.multiply.scoped.force-fallback") "true")
-          jdk-25+?        (>= (.major (Runtime/version)) 25)]
-      (is (= (if (and jdk-25+? (not force-fallback?))
+  (testing "Java backend matches multi-release JAR selection"
+    (let [multi-release? (not= "false" (System/getProperty "jdk.util.jar.enableMultiRelease"))
+          version (.feature (java.util.jar.JarFile/runtimeVersion))]
+      (is (= (if (and multi-release? (>= version 25))
                "ScopedValueBackend" "ThreadLocalBackend")
              (ScopedRuntime/backendName))))))
 
@@ -35,6 +35,21 @@
     (is (= :thread-bound (ask *with-default*)))))
 
 
+(deftest scope-map-lookup-test
+  (doseq [[label make-map] [[:array-map identity]
+                            [:hash-map #(into (zipmap (range 16) (repeat :padding)) %)]
+                            [:java-map #(java.util.HashMap. ^java.util.Map %)]]]
+    (testing (str "Lookup semantics for " label)
+      (with-scope (make-map {#'*with-default* nil #'*another* false})
+        (is (nil? (ask *with-default* (throw (Exception. "Default evaluated"))))))
+      (with-scope (make-map {#'*another* false})
+        (is (false? (ask *another* :fallback)))
+        (is (= :default-value (ask *with-default* :fallback))))
+      (binding [*with-default* :thread-bound]
+        (with-scope (make-map {})
+          (is (= :thread-bound (ask *with-default* :fallback))))))))
+
+
 (deftest throwable-cleanup-test
   (let [failure (Error. "body failed")]
     (scoping [*with-default* :outer]
@@ -44,37 +59,38 @@
       (is (= :outer (ask *with-default*))))))
 
 
-;; # Virtual thread integration
+;; # Thread integration
 ;; ################################################################################
-(deftest virtual-thread-test
-  (testing "scope does NOT auto-propagate to virtual threads"
+(defn thread-isolation-checks
+  [start-thread]
+  (testing "scope does NOT auto-propagate to new threads"
     (let [result (promise)]
       (scoping [*with-default* :parent-scope]
-        (-> (Thread/startVirtualThread
+        (-> (start-thread
               (fn []
                 ;; Without explicit scope restoration, we get root binding
                 (deliver result (ask *with-default*))))
           (.join)))
       (is (= :default-value @result)
-        "Virtual thread sees root binding, not parent scope")))
+        "New thread sees root binding, not parent scope")))
 
-  (testing "scope propagates to virtual thread via capture/restore"
+  (testing "scope propagates to a thread via capture/restore"
     (let [result (promise)]
       (scoping [*with-default* :parent-scope]
         (let [scope (current-scope)]
-          (-> (Thread/startVirtualThread
+          (-> (start-thread
                 (fn []
                   (with-scope scope
                     (deliver result (ask *with-default*)))))
             (.join))))
       (is (= :parent-scope @result))))
 
-  (testing "multiple virtual threads can share captured scope"
+  (testing "multiple threads can share captured scope"
     (let [results  (atom [])
           captured (scoping [*with-default* :shared]
                      (current-scope))
           threads  (mapv (fn [i]
-                           (Thread/startVirtualThread
+                           (start-thread
                              (fn []
                                (with-scope captured
                                  (swap! results conj [(ask *with-default*) i])))))
@@ -83,17 +99,28 @@
       (is (= 5 (count @results)))
       (is (every? #(= :shared (first %)) @results))))
 
-  (testing "each virtual thread can have its own scope"
+  (testing "each thread can have its own scope"
     (let [results (atom {})]
       (doseq [i (range 3)]
         (let [thread-scope (scoping [*another* (keyword (str "thread-" i))]
                              (current-scope))]
-          (-> (Thread/startVirtualThread
+          (-> (start-thread
                 (fn []
                   (with-scope thread-scope
                     (swap! results assoc i (ask *another*)))))
             (.join))))
       (is (= {0 :thread-0, 1 :thread-1, 2 :thread-2} @results)))))
+
+
+(deftest platform-thread-test
+  (thread-isolation-checks #(doto (Thread. ^Runnable %) (.start))))
+
+
+(when (>= (.major (Runtime/version)) 21)
+  (deftest virtual-thread-test
+    ;; Resolve in the test at runtime so the same test namespace loads on JDK 17.
+    (let [start (.getMethod Thread "startVirtualThread" (into-array Class [Runnable]))]
+      (thread-isolation-checks #(.invoke start nil (object-array [%]))))))
 
 
 ;; # with-scope callback pattern (uses promise)

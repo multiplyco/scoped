@@ -1,0 +1,13 @@
+Batch crossover :screen {:spec {:parent-size 0, :batch-size 4, :workload :add}, :model clojure-persistent, :fork 1}
+Settings: {:samples 12, :warmup-jit-period 3000000000, :target-execution-time 50000000, :bootstrap-size 300, :overhead 0}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 6422700 in 12 samples of 535225 calls.
+      Execution time sample mean : 90,739668 ns
+             Execution time mean : 90,847132 ns
+Execution time sample std-deviation : 2,044136 ns
+    Execution time std-deviation : 2,191281 ns
+   Execution time lower quantile : 87,424448 ns ( 2,5%)
+   Execution time upper quantile : 93,511901 ns (97,5%)
+Saved target/bench/representation/2026-09-14-batch-screen/add-p0-k4--clojure-persistent--f1.edn

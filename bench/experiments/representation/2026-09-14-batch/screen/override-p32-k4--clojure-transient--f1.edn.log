@@ -1,0 +1,13 @@
+Batch crossover :screen {:spec {:parent-size 32, :batch-size 4, :workload :override}, :model clojure-transient, :fork 1}
+Settings: {:samples 12, :warmup-jit-period 3000000000, :target-execution-time 50000000, :bootstrap-size 300, :overhead 0}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 2671344 in 12 samples of 222612 calls.
+      Execution time sample mean : 225,007165 ns
+             Execution time mean : 224,975159 ns
+Execution time sample std-deviation : 2,096410 ns
+    Execution time std-deviation : 2,187748 ns
+   Execution time lower quantile : 222,580656 ns ( 2,5%)
+   Execution time upper quantile : 228,122939 ns (97,5%)
+Saved target/bench/representation/2026-09-14-batch-screen/override-p32-k4--clojure-transient--f1.edn

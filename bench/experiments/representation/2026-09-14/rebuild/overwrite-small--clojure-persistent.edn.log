@@ -1,0 +1,19 @@
+Standard criterium/bench: :overwrite/small clojure-persistent on 25.0.2+10-LTS
+Default settings: {:max-gc-attempts 100, :samples 60, :target-execution-time 1000000000, :warmup-jit-period 10000000000, :tail-quantile 0.025, :bootstrap-size 1000}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 1352902620 in 60 samples of 22548377 calls.
+      Execution time sample mean : 43,146252 ns
+             Execution time mean : 43,182402 ns
+Execution time sample std-deviation : 1,890444 ns
+    Execution time std-deviation : 1,968356 ns
+   Execution time lower quantile : 42,270080 ns ( 2,5%)
+   Execution time upper quantile : 48,409556 ns (97,5%)
+                   Overhead used : 1,884826 ns
+
+Found 8 outliers in 60 samples (13,3333 %)
+	low-severe	 8 (13,3333 %)
+ Variance from outliers : 31,9407 % Variance is moderately inflated by outliers
+Allocation: {:iterations 1000000, :samples-bytes [192000136 192000136 192000136], :bytes-per-call 192.000136}
+Saved target/bench/representation/2026-09-14-rebuild/overwrite-small--clojure-persistent.edn

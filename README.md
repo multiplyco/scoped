@@ -11,11 +11,22 @@ propagation with virtual threads. On older JDKs, falls back to `ThreadLocal`. Fu
 **Clojure:**
 
 - Clojure 1.12+
-- JDK 9+ (uses `ThreadLocal`)
-- JDK 25+ recommended for optimal performance (uses `ScopedValue`)
+- JDK 17+ (uses `ThreadLocal`)
+- JDK 25+ is the primary performance target (uses `ScopedValue`)
 
-On JDK 25+, the library uses Java's `ScopedValue` API for maximum performance. On older JDKs, it
-automatically falls back to a `ThreadLocal`-based implementation with identical semantics.
+On JDK 25+, the library uses Java's `ScopedValue` API. On JDK 17–24, it
+automatically uses `ThreadLocal` with identical public semantics. ThreadLocal
+performance is secondary to the JDK 25+ implementation.
+
+The JVM implementation is Java-owned: scope storage, lookup, root fallback,
+construction and entry/restoration sit behind `ScopedRuntime`. Clojure macros
+resolve Vars, preserve lazy default expressions and wrap lexical bodies in an
+`IFn` callback. They do not select or implement the carrier. CLJS retains its
+own implementation of the public API.
+
+A single multi-release JAR contains a Java 17 `Carrier` and a Java 25
+replacement. Java's class loader selects the class; no reflective backend
+loading or JDK check is needed in the Clojure API.
 
 **ClojureScript:**
 
@@ -317,35 +328,81 @@ This pattern applies to all async boundaries: `setTimeout`, `js/Promise`, `core.
 
 ## Benchmarks
 
-The [runtime benchmark suite](bench/RUNTIME.md) measures the public API in
-isolated JVMs with extended warm-up, one-minute sampling and repeated forks:
+The [development suite](bench/DEV.md) runs all 31 public-API JVM workloads in
+roughly a minute per backend, reporting time and allocations for spotting large
+regressions during implementation work. The tasks compile Java first:
+
+```sh
+bb bench:dev
+bb bench:dev:thread-local
+```
+
+Save a reference, then compare after making changes:
+
+```sh
+bb bench:dev '{:output "target/bench/dev/before.edn"}'
+bb bench:dev '{:baseline "target/bench/dev/before.edn" :output "target/bench/dev/after.edn"}'
+```
+
+Without Babashka, use `clojure -T:build compile-java` followed by
+`clojure -M:bench-dev`. Compilation requires JDK 25+ and produces
+`target/scoped-runtime.jar`, a Java-only multi-release JAR used by the local
+classpath. The base classes target Java 17 and the carrier replacement targets
+Java 25. Local and Git dependencies support `clojure -X:deps prep`; the `bb`
+development and benchmark tasks compile automatically. Rebuilding Java code
+requires a fresh JVM/REPL to load the new classes. `clojure -T:build jar` builds
+the complete distributable JAR with both Java implementations and Clojure sources.
+
+These short, shared-JVM results are exploratory.
+The [runtime benchmark suite](bench/RUNTIME.md) provides longer confirmation
+with isolated JVMs, extended warm-up, one-minute sampling and repeated forks:
 
 ```sh
 clojure -M:bench-runtime '{:backends [:scoped-value :thread-local]}'
 ```
 
-Run the JVM scope-construction benchmarks with Criterium:
-
-```sh
-clojure -T:build compile-java
-```
-
-The base classes target Java 9; the ScopedValue backend targets Java 25 and is
-loaded only on compatible JVMs. Published JARs contain compiled classes. Local
-and Git dependencies support `clojure -X:deps prep`; the `bb` development and
-test tasks compile automatically. `clojure -T:build jar` builds both backends.
-
-Run the JVM runtime benchmarks with Criterium:
-
-```sh
-clojure -M:bench-runtime
-```
-
-See the [runtime benchmark guide](bench/RUNTIME.md) for reads, construction,
-entry/exit, nesting and capture/restore, including time and allocation baselines.
 The [conditional-binding benchmark guide](bench/README.md) documents `clojure -M:bench`;
 see its [recorded measurements](bench/RESULTS.md) for comparisons of the original
 associations, function wrappers, and macro wrappers.
+
+## JVM build and tests
+
+Common Java sources live alongside Clojure under `src/co/multiply/scoped`.
+`src-java/jdk25` contains only the replacement `Carrier.java`, with the same
+Java API. It is packaged at `META-INF/versions/25`; both JARs declare
+`Multi-Release: true`. Keep `target/classes` off runtime classpaths so it cannot
+bypass multi-release selection. The build preserves benchmark results under
+`target/bench`.
+
+```sh
+bb compile:java         # Build the Java-only JAR with JDK 25+
+bb test:clj             # Build once; test the same complete JAR in three JVMs
+bb test:clj:jdk17       # Actual JDK 17, ThreadLocal
+bb test:clj:scoped-value # Actual JDK 25, ScopedValue
+bb test:clj:thread-local # Actual JDK 25, base ThreadLocal carrier
+```
+
+Tests use the packaged library, the `test` directory and test dependencies;
+local production sources and loose class files are excluded. The launcher
+checks artifact origins, selected carrier bytecode and backend before running
+the suite. Platform-thread isolation runs on both JDKs; virtual-thread tests
+run where available (JDK 21+).
+
+There is no library-specific backend switch. For same-JDK ThreadLocal tests
+and benchmarks, the tasks use `-Djdk.util.jar.version=17` to make Java select
+the base carrier. This setting affects all multi-release JARs in that JVM;
+actual JDK 17 runs remain the compatibility check. The Java 25 carrier contains
+only the ScopedValue implementation.
+
+The runner finds JDKs in the current Java installation or SDKMAN candidates.
+For other installations, set `JAVA17_HOME` and `JAVA25_HOME`, or pass paths:
+
+```sh
+clojure -T:build test-jar :jdk17-home '"/path/to/jdk17"' :jdk25-home '"/path/to/jdk25"'
+```
+
+The build process still runs on JDK 25+; those settings choose the test JVMs.
+`bb test` also runs the CLJS tests.
 
 ## License
 
