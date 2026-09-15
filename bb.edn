@@ -17,7 +17,7 @@
   test                  {:doc     "Run all tests (CLJ + CLJS)"
                          :depends [test:clj test:cljs]}
 
-  test:clj              {:doc "Build once and test the JAR on JDK 17, JDK 25 and the base carrier on 25"
+  test:clj              {:doc "Build once and test the JAR on JDK 17, JDK 25 and the base runtime on 25"
                          :task (shell "clj -T:build test-jar")}
 
   test:clj:jdk17        {:doc "Test the packaged JAR on actual JDK 17"
@@ -26,7 +26,7 @@
   test:clj:scoped-value {:doc "Test the packaged JAR with ScopedValue on JDK 25"
                          :task (shell "clj -T:build test-jar :runtimes '[:jdk25]'")}
 
-  test:clj:thread-local {:doc "Test the packaged JAR's base carrier on JDK 25"
+  test:clj:thread-local {:doc "Test the packaged JAR's base runtime on JDK 25"
                          :task (shell "clj -T:build test-jar :runtimes '[:thread-local]'")}
 
   test:cljs             {:doc  "Run ClojureScript tests"

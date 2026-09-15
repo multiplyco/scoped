@@ -1,4 +1,4 @@
-{:paths ["src" "target/scoped-runtime.jar"]
+{:paths ["src" "target/scoped-runtime.jar" "src-java/jdk25"]
 
  :deps/prep-lib {:alias :build :fn compile-java
                  :ensure "target/scoped-runtime.jar"}
@@ -62,6 +62,14 @@
                                  criterium/criterium {:mvn/version "0.4.6"}}
                     :jvm-opts ["-Xms512m" "-Xmx512m"]
                     :main-opts ["-m" "co.multiply.scoped-task-slot-bench"]}
+
+  :bench-bifurcan {:replace-paths ["bench/experiments/bifurcan/clj"
+                                  "target/bench/bifurcan/classes"]
+                   :extra-deps {org.clojure/clojure {:mvn/version "1.12.5"}
+                                criterium/criterium {:mvn/version "0.4.6"}
+                                io.lacuna/bifurcan {:mvn/version "0.2.0-rc1"}}
+                   :jvm-opts ["-Xms512m" "-Xmx512m"]
+                   :main-opts ["-m" "co.multiply.scoped-bifurcan-bench"]}
 
   :shadow-cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "3.3.4"}}}
 

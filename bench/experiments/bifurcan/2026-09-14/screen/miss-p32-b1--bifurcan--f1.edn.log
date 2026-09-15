@@ -1,0 +1,11 @@
+Bifurcan comparison :screen {:spec {:parent-size 32, :operation :miss}, :model bifurcan, :fork 1}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 71025840 in 16 samples of 4439115 calls.
+      Execution time sample mean : 11,736362 ns
+             Execution time mean : 11,741510 ns
+Execution time sample std-deviation : 0,241270 ns
+    Execution time std-deviation : 0,247268 ns
+   Execution time lower quantile : 11,240031 ns ( 2,5%)
+   Execution time upper quantile : 12,106738 ns (97,5%)

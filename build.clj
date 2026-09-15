@@ -31,6 +31,15 @@
 (def scm-url "https://github.com/multiplyco/scoped")
 
 
+(defn- validate-runtime-api!
+  []
+  (let [jar-tool (io/file (System/getProperty "java.home") "bin"
+                   (if (= java.io.File/separator "\\") "jar.exe" "jar"))
+        result (b/process {:command-args [(str jar-tool) "--validate" "--file" runtime-jar]})]
+    (when-not (zero? (:exit result))
+      (throw (ex-info "Multi-release runtime implementations have incompatible Java APIs" result)))))
+
+
 (defn compile-java
   "Build the Java-only multi-release JAR used by source/REPL/benchmark classpaths."
   [_]
@@ -43,7 +52,8 @@
   (b/javac {:src-dirs ["src-java/jdk25"] :class-dir versioned-class-dir :basis @basis
             :javac-opts ["--release" "25" "-Xlint:all"]})
   (b/jar {:class-dir class-dir :jar-file runtime-jar
-          :manifest {"Multi-Release" "true"}}))
+          :manifest {"Multi-Release" "true"}})
+  (validate-runtime-api!))
 
 
 (defn jar
@@ -92,6 +102,16 @@
               :javac-opts ["--release" "25" "-Xlint:all"]})))
 
 
+(defn compile-bifurcan
+  "Compile the standalone Bifurcan comparison, outside the library JAR."
+  [_]
+  (let [output "target/bench/bifurcan/classes"]
+    (b/delete {:path output})
+    (b/javac {:src-dirs ["bench/experiments/bifurcan/java"]
+              :class-dir output :basis (b/create-basis {:aliases [:bench-bifurcan]})
+              :javac-opts ["--release" "17" "-Xlint:all"]})))
+
+
 (defn- java-major
   [home]
   (let [release (io/file home "release")]
@@ -121,7 +141,7 @@
 
 
 (defn test-jar
-  "Build once, then test that exact JAR on JDK 17, JDK 25 and the base carrier on 25.
+  "Build once, then test that exact JAR on JDK 17, JDK 25 and the base runtime on 25.
    Override homes with :jdk17-home / :jdk25-home or JAVA17_HOME / JAVA25_HOME."
   [{:keys [runtimes] :or {runtimes [:jdk17 :jdk25 :thread-local]} :as options}]
   (let [config {:jdk17 {:major 17 :backend "ThreadLocalBackend"}

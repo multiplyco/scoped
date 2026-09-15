@@ -1,0 +1,15 @@
+Bifurcan comparison :screen {:spec {:parent-size 4, :operation :override}, :model clojure, :fork 1}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 48180816 in 16 samples of 3011301 calls.
+      Execution time sample mean : 16,797240 ns
+             Execution time mean : 16,797722 ns
+Execution time sample std-deviation : 0,143668 ns
+    Execution time std-deviation : 0,148972 ns
+   Execution time lower quantile : 16,468131 ns ( 2,5%)
+   Execution time upper quantile : 16,924186 ns (97,5%)
+
+Found 1 outliers in 16 samples (6,2500 %)
+	low-severe	 1 (6,2500 %)
+ Variance from outliers : 5,8594 % Variance is slightly inflated by outliers

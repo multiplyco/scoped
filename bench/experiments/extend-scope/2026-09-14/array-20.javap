@@ -1,0 +1,549 @@
+Compiled from "scoped_extend_kernels.clj"
+public final class co.multiply.scoped_extend_kernels$array_20 extends clojure.lang.AFunction {
+  public static final java.lang.Object const__1;
+
+  public static final clojure.lang.Var const__5;
+
+  public static final clojure.lang.Var const__10;
+
+  public static final clojure.lang.Var const__14;
+
+  public static final clojure.lang.Var const__18;
+
+  public static final clojure.lang.Var const__22;
+
+  public static final clojure.lang.Var const__26;
+
+  public static final clojure.lang.Var const__30;
+
+  public static final clojure.lang.Var const__34;
+
+  public static final clojure.lang.Var const__38;
+
+  public static final clojure.lang.Var const__42;
+
+  public static final clojure.lang.Var const__46;
+
+  public static final clojure.lang.Var const__50;
+
+  public static final clojure.lang.Var const__54;
+
+  public static final clojure.lang.Var const__58;
+
+  public static final clojure.lang.Var const__62;
+
+  public static final clojure.lang.Var const__66;
+
+  public static final clojure.lang.Var const__70;
+
+  public static final clojure.lang.Var const__74;
+
+  public static final clojure.lang.Var const__78;
+
+  public static final clojure.lang.Var const__82;
+
+  public co.multiply.scoped_extend_kernels$array_20();
+    Code:
+         0: aload_0
+         1: invokespecial #9                  // Method clojure/lang/AFunction."<init>":()V
+         4: return
+
+  public static java.lang.Object invokeStatic(java.lang.Object, java.lang.Object);
+    Code:
+         0: aload_0
+         1: aconst_null
+         2: astore_0
+         3: astore_2
+         4: getstatic     #15                 // Field const__1:Ljava/lang/Object;
+         7: invokestatic  #21                 // Method clojure/lang/RT.object_array:(Ljava/lang/Object;)[Ljava/lang/Object;
+        10: astore_3
+        11: aload_3
+        12: checkcast     #23                 // class "[Ljava/lang/Object;"
+        15: lconst_0
+        16: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        19: getstatic     #31                 // Field const__5:Lclojure/lang/Var;
+        22: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+        25: pop
+        26: aload_3
+        27: checkcast     #23                 // class "[Ljava/lang/Object;"
+        30: lconst_1
+        31: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        34: aload_1
+        35: checkcast     #23                 // class "[Ljava/lang/Object;"
+        38: lconst_0
+        39: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        42: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+        45: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+        48: pop
+        49: aload_3
+        50: checkcast     #23                 // class "[Ljava/lang/Object;"
+        53: ldc2_w        #40                 // long 2l
+        56: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        59: getstatic     #44                 // Field const__10:Lclojure/lang/Var;
+        62: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+        65: pop
+        66: aload_3
+        67: checkcast     #23                 // class "[Ljava/lang/Object;"
+        70: ldc2_w        #45                 // long 3l
+        73: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        76: aload_1
+        77: checkcast     #23                 // class "[Ljava/lang/Object;"
+        80: lconst_1
+        81: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+        84: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+        87: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+        90: pop
+        91: aload_3
+        92: checkcast     #23                 // class "[Ljava/lang/Object;"
+        95: ldc2_w        #47                 // long 4l
+        98: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       101: getstatic     #51                 // Field const__14:Lclojure/lang/Var;
+       104: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       107: pop
+       108: aload_3
+       109: checkcast     #23                 // class "[Ljava/lang/Object;"
+       112: ldc2_w        #52                 // long 5l
+       115: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       118: aload_1
+       119: checkcast     #23                 // class "[Ljava/lang/Object;"
+       122: ldc2_w        #40                 // long 2l
+       125: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       128: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       131: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       134: pop
+       135: aload_3
+       136: checkcast     #23                 // class "[Ljava/lang/Object;"
+       139: ldc2_w        #54                 // long 6l
+       142: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       145: getstatic     #58                 // Field const__18:Lclojure/lang/Var;
+       148: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       151: pop
+       152: aload_3
+       153: checkcast     #23                 // class "[Ljava/lang/Object;"
+       156: ldc2_w        #59                 // long 7l
+       159: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       162: aload_1
+       163: checkcast     #23                 // class "[Ljava/lang/Object;"
+       166: ldc2_w        #45                 // long 3l
+       169: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       172: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       175: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       178: pop
+       179: aload_3
+       180: checkcast     #23                 // class "[Ljava/lang/Object;"
+       183: ldc2_w        #61                 // long 8l
+       186: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       189: getstatic     #65                 // Field const__22:Lclojure/lang/Var;
+       192: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       195: pop
+       196: aload_3
+       197: checkcast     #23                 // class "[Ljava/lang/Object;"
+       200: ldc2_w        #66                 // long 9l
+       203: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       206: aload_1
+       207: checkcast     #23                 // class "[Ljava/lang/Object;"
+       210: ldc2_w        #47                 // long 4l
+       213: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       216: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       219: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       222: pop
+       223: aload_3
+       224: checkcast     #23                 // class "[Ljava/lang/Object;"
+       227: ldc2_w        #68                 // long 10l
+       230: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       233: getstatic     #72                 // Field const__26:Lclojure/lang/Var;
+       236: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       239: pop
+       240: aload_3
+       241: checkcast     #23                 // class "[Ljava/lang/Object;"
+       244: ldc2_w        #73                 // long 11l
+       247: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       250: aload_1
+       251: checkcast     #23                 // class "[Ljava/lang/Object;"
+       254: ldc2_w        #52                 // long 5l
+       257: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       260: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       263: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       266: pop
+       267: aload_3
+       268: checkcast     #23                 // class "[Ljava/lang/Object;"
+       271: ldc2_w        #75                 // long 12l
+       274: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       277: getstatic     #79                 // Field const__30:Lclojure/lang/Var;
+       280: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       283: pop
+       284: aload_3
+       285: checkcast     #23                 // class "[Ljava/lang/Object;"
+       288: ldc2_w        #80                 // long 13l
+       291: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       294: aload_1
+       295: checkcast     #23                 // class "[Ljava/lang/Object;"
+       298: ldc2_w        #54                 // long 6l
+       301: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       304: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       307: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       310: pop
+       311: aload_3
+       312: checkcast     #23                 // class "[Ljava/lang/Object;"
+       315: ldc2_w        #82                 // long 14l
+       318: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       321: getstatic     #86                 // Field const__34:Lclojure/lang/Var;
+       324: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       327: pop
+       328: aload_3
+       329: checkcast     #23                 // class "[Ljava/lang/Object;"
+       332: ldc2_w        #87                 // long 15l
+       335: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       338: aload_1
+       339: checkcast     #23                 // class "[Ljava/lang/Object;"
+       342: ldc2_w        #59                 // long 7l
+       345: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       348: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       351: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       354: pop
+       355: aload_3
+       356: checkcast     #23                 // class "[Ljava/lang/Object;"
+       359: ldc2_w        #89                 // long 16l
+       362: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       365: getstatic     #93                 // Field const__38:Lclojure/lang/Var;
+       368: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       371: pop
+       372: aload_3
+       373: checkcast     #23                 // class "[Ljava/lang/Object;"
+       376: ldc2_w        #94                 // long 17l
+       379: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       382: aload_1
+       383: checkcast     #23                 // class "[Ljava/lang/Object;"
+       386: ldc2_w        #61                 // long 8l
+       389: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       392: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       395: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       398: pop
+       399: aload_3
+       400: checkcast     #23                 // class "[Ljava/lang/Object;"
+       403: ldc2_w        #96                 // long 18l
+       406: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       409: getstatic     #100                // Field const__42:Lclojure/lang/Var;
+       412: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       415: pop
+       416: aload_3
+       417: checkcast     #23                 // class "[Ljava/lang/Object;"
+       420: ldc2_w        #101                // long 19l
+       423: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       426: aload_1
+       427: checkcast     #23                 // class "[Ljava/lang/Object;"
+       430: ldc2_w        #66                 // long 9l
+       433: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       436: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       439: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       442: pop
+       443: aload_3
+       444: checkcast     #23                 // class "[Ljava/lang/Object;"
+       447: ldc2_w        #103                // long 20l
+       450: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       453: getstatic     #107                // Field const__46:Lclojure/lang/Var;
+       456: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       459: pop
+       460: aload_3
+       461: checkcast     #23                 // class "[Ljava/lang/Object;"
+       464: ldc2_w        #108                // long 21l
+       467: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       470: aload_1
+       471: checkcast     #23                 // class "[Ljava/lang/Object;"
+       474: ldc2_w        #68                 // long 10l
+       477: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       480: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       483: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       486: pop
+       487: aload_3
+       488: checkcast     #23                 // class "[Ljava/lang/Object;"
+       491: ldc2_w        #110                // long 22l
+       494: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       497: getstatic     #114                // Field const__50:Lclojure/lang/Var;
+       500: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       503: pop
+       504: aload_3
+       505: checkcast     #23                 // class "[Ljava/lang/Object;"
+       508: ldc2_w        #115                // long 23l
+       511: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       514: aload_1
+       515: checkcast     #23                 // class "[Ljava/lang/Object;"
+       518: ldc2_w        #73                 // long 11l
+       521: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       524: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       527: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       530: pop
+       531: aload_3
+       532: checkcast     #23                 // class "[Ljava/lang/Object;"
+       535: ldc2_w        #117                // long 24l
+       538: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       541: getstatic     #121                // Field const__54:Lclojure/lang/Var;
+       544: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       547: pop
+       548: aload_3
+       549: checkcast     #23                 // class "[Ljava/lang/Object;"
+       552: ldc2_w        #122                // long 25l
+       555: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       558: aload_1
+       559: checkcast     #23                 // class "[Ljava/lang/Object;"
+       562: ldc2_w        #75                 // long 12l
+       565: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       568: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       571: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       574: pop
+       575: aload_3
+       576: checkcast     #23                 // class "[Ljava/lang/Object;"
+       579: ldc2_w        #124                // long 26l
+       582: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       585: getstatic     #128                // Field const__58:Lclojure/lang/Var;
+       588: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       591: pop
+       592: aload_3
+       593: checkcast     #23                 // class "[Ljava/lang/Object;"
+       596: ldc2_w        #129                // long 27l
+       599: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       602: aload_1
+       603: checkcast     #23                 // class "[Ljava/lang/Object;"
+       606: ldc2_w        #80                 // long 13l
+       609: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       612: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       615: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       618: pop
+       619: aload_3
+       620: checkcast     #23                 // class "[Ljava/lang/Object;"
+       623: ldc2_w        #131                // long 28l
+       626: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       629: getstatic     #135                // Field const__62:Lclojure/lang/Var;
+       632: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       635: pop
+       636: aload_3
+       637: checkcast     #23                 // class "[Ljava/lang/Object;"
+       640: ldc2_w        #136                // long 29l
+       643: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       646: aload_1
+       647: checkcast     #23                 // class "[Ljava/lang/Object;"
+       650: ldc2_w        #82                 // long 14l
+       653: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       656: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       659: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       662: pop
+       663: aload_3
+       664: checkcast     #23                 // class "[Ljava/lang/Object;"
+       667: ldc2_w        #138                // long 30l
+       670: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       673: getstatic     #142                // Field const__66:Lclojure/lang/Var;
+       676: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       679: pop
+       680: aload_3
+       681: checkcast     #23                 // class "[Ljava/lang/Object;"
+       684: ldc2_w        #143                // long 31l
+       687: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       690: aload_1
+       691: checkcast     #23                 // class "[Ljava/lang/Object;"
+       694: ldc2_w        #87                 // long 15l
+       697: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       700: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       703: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       706: pop
+       707: aload_3
+       708: checkcast     #23                 // class "[Ljava/lang/Object;"
+       711: ldc2_w        #145                // long 32l
+       714: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       717: getstatic     #149                // Field const__70:Lclojure/lang/Var;
+       720: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       723: pop
+       724: aload_3
+       725: checkcast     #23                 // class "[Ljava/lang/Object;"
+       728: ldc2_w        #150                // long 33l
+       731: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       734: aload_1
+       735: checkcast     #23                 // class "[Ljava/lang/Object;"
+       738: ldc2_w        #89                 // long 16l
+       741: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       744: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       747: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       750: pop
+       751: aload_3
+       752: checkcast     #23                 // class "[Ljava/lang/Object;"
+       755: ldc2_w        #152                // long 34l
+       758: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       761: getstatic     #156                // Field const__74:Lclojure/lang/Var;
+       764: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       767: pop
+       768: aload_3
+       769: checkcast     #23                 // class "[Ljava/lang/Object;"
+       772: ldc2_w        #157                // long 35l
+       775: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       778: aload_1
+       779: checkcast     #23                 // class "[Ljava/lang/Object;"
+       782: ldc2_w        #94                 // long 17l
+       785: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       788: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       791: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       794: pop
+       795: aload_3
+       796: checkcast     #23                 // class "[Ljava/lang/Object;"
+       799: ldc2_w        #159                // long 36l
+       802: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       805: getstatic     #163                // Field const__78:Lclojure/lang/Var;
+       808: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       811: pop
+       812: aload_3
+       813: checkcast     #23                 // class "[Ljava/lang/Object;"
+       816: ldc2_w        #164                // long 37l
+       819: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       822: aload_1
+       823: checkcast     #23                 // class "[Ljava/lang/Object;"
+       826: ldc2_w        #96                 // long 18l
+       829: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       832: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       835: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       838: pop
+       839: aload_3
+       840: checkcast     #23                 // class "[Ljava/lang/Object;"
+       843: ldc2_w        #166                // long 38l
+       846: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       849: getstatic     #170                // Field const__82:Lclojure/lang/Var;
+       852: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       855: pop
+       856: aload_3
+       857: checkcast     #23                 // class "[Ljava/lang/Object;"
+       860: ldc2_w        #171                // long 39l
+       863: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       866: aload_1
+       867: aconst_null
+       868: astore_1
+       869: checkcast     #23                 // class "[Ljava/lang/Object;"
+       872: ldc2_w        #101                // long 19l
+       875: invokestatic  #27                 // Method clojure/lang/RT.intCast:(J)I
+       878: invokestatic  #39                 // Method clojure/lang/RT.aget:([Ljava/lang/Object;I)Ljava/lang/Object;
+       881: invokestatic  #35                 // Method clojure/lang/RT.aset:([Ljava/lang/Object;ILjava/lang/Object;)Ljava/lang/Object;
+       884: pop
+       885: aload_2
+       886: aconst_null
+       887: astore_2
+       888: aload_3
+       889: aconst_null
+       890: astore_3
+       891: checkcast     #23                 // class "[Ljava/lang/Object;"
+       894: invokestatic  #178                // Method co/multiply/scoped/ScopedRuntime.extendScope:(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+       897: areturn
+
+  public java.lang.Object invoke(java.lang.Object, java.lang.Object);
+    Code:
+         0: aload_1
+         1: aconst_null
+         2: astore_1
+         3: aload_2
+         4: aconst_null
+         5: astore_2
+         6: invokestatic  #185                // Method invokeStatic:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+         9: areturn
+
+  public static {};
+    Code:
+         0: bipush        40
+         2: invokestatic  #192                // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+         5: putstatic     #15                 // Field const__1:Ljava/lang/Object;
+         8: ldc           #194                // String co.multiply.scoped-extend-kernels
+        10: ldc           #196                // String key0
+        12: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        15: checkcast     #202                // class clojure/lang/Var
+        18: putstatic     #31                 // Field const__5:Lclojure/lang/Var;
+        21: ldc           #194                // String co.multiply.scoped-extend-kernels
+        23: ldc           #204                // String key1
+        25: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        28: checkcast     #202                // class clojure/lang/Var
+        31: putstatic     #44                 // Field const__10:Lclojure/lang/Var;
+        34: ldc           #194                // String co.multiply.scoped-extend-kernels
+        36: ldc           #206                // String key2
+        38: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        41: checkcast     #202                // class clojure/lang/Var
+        44: putstatic     #51                 // Field const__14:Lclojure/lang/Var;
+        47: ldc           #194                // String co.multiply.scoped-extend-kernels
+        49: ldc           #208                // String key3
+        51: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        54: checkcast     #202                // class clojure/lang/Var
+        57: putstatic     #58                 // Field const__18:Lclojure/lang/Var;
+        60: ldc           #194                // String co.multiply.scoped-extend-kernels
+        62: ldc           #210                // String key4
+        64: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        67: checkcast     #202                // class clojure/lang/Var
+        70: putstatic     #65                 // Field const__22:Lclojure/lang/Var;
+        73: ldc           #194                // String co.multiply.scoped-extend-kernels
+        75: ldc           #212                // String key5
+        77: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        80: checkcast     #202                // class clojure/lang/Var
+        83: putstatic     #72                 // Field const__26:Lclojure/lang/Var;
+        86: ldc           #194                // String co.multiply.scoped-extend-kernels
+        88: ldc           #214                // String key6
+        90: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+        93: checkcast     #202                // class clojure/lang/Var
+        96: putstatic     #79                 // Field const__30:Lclojure/lang/Var;
+        99: ldc           #194                // String co.multiply.scoped-extend-kernels
+       101: ldc           #216                // String key7
+       103: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       106: checkcast     #202                // class clojure/lang/Var
+       109: putstatic     #86                 // Field const__34:Lclojure/lang/Var;
+       112: ldc           #194                // String co.multiply.scoped-extend-kernels
+       114: ldc           #218                // String key8
+       116: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       119: checkcast     #202                // class clojure/lang/Var
+       122: putstatic     #93                 // Field const__38:Lclojure/lang/Var;
+       125: ldc           #194                // String co.multiply.scoped-extend-kernels
+       127: ldc           #220                // String key9
+       129: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       132: checkcast     #202                // class clojure/lang/Var
+       135: putstatic     #100                // Field const__42:Lclojure/lang/Var;
+       138: ldc           #194                // String co.multiply.scoped-extend-kernels
+       140: ldc           #222                // String key10
+       142: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       145: checkcast     #202                // class clojure/lang/Var
+       148: putstatic     #107                // Field const__46:Lclojure/lang/Var;
+       151: ldc           #194                // String co.multiply.scoped-extend-kernels
+       153: ldc           #224                // String key11
+       155: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       158: checkcast     #202                // class clojure/lang/Var
+       161: putstatic     #114                // Field const__50:Lclojure/lang/Var;
+       164: ldc           #194                // String co.multiply.scoped-extend-kernels
+       166: ldc           #226                // String key12
+       168: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       171: checkcast     #202                // class clojure/lang/Var
+       174: putstatic     #121                // Field const__54:Lclojure/lang/Var;
+       177: ldc           #194                // String co.multiply.scoped-extend-kernels
+       179: ldc           #228                // String key13
+       181: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       184: checkcast     #202                // class clojure/lang/Var
+       187: putstatic     #128                // Field const__58:Lclojure/lang/Var;
+       190: ldc           #194                // String co.multiply.scoped-extend-kernels
+       192: ldc           #230                // String key14
+       194: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       197: checkcast     #202                // class clojure/lang/Var
+       200: putstatic     #135                // Field const__62:Lclojure/lang/Var;
+       203: ldc           #194                // String co.multiply.scoped-extend-kernels
+       205: ldc           #232                // String key15
+       207: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       210: checkcast     #202                // class clojure/lang/Var
+       213: putstatic     #142                // Field const__66:Lclojure/lang/Var;
+       216: ldc           #194                // String co.multiply.scoped-extend-kernels
+       218: ldc           #234                // String key16
+       220: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       223: checkcast     #202                // class clojure/lang/Var
+       226: putstatic     #149                // Field const__70:Lclojure/lang/Var;
+       229: ldc           #194                // String co.multiply.scoped-extend-kernels
+       231: ldc           #236                // String key17
+       233: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       236: checkcast     #202                // class clojure/lang/Var
+       239: putstatic     #156                // Field const__74:Lclojure/lang/Var;
+       242: ldc           #194                // String co.multiply.scoped-extend-kernels
+       244: ldc           #238                // String key18
+       246: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       249: checkcast     #202                // class clojure/lang/Var
+       252: putstatic     #163                // Field const__78:Lclojure/lang/Var;
+       255: ldc           #194                // String co.multiply.scoped-extend-kernels
+       257: ldc           #240                // String key19
+       259: invokestatic  #200                // Method clojure/lang/RT.var:(Ljava/lang/String;Ljava/lang/String;)Lclojure/lang/Var;
+       262: checkcast     #202                // class clojure/lang/Var
+       265: putstatic     #170                // Field const__82:Lclojure/lang/Var;
+       268: return
+}

@@ -78,23 +78,20 @@
           `(merge-resolved-bindings ~scope ~resolved)))
       (case n
         0 scope
-        1 `(co.multiply.scoped.ScopedRuntime/assoc ~scope ~@resolved)
-        2 `(co.multiply.scoped.ScopedRuntime/assocTwo ~scope ~@resolved)
-        3 `(co.multiply.scoped.ScopedRuntime/assocThree ~scope ~@resolved)
-        4 `(co.multiply.scoped.ScopedRuntime/assocFour ~scope ~@resolved)
-        5 `(co.multiply.scoped.ScopedRuntime/assocFive ~scope ~@resolved)
-        6 `(co.multiply.scoped.ScopedRuntime/assocSix ~scope ~@resolved)
-        7 `(co.multiply.scoped.ScopedRuntime/assocSeven ~scope ~@resolved)
-        8 `(co.multiply.scoped.ScopedRuntime/assocEight ~scope ~@resolved)
-        9 `(co.multiply.scoped.ScopedRuntime/assocNine ~scope ~@resolved)
-        10 `(co.multiply.scoped.ScopedRuntime/assocTen ~scope ~@resolved)
-        ;; Fill one JVM array directly, without constructing a Clojure vector first.
-        (let [scope-sym (gensym "scope")
-              array-sym (with-meta (gensym "bindings") {:tag 'objects})]
-          `(let [~scope-sym ~scope
-                 ~array-sym (object-array ~(count resolved))]
-             ~@(map-indexed (fn [i form] `(aset ~array-sym ~i ~form)) resolved)
-             (co.multiply.scoped.ScopedRuntime/extendScope ~scope-sym ~array-sym)))))))
+        1 `(co.multiply.scoped.MapUpdates/assoc ~scope ~@resolved)
+        2 `(co.multiply.scoped.MapUpdates/assocTwo ~scope ~@resolved)
+        3 `(co.multiply.scoped.MapUpdates/assocThree ~scope ~@resolved)
+        4 `(co.multiply.scoped.MapUpdates/assocFour ~scope ~@resolved)
+        5 `(co.multiply.scoped.MapUpdates/assocFive ~scope ~@resolved)
+        6 `(co.multiply.scoped.MapUpdates/assocSix ~scope ~@resolved)
+        7 `(co.multiply.scoped.MapUpdates/assocSeven ~scope ~@resolved)
+        8 `(co.multiply.scoped.MapUpdates/assocEight ~scope ~@resolved)
+        9 `(co.multiply.scoped.MapUpdates/assocNine ~scope ~@resolved)
+        10 `(co.multiply.scoped.MapUpdates/assocTen ~scope ~@resolved)
+        `(-> (h/asTransient ~scope)
+           ~@(for [[k v] (partition 2 resolved)]
+               `(co.multiply.scoped.MapUpdates/assocTransient ~k ~v))
+           (h/asPersistent))))))
 
 
 (defmacro with-scope

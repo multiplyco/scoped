@@ -621,3 +621,61 @@
                              (if (identical? skip v) scope (assoc scope k v)))
                      base (map vector vars values))]
       (is (= expected (extend base values)) (str "Fixed arity " n ", " mode)))))
+
+
+(deftest large-scope-updates-test
+  (let [vars [#'*var-01* #'*var-02* #'*var-03* #'*var-04*
+              #'*var-05* #'*var-06* #'*var-07* #'*var-08*
+              #'*var-09* #'*var-10* #'*var-11* #'*var-12*]
+        cases [[11 (fn [scope parent value]
+                     (assoc-scope (parent scope)
+                       *var-01* (value 0) *var-02* (value 1)
+                       *var-03* (value 2) *var-04* (value 3)
+                       *var-05* (value 4) *var-06* (value 5)
+                       *var-07* (value 6) *var-08* (value 7)
+                       *var-09* (value 8) *var-10* (value 9)
+                       *var-11* (value 10)))]
+               [20 (fn [scope parent value]
+                     (assoc-scope (parent scope)
+                       *var-01* (value 0) *var-02* (value 1)
+                       *var-03* (value 2) *var-04* (value 3)
+                       *var-05* (value 4) *var-06* (value 5)
+                       *var-07* (value 6) *var-08* (value 7)
+                       *var-09* (value 8) *var-10* (value 9)
+                       *var-11* (value 10) *var-12* (value 11)
+                       *var-01* (value 12) *var-02* (value 13)
+                       *var-03* (value 14) *var-04* (value 15)
+                       *var-05* (value 16) *var-06* (value 17)
+                       *var-07* (value 18) *var-08* (value 19)))]]
+        parents [{}
+                 (zipmap (take 8 vars) (repeat :inherited))
+                 (zipmap (concat vars (range 20)) (repeat :inherited))]]
+    (doseq [[n extend] cases scope parents mode [:mixed :skip]]
+      (testing (str n " bindings on " (count scope) " entries, " mode)
+        (let [calls (atom [])
+              parent (fn [p] (swap! calls conj :parent) p)
+              values (mapv (fn [i]
+                             (if (= mode :skip) skip
+                                 (case (mod i 4) 0 nil 1 false 2 skip 3 [i :value])))
+                       (range n))
+              value (fn [i] (swap! calls conj i) (nth values i))
+              snapshot (vec scope)
+              expected (reduce (fn [m [k v]] (if (identical? skip v) m (assoc m k v)))
+                         scope (map vector (cycle vars) values))
+              result (extend scope parent value)]
+          (is (= expected result))
+          (is (= (into [:parent] (range n)) @calls))
+          (is (= snapshot (vec scope)))
+          (extend result identity (constantly :later))
+          (is (= expected result) "Later updates preserve the captured result"))))
+    (doseq [[_ extend] cases]
+      (let [calls (atom [])
+            parent (fn [p] (swap! calls conj :parent) p)
+            failure (ex-info "binding failed" {})]
+        (testing "An input exception prevents subsequent inputs from being evaluated"
+          (is (identical? failure
+                (try
+                  (extend {} parent
+                          (fn [i] (if (= i 5) (throw failure) (do (swap! calls conj i) i))))
+                  (catch #?(:clj Exception :cljs :default) e e))))
+          (is (= (into [:parent] (range 5)) @calls)))))))

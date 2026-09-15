@@ -1,0 +1,17 @@
+Scope-extension comparison :full {:spec {:bindings 20, :parent-size 32, :workload :override}, :model :inline, :fork 1}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -Xms512m -Xmx512m
+Evaluation count : 104895000 in 60 samples of 1748250 calls.
+      Execution time sample mean : 570,211736 ns
+             Execution time mean : 570,329082 ns
+Execution time sample std-deviation : 12,260506 ns
+    Execution time std-deviation : 12,505375 ns
+   Execution time lower quantile : 564,315473 ns ( 2,5%)
+   Execution time upper quantile : 614,536265 ns (97,5%)
+                   Overhead used : 1,832532 ns
+
+Found 5 outliers in 60 samples (8,3333 %)
+	low-severe	 1 (1,6667 %)
+	low-mild	 4 (6,6667 %)
+ Variance from outliers : 9,4583 % Variance is slightly inflated by outliers

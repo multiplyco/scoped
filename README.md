@@ -24,9 +24,12 @@ resolve Vars, preserve lazy default expressions and wrap lexical bodies in an
 `IFn` callback. They do not select or implement the carrier. CLJS retains its
 own implementation of the public API.
 
-A single multi-release JAR contains a Java 17 `Carrier` and a Java 25
-replacement. Java's class loader selects the class; no reflective backend
-loading or JDK check is needed in the Clojure API.
+A single multi-release JAR contains two independent implementations of
+`ScopedRuntime`: a Java 17 ThreadLocal runtime and a Java 25 ScopedValue runtime.
+Java's class loader selects the complete implementation; no reflective backend
+loading or JDK check is needed in the Clojure API. Both implementations expose
+the same Java contract and run the same behavioral tests. Their internals,
+including lookup and map construction, can evolve independently.
 
 **ClojureScript:**
 
@@ -367,31 +370,39 @@ associations, function wrappers, and macro wrappers.
 
 ## JVM build and tests
 
-Common Java sources live alongside Clojure under `src/co/multiply/scoped`.
-`src-java/jdk25` contains only the replacement `Carrier.java`, with the same
-Java API. It is packaged at `META-INF/versions/25`; both JARs declare
-`Multi-Release: true`. Keep `target/classes` off runtime classpaths so it cannot
-bypass multi-release selection. The build preserves benchmark results under
-`target/bench`.
+The Java 17 compatibility implementation lives alongside Clojure at
+`src/co/multiply/scoped/ScopedRuntime.java`. The primary Java 25 implementation
+is `src-java/jdk25/co/multiply/scoped/ScopedRuntime.java`, packaged at
+`META-INF/versions/25`. Each owns its carrier and lookup logic; duplication is
+intentional so ThreadLocal concerns do not constrain ScopedValue development.
+Map updates live in `src/co/multiply/scoped/MapUpdates.java`, compiled once for
+Java 17 and shared across both backends. The macros call its static methods
+directly: fixed helpers handle one through ten bindings, and larger updates
+thread a transient through the same class's `assocTransient` helper.
+Both JARs declare `Multi-Release: true`, and compilation runs
+`jar --validate` to check that their versioned Java APIs agree.
+
+Keep `target/classes` off runtime classpaths so it cannot bypass multi-release
+selection. The build preserves benchmark results under `target/bench`.
 
 ```sh
 bb compile:java         # Build the Java-only JAR with JDK 25+
 bb test:clj             # Build once; test the same complete JAR in three JVMs
 bb test:clj:jdk17       # Actual JDK 17, ThreadLocal
 bb test:clj:scoped-value # Actual JDK 25, ScopedValue
-bb test:clj:thread-local # Actual JDK 25, base ThreadLocal carrier
+bb test:clj:thread-local # Actual JDK 25, base ThreadLocal runtime
 ```
 
 Tests use the packaged library, the `test` directory and test dependencies;
 local production sources and loose class files are excluded. The launcher
-checks artifact origins, selected carrier bytecode and backend before running
-the suite. Platform-thread isolation runs on both JDKs; virtual-thread tests
-run where available (JDK 21+).
+checks artifact origins, selected runtime bytecode and backend, and the single
+shared Java 17 map helper before running the suite. Platform-thread isolation
+runs on both JDKs; virtual-thread tests run where available (JDK 21+).
 
 There is no library-specific backend switch. For same-JDK ThreadLocal tests
 and benchmarks, the tasks use `-Djdk.util.jar.version=17` to make Java select
-the base carrier. This setting affects all multi-release JARs in that JVM;
-actual JDK 17 runs remain the compatibility check. The Java 25 carrier contains
+the base runtime. This setting affects all multi-release JARs in that JVM;
+actual JDK 17 runs remain the compatibility check. The Java 25 runtime contains
 only the ScopedValue implementation.
 
 The runner finds JDKs in the current Java installation or SDKMAN candidates.

@@ -16,6 +16,12 @@ with short isolated scans and focused standard Criterium confirmations.
 Task-bookkeeping follow-up: [a separate task ScopedValue versus one map update](experiments/task-slot/README.md),
 covering nested calls and capture/restore sequences with stable application context.
 
+Scope-extension follow-up: [argument arrays versus unrolled Java helpers and inline transients](experiments/extend-scope/README.md),
+covering explicit batches of 11 and 20 bindings on JDK 25.
+
+Storage follow-up: [Bifurcan versus Clojure maps](experiments/bifurcan/README.md),
+focused on single-binding updates, lookups, retained child scopes and small batches.
+
 ## Distinguish an unbound carrier with `NO_SCOPE`
 
 Status: deferred idea, 2026-09-14. No runtime change or integrated measurement.

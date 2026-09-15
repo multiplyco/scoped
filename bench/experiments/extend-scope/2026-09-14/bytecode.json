@@ -1,0 +1,50 @@
+[
+  {
+    "model": "array",
+    "bindings": 11,
+    "bytes": 502,
+    "RT_aset": 22,
+    "helper_calls": 0,
+    "direct_assoc": 0
+  },
+  {
+    "model": "helpers",
+    "bindings": 11,
+    "bytes": 415,
+    "RT_aset": 0,
+    "helper_calls": 11,
+    "direct_assoc": 0
+  },
+  {
+    "model": "inline",
+    "bindings": 11,
+    "bytes": 734,
+    "RT_aset": 0,
+    "helper_calls": 0,
+    "direct_assoc": 11
+  },
+  {
+    "model": "array",
+    "bindings": 20,
+    "bytes": 898,
+    "RT_aset": 40,
+    "helper_calls": 0,
+    "direct_assoc": 0
+  },
+  {
+    "model": "helpers",
+    "bindings": 20,
+    "bytes": 739,
+    "RT_aset": 0,
+    "helper_calls": 20,
+    "direct_assoc": 0
+  },
+  {
+    "model": "inline",
+    "bindings": 20,
+    "bytes": 1319,
+    "RT_aset": 0,
+    "helper_calls": 0,
+    "direct_assoc": 20
+  }
+]

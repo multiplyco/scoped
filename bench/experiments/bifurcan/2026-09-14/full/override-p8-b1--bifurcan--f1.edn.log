@@ -1,0 +1,17 @@
+Bifurcan comparison :full {:spec {:parent-size 8, :operation :override}, :model bifurcan, :fork 1}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -XX:-OmitStackTraceInFastThrow -Xms512m -Xmx512m
+Evaluation count : 1691713440 in 60 samples of 28195224 calls.
+      Execution time sample mean : 34,104178 ns
+             Execution time mean : 34,114377 ns
+Execution time sample std-deviation : 1,171842 ns
+    Execution time std-deviation : 1,190016 ns
+   Execution time lower quantile : 33,414027 ns ( 2,5%)
+   Execution time upper quantile : 37,050716 ns (97,5%)
+                   Overhead used : 1,895712 ns
+
+Found 9 outliers in 60 samples (15,0000 %)
+	low-severe	 2 (3,3333 %)
+	low-mild	 7 (11,6667 %)
+ Variance from outliers : 22,1682 % Variance is moderately inflated by outliers

@@ -1,0 +1,11 @@
+Scope-extension comparison :screen {:spec {:bindings 11, :parent-size 8, :workload :add}, :model :helpers, :fork 1}
+aarch64 Mac OS X 26.3.1 10 cpu(s)
+OpenJDK 64-Bit Server VM 25.0.2+10-LTS
+Runtime arguments: -Xms512m -Xmx512m
+Evaluation count : 1245488 in 16 samples of 77843 calls.
+      Execution time sample mean : 635,504451 ns
+             Execution time mean : 635,635656 ns
+Execution time sample std-deviation : 6,369906 ns
+    Execution time std-deviation : 6,612933 ns
+   Execution time lower quantile : 627,836376 ns ( 2,5%)
+   Execution time upper quantile : 647,767447 ns (97,5%)

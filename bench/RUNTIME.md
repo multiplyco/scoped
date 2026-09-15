@@ -29,7 +29,7 @@ clojure -M:bench-runtime '{:backends [:scoped-value :thread-local] :label "origi
 The complete 31-case matrix runs 310 fresh JVMs and takes roughly seven hours.
 Each backend is selected in its worker JVM before the library loads. With no
 `:backends` option, the runner selects the current JVM's default backend (or
-ThreadLocal when `jdk.util.jar.version=17` selects the base carrier). The original Clojure
+ThreadLocal when `jdk.util.jar.version=17` selects the base runtime). The original Clojure
 baseline does not require Java compilation. When restoring the Java experiment,
 compile its runtime before benchmarking it.
 
